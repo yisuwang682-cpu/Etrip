@@ -6,6 +6,7 @@ import 'package:egyptopia/core/widgets/custom_search.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
 import 'package:egyptopia/features/home/presentation/views/widgets/feature_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeBody extends StatelessWidget {
@@ -14,8 +15,9 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(8),
       children: [
+        const VerticalSpace(2),
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Image.asset(
             AssetsData.fixedLogo,
@@ -33,7 +35,7 @@ class HomeBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Recommended For You",
+              "  Recommended For You",
               style: GoogleFonts.montserrat(
                   color: const Color(0xFF1F2544),
                   fontSize: 18,
@@ -63,7 +65,7 @@ class HomeBody extends StatelessWidget {
             child: const FeatureSlider(imageAsset: AssetsData.dest)),
         const VerticalSpace(2),
         const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             BuildCategoryIcon(
               icon: Icons.place,
@@ -83,22 +85,18 @@ class HomeBody extends StatelessWidget {
                 icon: Icons.directions_walk,
                 label: "Activities",
                 route: AppRouter.kActivities),
-          ],
-        ),
-        const VerticalSpace(1),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
             BuildCategoryIcon(
-                icon: Icons.quiz_rounded,
-                label: "Quizzes",
-                route: AppRouter.kQuizStart),
+                icon: Icons.thunderstorm_outlined,
+                label: "Weather",
+                route: AppRouter.kWeather),
             BuildCategoryIcon(
-                icon: Icons.cloud, label: "Weather", route: AppRouter.kWeather),
-            BuildCategoryIcon(
-                icon: Icons.chat,
+                icon: FontAwesomeIcons.redditAlien,
                 label: "ChatBot",
                 route: AppRouter.kActivities),
+            BuildCategoryIcon(
+                icon: Icons.extension,
+                label: "Quizzes",
+                route: AppRouter.kQuizStart),
           ],
         ),
         const VerticalSpace(1),
@@ -106,7 +104,7 @@ class HomeBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Discover Egypt",
+              "  Discover Egypt",
               style: GoogleFonts.montserrat(
                   color: const Color(0xFF1F2544),
                   fontSize: 18,
