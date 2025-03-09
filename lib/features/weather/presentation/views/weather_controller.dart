@@ -54,7 +54,9 @@ class WeatherController extends GetxController {
     "Al Arish",
     "Marsa Matruh",
     "Siwah",
-    "Dahab"
+    "Dahab",
+    "Kafr Ash Shaykh",
+    "Ain Sukhna"
   ].obs;
 
   RxList<String> filteredCities = <String>[].obs;
