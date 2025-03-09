@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class WeatherController extends GetxController {
+  RxString country = "".obs;
   RxInt weatherId = 0.obs;
   RxString city = "Loading...".obs;
   RxDouble temperature = 0.0.obs;
@@ -22,6 +23,51 @@ class WeatherController extends GetxController {
   RxList<Map<String, dynamic>> forecastData = <Map<String, dynamic>>[].obs;
 
   final WeatherApi _weatherApi = WeatherApi();
+
+  RxBool isSearching = false.obs;
+
+  final List<String> governoratesAndCities = [
+    "Cairo",
+    "Giza",
+    "Alexandria",
+    "Luxor",
+    "Aswan",
+    "Suez",
+    "Ismailia",
+    "Port Said",
+    "Damietta",
+    "Beheira",
+    "Faiyum",
+    "Beni Suef",
+    "Minya",
+    "Sohag",
+    "Qena",
+    "Red Sea",
+    "New Valley",
+    "South Sinai",
+    "Sharm El-Sheikh",
+    "Hurghada",
+    "El Gouna",
+    "Marsa Alam",
+    "Nuweiba",
+    "Safaga",
+    "Al Arish",
+    "Marsa Matruh",
+    "Siwah",
+    "Dahab"
+  ].obs;
+
+  RxList<String> filteredCities = <String>[].obs;
+
+  void filterCities(String query) {
+    if (query.isEmpty) {
+      filteredCities.clear();
+    } else {
+      filteredCities.value = governoratesAndCities
+          .where((city) => city.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+  }
 
   @override
   void onInit() {
@@ -70,6 +116,7 @@ class WeatherController extends GetxController {
   }
 
   void updateWeatherState(Map<String, dynamic> weatherData) {
+    country.value = weatherData['country'];
     weatherId.value = weatherData['id'];
     city.value = weatherData['city'];
     temperature.value = weatherData['temperature'];

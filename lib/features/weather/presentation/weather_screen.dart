@@ -7,14 +7,13 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'views/weather_controller.dart';
 
 class WeatherScreen extends StatelessWidget {
   final WeatherController controller = Get.put(WeatherController());
   final TextEditingController searchController = TextEditingController();
 
-  WeatherScreen({super.key}){
+  WeatherScreen({super.key}) {
     controller.getWeatherByLocation();
   }
 
@@ -42,77 +41,134 @@ class WeatherScreen extends StatelessWidget {
               child: Container(color: Colors.black.withOpacity(0.2)),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                const VerticalSpace(7),
-                TextField(
-                  controller: searchController,
-                  onSubmitted: (value) {
-                    if (value.isNotEmpty) {
-                      controller.fetchWeatherDataByCity(value);
-                    }
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.8),
-                    hintText: "Enter city name",
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {
-                        if (searchController.text.isNotEmpty) {
-                          controller
-                              .fetchWeatherDataByCity(searchController.text);
-                        }
-                      },
+          GestureDetector(
+            onTap: () {
+              if (controller.isSearching.value) {
+                controller.isSearching.value = false; // إخفاء القائمة
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  const VerticalSpace(7),
+                  TextField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      controller.isSearching.value = value.isNotEmpty;
+                      controller.filterCities(value);
+                    },
+                    onSubmitted: (value) {
+                      if (value.isNotEmpty) {
+                        controller.fetchWeatherDataByCity(value);
+                        controller.isSearching.value =
+                            false; // إخفاء القائمة بعد البحث
+                      }
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.8),
+                      hintText: "Enter city name",
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          if (searchController.text.isNotEmpty) {
+                            controller
+                                .fetchWeatherDataByCity(searchController.text);
+                            controller.isSearching.value = false;
+                          }
+                        },
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
                     ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
                   ),
-                ),
-                const VerticalSpace(1),
-                Obx(
-                  () => controller.isLoading.value
-                      ? const CircularProgressIndicator()
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(controller.city.value,
-                                style: TextStyle(
-                                    fontSize: SizeConfig.defaultSize! * 2.7,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            Text(
-                                "${controller.dayOfWeek.value}, ${controller.currentTime.value}",
-                                style: GoogleFonts.lato(
-                                    fontSize: SizeConfig.defaultSize! * 1.7, color: Colors.white)),
-                            controller.getWeatherIcon(),
-                            WeatherCard(
-                                city: controller.city.value,
-                                temperature: controller.temperature.value,
-                                description: controller.description.value,
-                                icon: controller.icon.value,
-                                humidity: controller.humidity.value,
-                                windSpeed: controller.windSpeed.value,
-                                pressure: controller.pressure.value,
-                                sunrise: controller.sunrise.value,
-                                sunset: controller.sunset.value),
-                            if (controller.forecastData.isNotEmpty) ...[
-                              const VerticalSpace(1),
-                              Text("5-Day Weather Forecast",
-                                  style: GoogleFonts.lato(
-                                      fontSize: SizeConfig.defaultSize! * 2,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                              const VerticalSpace(1),
-                              ForecastList(
-                                  forecastData: controller.forecastData)
-                            ],
-                          ],
-                        ),
-                ),
-              ],
+                  Obx(() => controller.isSearching.value
+                      ? ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight: SizeConfig.defaultSize! * 30,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(color: Colors.black26, blurRadius: 5)
+                              ],
+                            ),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              itemCount: controller.filteredCities.length,
+                              itemBuilder: (context, index) {
+                                final city = controller.filteredCities[index];
+                                return ListTile(
+                                  title: Text(city,
+                                      style:
+                                          const TextStyle(color: Colors.black)),
+                                  onTap: () {
+                                    searchController.text = city;
+                                    controller.fetchWeatherDataByCity(city);
+                                    controller.isSearching.value = false;
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                      : const SizedBox()),
+                  const VerticalSpace(1),
+                  Obx(
+                    () => controller.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      "${controller.city.value}, ${controller.country.value}",
+                                      style: TextStyle(
+                                          fontSize:
+                                              SizeConfig.defaultSize! * 2.7,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  Text(
+                                      "${controller.dayOfWeek.value}, ${controller.currentTime.value}",
+                                      style: GoogleFonts.lato(
+                                          fontSize:
+                                              SizeConfig.defaultSize! * 1.7,
+                                          color: Colors.white)),
+                                  controller.getWeatherIcon(),
+                                  WeatherCard(
+                                      city: controller.city.value,
+                                      temperature: controller.temperature.value,
+                                      description: controller.description.value,
+                                      icon: controller.icon.value,
+                                      humidity: controller.humidity.value,
+                                      windSpeed: controller.windSpeed.value,
+                                      pressure: controller.pressure.value,
+                                      sunrise: controller.sunrise.value,
+                                      sunset: controller.sunset.value),
+                                  if (controller.forecastData.isNotEmpty) ...[
+                                    const VerticalSpace(1),
+                                    Text("5-Day Weather Forecast",
+                                        style: GoogleFonts.lato(
+                                            fontSize:
+                                                SizeConfig.defaultSize! * 2,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold)),
+                                    const VerticalSpace(1),
+                                    ForecastList(
+                                        forecastData: controller.forecastData)
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
