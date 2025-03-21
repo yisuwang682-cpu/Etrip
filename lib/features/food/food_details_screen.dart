@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:egyptopia/core/constants.dart';
 import 'package:egyptopia/core/utils/size_config.dart';
 import 'package:egyptopia/core/widgets/reusable_screen.dart';
@@ -25,11 +26,13 @@ class FoodDetailsScreen extends StatelessWidget {
             const VerticalSpace(8),
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.network(
-                "http://192.168.1.12:8000${foodItem['Image']}",
+              child: CachedNetworkImage(
+                imageUrl: "http://192.168.1.12:8000${foodItem['Image']}",
                 height: SizeConfig.defaultSize! * 23.5,
                 width: double.infinity,
                 fit: BoxFit.fill,
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error, size: 65, color: Colors.red),
               ),
             ),
             const VerticalSpace(2),
