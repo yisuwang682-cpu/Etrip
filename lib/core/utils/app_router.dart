@@ -2,6 +2,9 @@ import 'package:egyptopia/features/home/presentation/views/home_view.dart';
 import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
 import 'package:egyptopia/features/z/activities.dart';
 import 'package:egyptopia/features/auth/presentation/views/widgets/create_new_password.dart';
+import 'package:egyptopia/features/z/chatDetails.dart';
+import 'package:egyptopia/features/z/chatbot.dart';
+import 'package:egyptopia/features/z/event_details.dart';
 import 'package:egyptopia/features/z/events.dart';
 import 'package:egyptopia/features/food/food_details_screen.dart';
 import 'package:egyptopia/features/food/food_items_screen.dart';
@@ -35,11 +38,14 @@ abstract class AppRouter {
   static const kQuizStart = '/quizzes';
   static const kEvents = '/events';
   static const kActivities = '/activities';
+  static const kChatbot = '/chatbot';
   static const kQuizLevels = '/quizLevel';
+  static const kEventDetails = '/eventDetails';
   static const kQuizResults = '/quizResults';
   static const kWeather = '/weather';
   static const kFoodStart = '/foodStart';
   static const kFoodCategories = '/foodCategories';
+  static const kChatDetails = '/chatDetails';
   static const kFoodItemsScreen = '/foodItemsScreen';
   static const kFoodDetails = '/foodDetails';
 
@@ -75,7 +81,15 @@ abstract class AppRouter {
     GoRoute(path: kQuizStart, builder: (context, state) => const QuizStart()),
     GoRoute(path: kEvents, builder: (context, state) => const Events()),
     GoRoute(path: kActivities, builder: (context, state) => const Activities()),
+    GoRoute(path: kChatbot, builder: (context, state) => const Chatbot()),
     GoRoute(path: kQuizLevels, builder: (context, state) => const QuizLevels()),
+    GoRoute(
+      path: kEventDetails,
+      builder: (context, state) {
+        final event = state.extra as Map<String, dynamic>? ?? {};
+        return EventDetails(event: event);
+      },
+    ),
     GoRoute(
       path: '/quiz/:level',
       builder: (context, state) {
@@ -99,6 +113,8 @@ abstract class AppRouter {
     GoRoute(
         path: kFoodCategories,
         builder: (context, state) => const FoodCategories()),
+    GoRoute(
+        path: kChatDetails, builder: (context, state) => const ChatDetails()),
     GoRoute(
         path: kFoodItemsScreen,
         builder: (context, state) {

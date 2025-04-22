@@ -92,7 +92,7 @@ class HomeBody extends StatelessWidget {
             BuildCategoryIcon(
                 icon: FontAwesomeIcons.redditAlien,
                 label: "ChatBot",
-                route: AppRouter.kActivities),
+                route: AppRouter.kChatbot),
             BuildCategoryIcon(
                 icon: Icons.extension,
                 label: "Quizzes",

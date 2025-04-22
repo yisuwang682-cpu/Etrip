@@ -16,7 +16,8 @@ class ReusableScreen extends StatelessWidget {
     required this.child,
     this.imageColor = Colors.white,
     this.backgroundColor = konBordingColor,
-    this.gradientStops, this.showBackButton = false,
+    this.gradientStops,
+    this.showBackButton = false,
   });
 
   @override

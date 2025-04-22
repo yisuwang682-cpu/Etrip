@@ -121,7 +121,7 @@ class WeatherController extends GetxController {
     country.value = weatherData['country'];
     weatherId.value = weatherData['id'];
     city.value = weatherData['city'];
-    temperature.value = weatherData['temperature'];
+    temperature.value = weatherData['temperature'].toDouble();
     description.value = weatherData['description'];
     icon.value = weatherData['icon'];
     humidity.value = weatherData['humidity'];
