@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
+import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,6 +132,28 @@ class _EventsState extends State<Events> {
                                         ),
                                       ),
                                     ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white12,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: FavoriteIcon(
+                                          iconSize: 30,
+                                          id: event['event_id'].toString(),
+                                          type: FavoriteType.event,
+                                          title: event['event_name'],
+                                          imageUrl: event['Image'],
+                                          price: event['ticket_price'],
+                                          city: event['city_name'],
+                                          additionalInfo:
+                                              event['registration_link'],
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 Padding(

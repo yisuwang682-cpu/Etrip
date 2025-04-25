@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:egyptopia/core/widgets/custom_buttons.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
+import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -335,18 +338,9 @@ class _ActivitiesState extends State<Activities> {
                                     Row(
                                       children: [
                                         Expanded(
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color.fromARGB(
-                                                      255, 64, 77, 151),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(24),
-                                              ),
-                                              minimumSize: const Size(120, 40),
-                                            ),
-                                            onPressed: () async {
+                                          child: CustomJoinButton(
+                                            text: "Join Now",
+                                            onTap: () async {
                                               String registrationLink = activity[
                                                   'link']; // Replace 'event' with your actual event data
 
@@ -361,22 +355,18 @@ class _ActivitiesState extends State<Activities> {
                                                     "Could not launch the registration link.");
                                               }
                                             },
-                                            child: Text(
-                                              "Join Now",
-                                              style: GoogleFonts
-                                                  .imFellFrenchCanonSc(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
                                           ),
                                         ),
                                         const SizedBox(width: 8),
-                                        const Icon(
-                                          Icons.favorite_border,
-                                          size: 35,
-                                        ),
+                                        FavoriteIcon(
+                                          id: activity['id'].toString(),
+                                          type: FavoriteType.activity,
+                                          title: activity['title'],
+                                          imageUrl: activity['Image'],
+                                          price: activity['price_after'],
+                                          city: activity['city_name'],
+                                          additionalInfo: activity['link'],
+                                        )
                                       ],
                                     ),
                                   ],

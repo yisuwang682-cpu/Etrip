@@ -80,3 +80,34 @@ class BackGeneralButton extends StatelessWidget {
     );
   }
 }
+
+class CustomJoinButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
+  final Size? minimumSize;
+  final double? fontSize;
+
+  const CustomJoinButton(
+      {super.key, required this.text, required this.onTap, this.minimumSize, this.fontSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromARGB(255, 64, 77, 151),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        minimumSize: minimumSize ?? const Size(100, 40),
+      ),
+      onPressed: onTap,
+      child: Text(
+        text,
+        style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: fontSize ?? 20),
+      ),
+    );
+  }
+}

@@ -1,4 +1,7 @@
+import 'package:egyptopia/core/widgets/custom_buttons.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
+import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:egyptopia/core/widgets/reusable_screen.dart';
@@ -206,16 +209,10 @@ class EventDetails extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 64, 77, 151),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
-                                ),
-                                minimumSize: const Size(100, 40),
-                              ),
-                              onPressed: () async {
+                            CustomJoinButton(
+                              text: "Contact Info",
+                              fontSize: 14,
+                              onTap: () async {
                                 final email = event['contact_info'] ??
                                     'info@touregypt.gov.eg'; // Default email if no contact info
                                 final Uri emailUri = Uri(
@@ -230,14 +227,6 @@ class EventDetails extends StatelessWidget {
                                   print('Could not launch email client');
                                 }
                               },
-                              child: Text(
-                                "Contact Info",
-                                style: GoogleFonts.imFellFrenchCanonSc(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
                             )
                           ],
                         ),
@@ -262,16 +251,10 @@ class EventDetails extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                                child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 64, 77, 151),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
-                                ),
-                                minimumSize: const Size(200, 45),
-                              ),
-                              onPressed: () async {
+                                child: CustomJoinButton(
+                              text: "Join event",
+                              minimumSize: const Size(200, 45),
+                              onTap: () async {
                                 String registrationLink =
                                     event['registration_link'];
 
@@ -286,18 +269,16 @@ class EventDetails extends StatelessWidget {
                                       "Could not launch the registration link.");
                                 }
                               },
-                              child: Text(
-                                "Join event",
-                                style: GoogleFonts.imFellFrenchCanonSc(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
                             )),
                             const SizedBox(width: 12),
-                            const Icon(
-                              Icons.favorite_border,
-                              size: 35,
+                            FavoriteIcon(
+                              id: event['event_id'].toString(),
+                              type: FavoriteType.event,
+                              title: event['event_name'],
+                              imageUrl: event['Image'],
+                              price: event['ticket_price'],
+                              city: event['city_name'],
+                              additionalInfo: event['registration_link'],
                             ),
                           ],
                         ),

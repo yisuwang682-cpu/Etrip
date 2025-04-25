@@ -1,10 +1,15 @@
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import 'core/utils/size_config.dart';
+import 'features/wishlist/data/service/favorite_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); 
+  await Hive.initFlutter();
+  await FavoriteService.initHive(); 
+
   runApp(const MyApp());
 }
 
@@ -13,13 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    return LayoutBuilder( 
+      builder: (context, constraints) {
+        SizeConfig().init(context);
 
-    return  MaterialApp.router(
-      routerConfig: AppRouter.router,
-      theme: ThemeData(
-        textTheme: GoogleFonts.imFellFrenchCanonScTextTheme()
-      ),
+        return MaterialApp.router(
+          routerConfig: AppRouter.router,
+          theme: ThemeData(
+            textTheme: GoogleFonts.imFellFrenchCanonScTextTheme(),
+          ),
+        );
+      },
     );
   }
 }
+
