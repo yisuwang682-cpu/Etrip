@@ -10,14 +10,14 @@ class ReusableScreen extends StatelessWidget {
   final List<double>? gradientStops;
   final Color? imageColor;
   final bool showBackButton;
-
+  final Color? iconColor;
   const ReusableScreen({
     super.key,
     required this.child,
     this.imageColor = Colors.white,
     this.backgroundColor = konBordingColor,
     this.gradientStops,
-    this.showBackButton = false,
+    this.showBackButton = false, this.iconColor,
   });
 
   @override
@@ -43,6 +43,7 @@ class ReusableScreen extends StatelessWidget {
                 color: imageColor,
               ),
             ),
+            child,
             if (showBackButton)
               Positioned(
                 left: SizeConfig.defaultSize!,
@@ -51,10 +52,10 @@ class ReusableScreen extends StatelessWidget {
                   onPressed: () {
                     GoRouter.of(context).pop();
                   },
-                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                  icon: Icon(Icons.arrow_back_ios,
+                      color: iconColor ?? Colors.white),
                 ),
               ),
-            child,
           ],
         ),
       ),

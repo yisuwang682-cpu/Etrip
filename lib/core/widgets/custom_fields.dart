@@ -9,6 +9,7 @@ class CustomInputField extends StatefulWidget {
   final String hint;
   final TextEditingController? controller;
   final TextInputType? inputType;
+  final bool? enabled;
   final bool isPassword;
   final bool isDropdown;
   final bool isDatePicker;
@@ -31,7 +32,7 @@ class CustomInputField extends StatefulWidget {
     this.dropdownItems,
     this.onChanged,
     this.validator,
-    this.onSaved,
+    this.onSaved, this.enabled,
   });
 
   @override
@@ -170,6 +171,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
 
   InputDecoration _inputDecoration() {
     return InputDecoration(
+      enabled: widget.enabled ?? true,
       filled: true,
       fillColor: Colors.grey[200],
       border: OutlineInputBorder(

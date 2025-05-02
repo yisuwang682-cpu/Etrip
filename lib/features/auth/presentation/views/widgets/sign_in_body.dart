@@ -144,29 +144,18 @@ class _SignInBodyState extends State<SignInBody> {
                         ],
                       ),
                       const VerticalSpace(1.5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          BuildSocialIcon(
-                              assetPath: AssetsData.fblogo,
-                              size: SizeConfig.defaultSize! * 3),
-                          const HorizantalSpace(2),
-                          BuildSocialIcon(
+                      Center(
+                        child: BuildSocialIcon(
                               onTap: () {
-                                    _controller.loginWithGoogle(context,
-                                        (isLoading) {
-                                      setState(() {
-                                        _loading = isLoading;
-                                      });
-                                    });
-                                  },
+                                _controller.loginWithGoogle(context,
+                                    (isLoading) {
+                                  setState(() {
+                                    _loading = isLoading;
+                                  });
+                                });
+                              },
                               assetPath: AssetsData.google,
                               size: SizeConfig.defaultSize! * 3),
-                          const HorizantalSpace(2),
-                          BuildSocialIcon(
-                              assetPath: AssetsData.insta,
-                              size: SizeConfig.defaultSize! * 3),
-                        ],
                       ),
                       const VerticalSpace(1.5),
                       Center(

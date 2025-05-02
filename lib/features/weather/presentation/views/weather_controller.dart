@@ -21,6 +21,7 @@ class WeatherController extends GetxController {
   RxString dayOfWeek = "".obs;
   RxString currentTime = "".obs;
   RxList<Map<String, dynamic>> forecastData = <Map<String, dynamic>>[].obs;
+  RxString errorMessage = "".obs;
 
   final WeatherApi _weatherApi = WeatherApi();
 
@@ -89,11 +90,12 @@ class WeatherController extends GetxController {
       Position position = await _determinePosition();
       await fetchWeatherDataByCoordinates(
           position.latitude, position.longitude);
+
+      errorMessage.value = '';
     } catch (e) {
       city.value = "Location Error";
       isLoading.value = false;
-          rethrow; 
-
+      errorMessage.value = e.toString();
     }
   }
 

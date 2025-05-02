@@ -1,12 +1,13 @@
-// import 'dart:convert';
+import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
 import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dartz/dartz.dart';
-// import 'package:http/http.dart' as http;
 
 class AuthRepoImpl extends AuthRepo {
+  final EgyptopiaApiService _apiService = EgyptopiaApiService();
+
   @override
   Future<Either<Exception, UserCredential>> loginWithGoogle() async {
     try {
@@ -28,30 +29,24 @@ class AuthRepoImpl extends AuthRepo {
           await FirebaseAuth.instance.signInWithCredential(credential);
       User? user = userCredential.user;
 
-      if (user != null) {
-        // // اتأكد إذا كان اليوزر جديد (أول تسجيل) من خلال API
-        // final response = await http.get(
-        //   Uri.parse('https://yourapi.com/users/${user.uid}'),
-        // );
-
-        // if (response.statusCode == 404) {
-        //   // أول دخول: ابعت بيانات المستخدم للـ API الخاص بك
-        //   EgyptopiaUser egyptopiaUser = EgyptopiaUser(
-        //     id: user.uid,
-        //     name: user.displayName ?? '',
-        //     email: user.email ?? '',
-        //     country: '',
-        //     dateOfBirth: '',
-        //     gender: '',
-        //     photoUrl: user.photoURL,
-        //   );
-
-        //   await http.post(
-        //     Uri.parse('https://yourapi.com/users'),
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: json.encode(egyptopiaUser.toMap()),
-        //   );
-        // }
+       if (user != null) {
+        final exists = await _apiService.userExists(user.uid);
+        if (!exists) {
+          EgyptopiaUser egyptopiaUser = EgyptopiaUser(
+            id: user.uid,
+            email: user.email!,
+            name: user.displayName ?? '',
+            country: null,
+            dateOfBirth: null,
+            gender: null,
+            profileImg: user.photoURL,
+          );
+          try {
+            await _apiService.createUser(egyptopiaUser);
+          } catch (e) {
+            return Left(Exception("API Error: $e"));
+          }
+        }
       }
 
       return Right(userCredential);
@@ -82,16 +77,14 @@ class AuthRepoImpl extends AuthRepo {
           country: user.country,
           dateOfBirth: user.dateOfBirth,
           gender: user.gender,
-          photoUrl: user.photoUrl,
+          profileImg: user.profileImg,
         );
+ try {
+          await _apiService.createUser(newUser); 
+        } catch (e) {
+          return Left(Exception("API Error: $e"));
+        }
 
-        // await http.post(
-        //   Uri.parse('https://yourapi.com/users'),
-        //   headers: {'Content-Type': 'application/json'},
-        //   body: json.encode(newUser.toMap()),
-        // );
-
-        // ابعت verification email وسجّل خروج لو عايز
         if (!firebaseUser.emailVerified) {
           await firebaseUser.sendEmailVerification();
           await FirebaseAuth.instance.signOut();
@@ -100,13 +93,13 @@ class AuthRepoImpl extends AuthRepo {
         return Right(userCredential);
       }
 
-      return Left(Exception("Sign up failed, please try again."));
+      return Left(Exception("Sign up failed, Please try again."));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         return Left(Exception(
-            'There is an account actually associated with this email.'));
+            '⚠️ There Is An Account Actually Associated With This Email.'));
       } else {
-        return Left(Exception(e.message ?? 'An error happened'));
+        return Left(Exception(e.message ?? '⚠️ An error happened'));
       }
     } catch (e) {
       return Left(Exception(e.toString()));
@@ -127,18 +120,40 @@ class AuthRepoImpl extends AuthRepo {
       if (user != null && !user.emailVerified) {
         await user.sendEmailVerification();
         await FirebaseAuth.instance.signOut();
-        return Left(Exception("Please verify your email before logging in."));
+        return Left(Exception("Please Verify Your Email Before Logging In."));
       }
 
       return Right(userCredential);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return Left(Exception('There is no account with this e-mail!'));
-      } else if (e.code == 'wrong-password') {
-        return Left(Exception('The password is incorrect!'));
-      } else {
-        return Left(Exception(e.message ?? 'An error happened'));
+      switch (e.code) {
+        case 'user-not-found':
+          return Left(Exception('❌ No Account Found With This Email.'));
+        case 'wrong-password':
+          return Left(Exception('❌ The Password Is Incorrect.'));
+        case 'invalid-email':
+          return Left(Exception('⚠️ The Email Address Is Badly Formatted.'));
+        case 'invalid-credential':
+          return Left(Exception(
+              "❌ This Email Doesn't Exist or The Password Is Incorrect"));
+        default:
+          return Left(Exception('❗ Firebase error: ${e.code}'));
       }
+    }
+  }
+
+  @override
+  Future<Either<Exception, void>> sendPasswordResetEmail(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return Left(Exception('⚠️ No Account Found With This Email!'));
+      } else {
+        return Left(Exception(e.message ?? '⚠️ An Error Occurred!'));
+      }
+    } catch (e) {
+      return Left(Exception('⚠️ An Error Occurred!'));
     }
   }
 }

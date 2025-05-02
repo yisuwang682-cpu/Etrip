@@ -61,7 +61,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                             BorderRadius.circular(SizeConfig.defaultSize! * 2),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha:0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                             blurRadius: 10,
                             spreadRadius: 2,
                           ),
@@ -165,30 +165,17 @@ class _SignUpBodyState extends State<SignUpBody> {
                           ],
                         ),
                         const VerticalSpace(1.5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BuildSocialIcon(
-                                assetPath: AssetsData.fblogo,
-                                size: SizeConfig.defaultSize! * 3),
-                            const HorizantalSpace(2),
-                            BuildSocialIcon(
-                                onTap: () {
-                                  _controller.loginWithGoogle(context,
-                                      (isLoading) {
-                                    setState(() {
-                                      _loading = isLoading;
-                                    });
-                                  });
-                                },
-                                assetPath: AssetsData.google,
-                                size: SizeConfig.defaultSize! * 3),
-                            const HorizantalSpace(2),
-                            BuildSocialIcon(
-                                assetPath: AssetsData.insta,
-                                size: SizeConfig.defaultSize! * 3),
-                          ],
-                        ),
+                        BuildSocialIcon(
+                            onTap: () {
+                              _controller.loginWithGoogle(context,
+                                  (isLoading) {
+                                setState(() {
+                                  _loading = isLoading;
+                                });
+                              });
+                            },
+                            assetPath: AssetsData.google,
+                            size: SizeConfig.defaultSize! * 3),
                         const VerticalSpace(1.5),
                         Center(
                           child: GestureDetector(

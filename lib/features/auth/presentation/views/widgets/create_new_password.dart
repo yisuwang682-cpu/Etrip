@@ -16,56 +16,63 @@ class CreateNewPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReusableScreen(
       showBackButton: true,
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
-            child: Column(
-              children: [
-                const VerticalSpace(4),
-                Text(
-                  "Create New Password",
-                  style: GoogleFonts.imFellFrenchCanon(
-                    fontSize: SizeConfig.defaultSize! * 3,
-                    fontWeight: FontWeight.w500,
+      child: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
+              child: Column(
+                children: [
+                  const VerticalSpace(4),
+                  Text(
+                    "Create New Password",
+                    style: GoogleFonts.imFellFrenchCanon(
+                      fontSize: SizeConfig.defaultSize! * 3,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                const VerticalSpace(2),
-                const PageViewItem(
-                  image: 'assets/images/new1.png',
-                  title:
-                      'Your new password must be different\nfrom previously used password',
-                  subTitle: '',
-                  titleFontSize: 18,
-                  subTitleFontSize: 10,
-                ),
-                const CustomInputField(
-                  label: "New Password",
-                  hint: "Enter Your New Password",
+                  const VerticalSpace(2),
+                  const PageViewItem(
+                    image: 'assets/images/new1.png',
+                    title:
+                        'Your new password must be different\nfrom previously used password',
+                    subTitle: '',
+                    titleFontSize: 18,
+                    subTitleFontSize: 1,
+                  ),const CustomInputField(
+                  label: "Old Password",
+                  hint: "Enter Your Old Password",
                   inputType: TextInputType.visiblePassword,
                   isPassword: true,
                 ),
                 const VerticalSpace(2),
-                const CustomInputField(
-                  label: "Confirm Password",
-                  hint: "Re-enter Your Password",
-                  inputType: TextInputType.visiblePassword,
-                  isPassword: true,
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: CustomGeneralButton(
-                    text: "Confirm",
-                    onTap: () {
-                      GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
-                    },
+                  const CustomInputField(
+                    label: "New Password",
+                    hint: "Enter Your New Password",
+                    inputType: TextInputType.visiblePassword,
+                    isPassword: true,
                   ),
-                ),
-              ],
+                  const VerticalSpace(2),
+                  const CustomInputField(
+                    label: "Confirm Password",
+                    hint: "Re-enter Your Password",
+                    inputType: TextInputType.visiblePassword,
+                    isPassword: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: CustomGeneralButton(
+                      text: "Confirm",
+                      onTap: () {
+                        GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

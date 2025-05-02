@@ -1,9 +1,13 @@
+import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
+import 'package:egyptopia/features/Profile/bloc/user_event.dart';
 import 'package:flutter/material.dart';
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
 import 'package:egyptopia/features/auth/data/respotireis/auth_repo_impl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpController {
   final AuthRepo _authRepo = AuthRepoImpl();
@@ -22,7 +26,8 @@ class SignUpController {
     passwordController.dispose();
   }
 
-  Future<void> signUp(BuildContext context, ValueChanged<bool> setLoading) async {
+  Future<void> signUp(
+      BuildContext context, ValueChanged<bool> setLoading) async {
     FocusScope.of(context).unfocus();
 
     final name = nameController.text.trim();
@@ -39,7 +44,11 @@ class SignUpController {
         dob.isEmpty ||
         userGender.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill all fields!')),
+        SnackBar(
+            content: Text(
+          'Please fill all fields!',
+          style: GoogleFonts.lato(),
+        )),
       );
       return;
     }
@@ -47,13 +56,13 @@ class SignUpController {
     setLoading(true);
 
     final user = EgyptopiaUser(
-      id: '', // سيتم إضافة الـid بعد التسجيل عند الحاجة
+      id: '',
       name: name,
       email: email,
       country: userCountry,
       dateOfBirth: dob,
       gender: userGender,
-      photoUrl: null,
+      profileImg: null,
     );
 
     final result = await _authRepo.signUpWithEmail(user, password);
@@ -64,19 +73,29 @@ class SignUpController {
       (failure) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(failure.toString().replaceAll('Exception: ', '')),
+            content: Text(failure.toString().replaceAll('Exception: ', ''),
+                style: GoogleFonts.lato()),
             backgroundColor: Colors.red[800],
           ),
         );
       },
       (userCredential) {
         if (userCredential == null) {
+          final user = userCredential?.user;
+          if (user != null) {
+            context.read<UserBloc>().add(LoadUser(user.uid));
+          }
           showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: const Text('Verify Your Email'),
-              content: const Text(
-                  'A verification email has been sent. Please check your inbox and verify your email address before logging in.'),
+              title: Text(
+                'Verify Your Email',
+                style: GoogleFonts.playfairDisplay(),
+              ),
+              content: Text(
+                'A verification email has been sent. Please check your inbox and verify your email address before logging in.',
+                style: GoogleFonts.lato(fontWeight: FontWeight.bold),
+              ),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -90,35 +109,46 @@ class SignUpController {
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Sign up was successful!')),
+            SnackBar(
+                content: Text(
+              'Sign up was successful!',
+              style: GoogleFonts.lato(),
+            )),
           );
         }
       },
     );
   }
 
-   Future<void> loginWithGoogle(BuildContext context, ValueChanged<bool> setLoading) async {
+  Future<void> loginWithGoogle(
+      BuildContext context, ValueChanged<bool> setLoading) async {
     setLoading(true);
 
     final result = await _authRepo.loginWithGoogle();
 
     setLoading(false);
 
-    result.fold(
-      (failure) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(failure.toString().replaceAll('Exception: ', '')),
-            backgroundColor: Colors.red[800],
+    result.fold((failure) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            failure.toString().replaceAll('Exception: ', ''),
+            style: GoogleFonts.lato(),
           ),
-        );
-      },
-      (userCredential) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Sign in with Google successful!')),
-        );
-        GoRouter.of(context).pushReplacement(AppRouter.kScreens); 
-      },
-    );
+          backgroundColor: Colors.red[800],
+        ),
+      );
+    }, (userCredential) async {
+      final user = userCredential.user;
+      if (user != null) {
+        context.read<UserBloc>().add(LoadUser(user.uid));
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('Sign in with Google successful ✅',
+                style: GoogleFonts.lato())),
+      );
+      GoRouter.of(context).pushReplacement(AppRouter.kScreens);
+    });
   }
 }

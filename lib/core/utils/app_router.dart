@@ -1,5 +1,9 @@
+import 'package:egyptopia/features/Profile/presentation/views/widgets/about_me.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/edit_profile.dart';
+import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/home/presentation/views/home_view.dart';
 import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
+import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
 import 'package:egyptopia/features/z/activities.dart';
 import 'package:egyptopia/features/auth/presentation/views/widgets/create_new_password.dart';
 import 'package:egyptopia/features/z/chat_details.dart';
@@ -48,6 +52,9 @@ abstract class AppRouter {
   static const kChatDetails = '/chatDetails';
   static const kFoodItemsScreen = '/foodItemsScreen';
   static const kFoodDetails = '/foodDetails';
+  static const kWishList = '/wishList';
+  static const kEditProfile = '/editProfile';
+  static const kAboutMe = '/aboutme';
 
   static final router = GoRouter(routes: [
     GoRoute(path: '/', builder: (context, state) => const SplashView()),
@@ -126,6 +133,19 @@ abstract class AppRouter {
         builder: (context, state) {
           final foodItem = state.extra as Map<String, dynamic>;
           return FoodDetailsScreen(foodItem: foodItem);
+        }),
+    GoRoute(path: kWishList, builder: (context, state) => const WishListView()),
+  GoRoute(
+        path: kEditProfile,
+        builder: (context, state) {
+          final user = state.extra as EgyptopiaUser;
+          return EditProfile(user: user,);
+        }),
+        GoRoute(
+        path: kAboutMe,
+        builder: (context, state) {
+          final user = state.extra as EgyptopiaUser;
+          return AboutMe(user: user,);
         }),
   ]);
 }

@@ -41,13 +41,15 @@ class WeatherScreen extends StatelessWidget {
   }
 
   Future<void> smartGetWeatherByLocation(BuildContext context) async {
-    try {
-      await controller.getWeatherByLocation();
-    } catch (e) {
-      if (e.toString().contains("User denied permissions to access the device's location")) {
-        // ignore: use_build_context_synchronously
-        showLocationDialog(context);
-      }
+    await controller.getWeatherByLocation();
+
+    if ((controller.errorMessage.value.contains("PERMISSION_DENIED_FOREVER") ||
+            controller.errorMessage.value
+                .contains("PermissionDeniedException") ||
+            controller.errorMessage.value.contains(
+                "User denied permissions to access the device's location")) &&
+        context.mounted) {
+      showLocationDialog(context);
     }
   }
 
