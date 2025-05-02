@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "393485979516-9mdd8o636e8hqlo99i9u0dfbb71bv1va.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.egyptopia",
+            "certificate_hash": "8fcdec572aa0d40e2de51bebc3d1e72b8b3aedee"
+          }
+        },
+        {
           "client_id": "393485979516-mc0eb4hnfogiaq7tvu978jvgnijk5f5l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -32,7 +32,7 @@ class ProfileContent extends StatelessWidget {
                 context.read<UserBloc>().add(LoadUser(user.id));
               },
             ),
-            const HorizantalSpace(2),
+            const HorizantalSpace(3),
             Column(
               children: [
                 Text(
