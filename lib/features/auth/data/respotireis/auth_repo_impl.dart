@@ -156,4 +156,26 @@ class AuthRepoImpl extends AuthRepo {
       return Left(Exception('⚠️ An Error Occurred!'));
     }
   }
+
+  @override
+Future<Either<Exception, void>> changePassword(String oldPassword, String newPassword) async {
+  try {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null || user.email == null) {
+      return Left(Exception("No user logged in"));
+    }
+    final cred = EmailAuthProvider.credential(email: user.email!, password: oldPassword);
+    await user.reauthenticateWithCredential(cred);
+
+    await user.updatePassword(newPassword);
+    return const Right(null);
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'wrong-password') {
+      return Left(Exception("Old password is incorrect!"));
+    }
+    return Left(Exception(e.message ?? "Error changing password"));
+  } catch (e) {
+    return Left(Exception(e.toString()));
+  }
+}
 }

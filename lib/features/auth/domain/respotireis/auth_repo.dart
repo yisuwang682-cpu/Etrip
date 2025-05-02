@@ -14,4 +14,6 @@ abstract class AuthRepo {
   Future<Either<Exception, UserCredential>> loginWithGoogle();
 
   Future<Either<Exception, void>> sendPasswordResetEmail(String email);
+
+  Future<Either<Exception, void>> changePassword(String oldPassword, String newPassword);
 }

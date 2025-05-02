@@ -39,11 +39,14 @@ class ProfileView extends StatelessWidget {
                       fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 const VerticalSpace(1),
-                CustomJoinButton(
-                    text: "Please Go to Login",
-                    onTap: () {
-                      GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
-                    })
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 65),
+                  child: CustomGeneralButton(
+                      text: "Please Sign-In First",
+                      onTap: () {
+                        GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
+                      }),
+                )
               ],
             ),
           );

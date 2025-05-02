@@ -1,11 +1,12 @@
 import 'package:egyptopia/features/Profile/presentation/views/widgets/about_me.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/edit_profile.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/my_preference.dart';
 import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/home/presentation/views/home_view.dart';
 import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
 import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
 import 'package:egyptopia/features/z/activities.dart';
-import 'package:egyptopia/features/auth/presentation/views/widgets/create_new_password.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/create_new_password.dart';
 import 'package:egyptopia/features/z/chat_details.dart';
 import 'package:egyptopia/features/z/chatbot.dart';
 import 'package:egyptopia/features/z/event_details.dart';
@@ -55,6 +56,7 @@ abstract class AppRouter {
   static const kWishList = '/wishList';
   static const kEditProfile = '/editProfile';
   static const kAboutMe = '/aboutme';
+  static const kMyPreference = '/myPreference';
 
   static final router = GoRouter(routes: [
     GoRoute(path: '/', builder: (context, state) => const SplashView()),
@@ -147,5 +149,7 @@ abstract class AppRouter {
           final user = state.extra as EgyptopiaUser;
           return AboutMe(user: user,);
         }),
+            GoRoute(path: kMyPreference, builder: (context, state) => const MyPreference()),
+
   ]);
 }

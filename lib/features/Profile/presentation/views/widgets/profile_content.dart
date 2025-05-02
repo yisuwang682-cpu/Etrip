@@ -76,10 +76,12 @@ class ProfileContent extends StatelessWidget {
         CustomCard(
             icon: const Icon(Icons.room_preferences_outlined),
             text: "My Prefrence",
-            onTap: () {}),
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kMyPreference);
+            }),
         CustomCard(
-            icon: const Icon(Icons.photo_size_select_actual_rounded),
-            text: "Travel photos",
+            icon: const Icon(Icons.vpn_key_outlined),
+            text: "Change Password",
             onTap: () {
               GoRouter.of(context).push(AppRouter.kCreateNewPassword);
             }),
