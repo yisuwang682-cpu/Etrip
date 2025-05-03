@@ -40,7 +40,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 const VerticalSpace(1),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 65),
+                  padding: const EdgeInsets.symmetric(horizontal: 95),
                   child: CustomGeneralButton(
                       text: "Please Sign-In First",
                       onTap: () {

@@ -20,7 +20,8 @@ class CreateNewPassword extends StatefulWidget {
 class _CreateNewPasswordState extends State<CreateNewPassword> {
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   bool _loading = false;
 
   @override
@@ -41,7 +42,8 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
       // عمل re-authenticate بالباسورد القديم
       AuthCredential credential = EmailAuthProvider.credential(
-        email: user.email!, password: currentPassword,
+        email: user.email!,
+        password: currentPassword,
       );
       await user.reauthenticateWithCredential(credential);
 
@@ -77,14 +79,15 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
     }
     setState(() => _loading = true);
 
-    final error = await changePassword(currentPassword: oldPw, newPassword: newPw);
+    final error =
+        await changePassword(currentPassword: oldPw, newPassword: newPw);
     setState(() => _loading = false);
 
     if (error == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Password changed successfully! Please log in again.")),
+        const SnackBar(content: Text("Password changed successfully!")),
       );
-      GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
+      GoRouter.of(context).pop();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error)),
@@ -147,7 +150,8 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: CustomGeneralButton(
                       text: _loading ? "Processing..." : "Confirm",
-                      onTap: _loading ? null : () => onChangePasswordTap(context),
+                      onTap:
+                          _loading ? null : () => onChangePasswordTap(context),
                     ),
                   ),
                 ],
