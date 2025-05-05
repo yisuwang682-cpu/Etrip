@@ -17,4 +17,5 @@ class AssetsData {
   static const foodImage = 'assets/images/foodImage.png';
   static const vectors2 = 'assets/images/vectors2.png';
   static const chatbot = 'assets/images/chatbot.png';
+  static const spacer = 'assets/images/spacer.png';
 }

@@ -1,6 +1,8 @@
 import 'package:egyptopia/features/Profile/presentation/views/widgets/about_me.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/edit_profile.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/my_preference.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_one.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_three.dart';
+import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_two.dart';
 import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/home/presentation/views/home_view.dart';
 import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
@@ -56,7 +58,9 @@ abstract class AppRouter {
   static const kWishList = '/wishList';
   static const kEditProfile = '/editProfile';
   static const kAboutMe = '/aboutme';
-  static const kMyPreference = '/myPreference';
+  static const kPreferenceOne = '/preferenceOne';
+  static const kPreferenceTwo = '/preferenceTwo';
+  static const kPreferenceThree = '/preferenceThree';
 
   static final router = GoRouter(routes: [
     GoRoute(path: '/', builder: (context, state) => const SplashView()),
@@ -137,19 +141,33 @@ abstract class AppRouter {
           return FoodDetailsScreen(foodItem: foodItem);
         }),
     GoRoute(path: kWishList, builder: (context, state) => const WishListView()),
-  GoRoute(
+    GoRoute(
         path: kEditProfile,
         builder: (context, state) {
           final user = state.extra as EgyptopiaUser;
-          return EditProfile(user: user,);
+          return EditProfile(
+            user: user,
+          );
         }),
-        GoRoute(
+    GoRoute(
         path: kAboutMe,
         builder: (context, state) {
           final user = state.extra as EgyptopiaUser;
-          return AboutMe(user: user,);
+          return AboutMe(
+            user: user,
+          );
         }),
-            GoRoute(path: kMyPreference, builder: (context, state) => const MyPreference()),
-
+    GoRoute(
+      path: kPreferenceOne,
+      builder: (context, state) => const PreferenceOne(),
+    ),
+    GoRoute(
+      path: kPreferenceTwo,
+      builder: (context, state) => const PreferenceTwo(),
+    ),
+    GoRoute(
+      path: kPreferenceThree,
+      builder: (context, state) => const PreferenceThree(),
+    ),
   ]);
 }

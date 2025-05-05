@@ -5,7 +5,10 @@ import 'package:image_picker/image_picker.dart';
 
 class EgyptopiaApiService {
   static const String _baseUrl = 'http://192.168.1.12:8000/api/users';
+  static const String _preferencesBaseUrl =
+      'http://192.168.1.12:8000/api/preferences';
 
+  // Existing user-related methods
   Future<bool> userExists(String id) async {
     final uri = Uri.parse('$_baseUrl/$id/');
     final response = await http.get(uri);
@@ -56,9 +59,63 @@ class EgyptopiaApiService {
 
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
-    
+
     if (response.statusCode != 200) {
       throw Exception("Failed to update image: ${response.body}");
+    }
+  }
+
+  // Preferences-related methods
+  Future<Map<String, dynamic>?> getUserPreferences(String userId) async {
+    final uri = Uri.parse('$_preferencesBaseUrl/$userId/');
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    }
+    return null;
+  }
+
+  Future<void> createUserPreferences({
+    required String userId,
+    required List<String> preferredCategories,
+    required List<String> preferredTourismTypes,
+    required List<String> preferredCities,
+  }) async {
+    final uri = Uri.parse('$_preferencesBaseUrl/create/');
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'user': userId, // Changed from 'user_id' to 'user'
+        'category': preferredCategories,
+        'tourism_type': preferredTourismTypes,
+        'city': preferredCities,
+      }),
+    );
+    if (response.statusCode != 201) {
+      throw Exception("Failed to create preferences: ${response.body}");
+    }
+  }
+
+  Future<void> updateUserPreferences({
+    required String userId,
+    required List<String> preferredCategories,
+    required List<String> preferredTourismTypes,
+    required List<String> preferredCities,
+  }) async {
+    final uri = Uri.parse('$_preferencesBaseUrl/$userId/');
+    final response = await http.patch(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'user': userId, // Changed from 'user_id' to 'user'
+        'category': preferredCategories,
+        'tourism_type': preferredTourismTypes,
+        'city': preferredCities,
+      }),
+    );
+    if (response.statusCode != 200) {
+      throw Exception("Failed to update preferences: ${response.body}");
     }
   }
 }

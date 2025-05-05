@@ -6,6 +6,9 @@ class EgyptopiaUser {
   final String? dateOfBirth;
   final String? gender;
   final String? profileImg;
+  final List<String> preferredCategories;
+  final List<String> preferredTourismTypes;
+  final List<String> preferredCities;
 
   EgyptopiaUser({
     required this.id,
@@ -15,6 +18,9 @@ class EgyptopiaUser {
     this.dateOfBirth,
     this.gender,
     this.profileImg,
+    this.preferredCategories = const [],
+    this.preferredTourismTypes = const [],
+    this.preferredCities = const [],
   });
 
   EgyptopiaUser copyWith({
@@ -25,6 +31,9 @@ class EgyptopiaUser {
     String? dateOfBirth,
     String? gender,
     String? profileImg,
+    List<String>? preferredCategories,
+    List<String>? preferredTourismTypes,
+    List<String>? preferredCities,
   }) {
     return EgyptopiaUser(
       id: id ?? this.id,
@@ -34,6 +43,10 @@ class EgyptopiaUser {
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       gender: gender ?? this.gender,
       profileImg: profileImg ?? this.profileImg,
+      preferredCategories: preferredCategories ?? this.preferredCategories,
+      preferredTourismTypes:
+          preferredTourismTypes ?? this.preferredTourismTypes,
+      preferredCities: preferredCities ?? this.preferredCities,
     );
   }
 
@@ -44,6 +57,9 @@ class EgyptopiaUser {
         'country': country,
         'date_of_birth': dateOfBirth,
         'gender': gender,
+        'preferred_categories': preferredCategories,
+        'preferred_tourism_types': preferredTourismTypes,
+        'preferred_cities': preferredCities,
       };
 
   factory EgyptopiaUser.fromMap(Map<String, dynamic> map) => EgyptopiaUser(
@@ -54,5 +70,10 @@ class EgyptopiaUser {
         dateOfBirth: map['date_of_birth'],
         gender: map['gender'],
         profileImg: map['profile_img'],
+        preferredCategories:
+            List<String>.from(map['preferred_categories'] ?? []),
+        preferredTourismTypes:
+            List<String>.from(map['preferred_tourism_types'] ?? []),
+        preferredCities: List<String>.from(map['preferred_cities'] ?? []),
       );
 }

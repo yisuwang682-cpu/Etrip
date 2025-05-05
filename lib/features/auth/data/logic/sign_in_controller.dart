@@ -1,5 +1,6 @@
 import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
 import 'package:egyptopia/features/Profile/bloc/user_event.dart';
+import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
@@ -55,13 +56,20 @@ class SignInController {
         final user = userCredential.user;
         if (user != null) {
           context.read<UserBloc>().add(LoadUser(user.uid));
+          final apiService = EgyptopiaApiService();
+          final existingPreferences =
+              await apiService.getUserPreferences(user.uid);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content:
+                    Text('Sign in successful! ✅', style: GoogleFonts.lato())),
+          );
+          if (existingPreferences != null) {
+            GoRouter.of(context).pushReplacement(AppRouter.kScreens);
+          } else {
+            GoRouter.of(context).pushReplacement(AppRouter.kPreferenceOne);
+          }
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content:
-                  Text('Sign in successful! ✅', style: GoogleFonts.lato())),
-        );
-        GoRouter.of(context).pushReplacement(AppRouter.kScreens);
       },
     );
   }
@@ -74,29 +82,34 @@ class SignInController {
 
     setLoading(false);
 
-    result.fold(
-      (failure) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(failure.toString().replaceAll('Exception: ', ''),
-                style: GoogleFonts.lato()),
-            backgroundColor: Colors.red[800],
-          ),
-        );
-      },
-      (userCredential) async {
-        final user = userCredential.user;
-        if (user != null) {
-          context.read<UserBloc>().add(LoadUser(user.uid));
-        }
+    result.fold((failure) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(failure.toString().replaceAll('Exception: ', ''),
+              style: GoogleFonts.lato()),
+          backgroundColor: Colors.red[800],
+        ),
+      );
+    }, (userCredential) async {
+      final user = userCredential.user;
+      if (user != null) {
+        context.read<UserBloc>().add(LoadUser(user.uid));
+        final apiService = EgyptopiaApiService();
+        final existingPreferences =
+            await apiService.getUserPreferences(user.uid);
+        print("Preferences exist: ${existingPreferences != null}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text('Sign in with Google successful ✅',
                   style: GoogleFonts.lato())),
         );
-        GoRouter.of(context).pushReplacement(AppRouter.kScreens);
-      },
-    );
+        if (existingPreferences != null) {
+          GoRouter.of(context).pushReplacement(AppRouter.kScreens);
+        } else {
+          GoRouter.of(context).pushReplacement(AppRouter.kPreferenceOne);
+        }
+      }
+    });
   }
 
   Future<void> sendPasswordReset(
