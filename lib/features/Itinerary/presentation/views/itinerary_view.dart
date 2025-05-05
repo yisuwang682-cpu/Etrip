@@ -5,9 +5,8 @@ class ItineraryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Itinerary")),
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Text(
           "Welcome to Itinerary!",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

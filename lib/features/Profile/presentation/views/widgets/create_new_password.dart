@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:egyptopia/core/utils/size_config.dart';
 import 'package:egyptopia/core/widgets/custom_fields.dart';
 import 'package:egyptopia/core/widgets/reusable_screen.dart';

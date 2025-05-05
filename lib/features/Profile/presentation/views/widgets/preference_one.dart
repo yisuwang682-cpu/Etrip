@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:egyptopia/core/constants.dart';
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/core/utils/assets.dart';
@@ -95,32 +96,7 @@ class _PreferenceOneState extends State<PreferenceOne> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final userId = FirebaseAuth.instance.currentUser?.uid ?? '';
-    if (userId.isEmpty) {
-      return ReusableScreen(
-        showBackButton: true,
-        gradientStops: const [0.1, 0.9],
-        backgroundColor: kSecondaryColor,
-        imageColor: Colors.black,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('User not logged in. Please sign in.'),
-              const VerticalSpace(2),
-              CustomGeneralButton(
-                text: "Sign In",
-                onTap: () {
-                  GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
+  Widget build(BuildContext context) {  
     return ReusableScreen(
       showBackButton: true,
       gradientStops: const [0.1, 0.9],

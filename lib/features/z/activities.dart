@@ -349,10 +349,6 @@ class _ActivitiesState extends State<Activities> {
                                                   registrationLink))) {
                                                 await launchUrl(Uri.parse(
                                                     registrationLink));
-                                              } else {
-                                                // Handle error if the link can't be launched
-                                                print(
-                                                    "Could not launch the registration link.");
                                               }
                                             },
                                           ),

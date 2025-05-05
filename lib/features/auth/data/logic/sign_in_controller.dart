@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
 import 'package:egyptopia/features/Profile/bloc/user_event.dart';
 import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
@@ -97,7 +99,6 @@ class SignInController {
         final apiService = EgyptopiaApiService();
         final existingPreferences =
             await apiService.getUserPreferences(user.uid);
-        print("Preferences exist: ${existingPreferences != null}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text('Sign in with Google successful ✅',

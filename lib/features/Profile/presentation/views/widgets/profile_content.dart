@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/core/widgets/custom_buttons.dart';
 import 'package:egyptopia/core/widgets/custom_card.dart';

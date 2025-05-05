@@ -223,8 +223,6 @@ class EventDetails extends StatelessWidget {
                                 // Check if the URL can be launched and then launch it
                                 if (await canLaunchUrl(emailUri)) {
                                   await launchUrl(emailUri);
-                                } else {
-                                  print('Could not launch email client');
                                 }
                               },
                             )
@@ -264,9 +262,6 @@ class EventDetails extends StatelessWidget {
                                 // Check if the link can be launched
                                 if (await canLaunchUrl(registrationUri)) {
                                   await launchUrl(registrationUri);
-                                } else {
-                                  print(
-                                      "Could not launch the registration link.");
                                 }
                               },
                             )),

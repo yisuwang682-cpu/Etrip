@@ -50,8 +50,6 @@ class _ChatDetailsState extends State<ChatDetails> {
           _messages.add({'role': 'bot', 'text': botReply});
         });
       } else {
-        print('Server Error: ${response.statusCode}');
-        print('Server Response: ${response.body}');
         setState(() {
           _messages.removeLast();
           _messages
@@ -59,7 +57,6 @@ class _ChatDetailsState extends State<ChatDetails> {
         });
       }
     } catch (e) {
-      print('Exception Error: $e');
       setState(() {
         _messages.removeLast();
         _messages.add({'role': 'bot', 'text': 'Error: Check your connection.'});
