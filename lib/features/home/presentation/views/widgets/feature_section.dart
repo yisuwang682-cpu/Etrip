@@ -26,7 +26,7 @@ class FeatureSection extends StatelessWidget {
             Text(
               title,
               style: titleStyle ??
-                  GoogleFonts.montserrat(
+                  GoogleFonts.merriweather(
                     color: const Color(0xFF1F2544),
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ class FeatureSection extends StatelessWidget {
               onPressed: onSeeAll,
               child: Text(
                 "See All",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.merriweather(
                   color: Colors.black,
                   shadows: [
                     const Shadow(

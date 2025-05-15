@@ -1,4 +1,5 @@
 import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:egyptopia/features/places/data/models/place_model.dart';
 import 'package:flutter/material.dart';
 import 'featured_slider_item.dart';
 
@@ -6,8 +7,8 @@ class FeatureSlider extends StatelessWidget {
   final double? height;
   final double? width;
   final String? imageAsset;
-  final List<Map<String, dynamic>>? places;
-  final void Function(Map<String, dynamic>? place)? onTap;
+  final List<PlaceModel>? places;
+  final void Function(PlaceModel? place)? onTap;
 
   const FeatureSlider({
     super.key,
@@ -17,29 +18,24 @@ class FeatureSlider extends StatelessWidget {
     this.places,
     this.onTap,
   }) : assert(
-          (imageAsset != null && places == null) ||
-              (imageAsset == null && places != null),
-          'Either imageAsset or places must be provided, but not both.',
-        );
+            (imageAsset != null && places == null) ||
+                (imageAsset == null && places != null),
+            'Either imageAsset or places must be provided, but not both.',
+          );
 
   @override
   Widget build(BuildContext context) {
-    String baseUrl = 'http://192.168.1.12:8000';
-
     final uniquePlaces = places != null
         ? (places!
-            .fold<Map<String, Map<String, dynamic>>>(
+            .fold<Map<String, PlaceModel>>(
               {},
               (map, place) {
-                final name = place['name'] as String;
-                if (!map.containsKey(name)) {
-                  map[name] = place;
+                if (!map.containsKey(place.name)) {
+                  map[place.name] = place;
                 }
                 return map;
               },
-            )
-            .values
-            .toList())
+            ).values.toList())
         : null;
 
     return Container(
@@ -51,55 +47,22 @@ class FeatureSlider extends StatelessWidget {
         itemBuilder: (context, index) {
           if (uniquePlaces != null) {
             final place = uniquePlaces[index];
-            final profileImage = place['profile_image']?.toString() ?? '';
-            final carouselRaw = place['carousel'];
-
-            String carouselImage = '';
-            if (carouselRaw != null) {
-              if (carouselRaw is List<dynamic>) {
-                final carousel = carouselRaw;
-                if (carousel.isNotEmpty) {
-                  final firstItem = carousel[0];
-                  if (firstItem is Map<String, dynamic>) {
-                    carouselImage = firstItem['image']?.toString() ?? '';
-                  } else if (firstItem is String) {
-                    carouselImage = firstItem;
-                  }
-                }
-              } else if (carouselRaw is String) {
-                carouselImage = carouselRaw;
-              }
-            }
-
-            final imageUrl = profileImage.isNotEmpty
-                ? '$baseUrl/$profileImage'
-                : (carouselImage.isNotEmpty ? '$baseUrl/$carouselImage' : '');
-            final cityName = place['city_name']?.toString() ?? '';
-            final name = place['name']?.toString() ?? '';
-            final rate =
-                double.tryParse(place['rate']?.toString() ?? '0') ?? 0.0;
-            final placeId = place['place_id']?.toString() ?? '';
-            final category = place['category']?.toString() ?? '';
-            final tourismType = place['tourism_type']?.toString() ?? '';
-            final description = place['description']?.toString() ?? '';
-            final googleMapsLink = place['google_maps_link']?.toString() ?? '';
-            final totalRates = place['total_rates'] ?? 0;
-            final carousel = place['carousel'] ?? [];
-
             return FeaturedSliderItem(
               width: width,
-              imageUrl: imageUrl,
+              imageUrl: (place.profileImage.isNotEmpty)
+                        ? place.profileImage
+                        :  place.carouselImages.first,
               isStatic: false,
-              cityName: cityName,
-              name: name,
-              rate: rate,
-              placeId: placeId,
-              category: category,
-              tourismType: tourismType,
-              description: description,
-              googleMapsLink: googleMapsLink,
-              totalRates: totalRates,
-              carousel: carousel,
+              cityName: place.cityName,
+              name: place.name,
+              rate: place.rate,
+              placeId: place.id,
+              category: place.category,
+              tourismType: place.tourismType,
+              description: place.description,
+              googleMapsLink: place.googleMapsLink,
+              totalRates: place.totalRates,
+              carousel: place.carouselImages,
               onTap: () => onTap?.call(place),
             );
           } else {

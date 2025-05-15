@@ -3,6 +3,7 @@
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/core/utils/size_config.dart';
 import 'package:egyptopia/core/widgets/custom_buttons.dart';
+import 'package:egyptopia/features/places/data/models/place_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
@@ -61,25 +62,21 @@ class FavoriteCard extends StatelessWidget {
                   context.push(AppRouter.kEventDetails, extra: eventData);
                 } else if (isPlace) {
                   // Existing place navigation logic
-                  final rate = fav.rate != null
-                      ? double.tryParse(fav.rate!) ?? 0.0
-                      : 0.0;
-                  final place = {
-                    'place_id': fav.id,
-                    'name': fav.title,
-                    'profile_image': fav.imageUrl,
-                    'city_name': fav.city,
-                    'category': fav.category ?? '',
-                    'tourism_type': fav.tourismType ?? '',
-                    'rate': rate,
-                    'description':
-                        fav.description ?? 'Description not available',
-                    'google_maps_link': fav.googleMapsLink ?? '',
-                    'total_rates': fav.totalRates ?? 0,
-                    'carousel': fav.carousel ?? [],
-                  };
-                  context.push(AppRouter.kPlaceDetails, extra: place);
-                }
+                  final place = PlaceModel(
+      id: fav.id,
+      name: fav.title,
+      profileImage: fav.imageUrl,
+      carouselImages: (fav.carousel ?? []).cast<String>(),
+      tourismType: fav.tourismType ?? '',
+      category: fav.category ?? '',
+      cityName: fav.city,
+      rate: double.tryParse(fav.rate ?? '') ?? 0.0,
+      totalRates: fav.totalRates ?? 0,
+      description: fav.description ?? 'Description not available',
+      googleMapsLink: fav.googleMapsLink ?? '',
+    );
+    context.push(AppRouter.kPlaceDetails, extra: place);
+  }
               },
               child: Card(
                 shape: cardShape,
@@ -219,24 +216,24 @@ class FavoriteCard extends StatelessWidget {
                                     text: isPlace ? "Explore Now" : "Join Now",
                                     onTap: () async {
                                       if (isPlace) {
-                                        final rate = fav.rate != null
-                                            ? double.tryParse(fav.rate!) ?? 0.0
-                                            : 0.0;
-                                        final place = {
-                                          'place_id': fav.id,
-                                          'name': fav.title,
-                                          'profile_image': fav.imageUrl,
-                                          'city_name': fav.city,
-                                          'category': fav.category ?? '',
-                                          'tourism_type': fav.tourismType ?? '',
-                                          'rate': rate,
-                                          'description': fav.description ??
+                                        final place = PlaceModel(
+                                          id: fav.id,
+                                          name: fav.title,
+                                          profileImage: fav.imageUrl,
+                                          carouselImages: (fav.carousel ?? [])
+                                              .cast<String>(),
+                                          tourismType: fav.tourismType ?? '',
+                                          category: fav.category ?? '',
+                                          cityName: fav.city,
+                                          rate:
+                                              double.tryParse(fav.rate ?? '') ??
+                                                  0.0,
+                                          totalRates: fav.totalRates ?? 0,
+                                          description: fav.description ??
                                               'Description not available',
-                                          'google_maps_link':
+                                          googleMapsLink:
                                               fav.googleMapsLink ?? '',
-                                          'total_rates': fav.totalRates ?? 0,
-                                          'carousel': fav.carousel ?? [],
-                                        };
+                                        );
                                         context.push(AppRouter.kPlaceDetails,
                                             extra: place);
                                       } else {

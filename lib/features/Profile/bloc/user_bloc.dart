@@ -14,20 +14,28 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   Future<void> _onLoadUser(LoadUser event, Emitter<UserState> emit) async {
-    emit(UserLoading());
-    try {
-      final user = await EgyptopiaApiService().getUserById(event.userId);
-      emit(UserLoaded(user!));
-    } catch (e) {
-      emit(UserError("Failed to load profile"));
+  emit(UserLoading());
+  try {
+    if (event.userId.isEmpty) {
+      emit(UserUnauthenticated());
+      return;
     }
+    final user = await EgyptopiaApiService().getUserById(event.userId);
+    if (user == null) {
+      emit(UserUnauthenticated());
+      return;
+    }
+    emit(UserLoaded(user));
+  } catch (e) {
+    emit(UserError("Failed to load profile"));
   }
+}
 
   Future<void> _onUpdateUser(UpdateUser event, Emitter<UserState> emit) async {
     emit(UserLoading());
     try {
       await EgyptopiaApiService().updateUser(event.updatedUser);
-      emit(UserLoaded(event.updatedUser)); // بنعتمد على الـobject الجديد اللي جالك من Edit
+      emit(UserLoaded(event.updatedUser)); 
     } catch (e) {
       emit(UserError("Error updating profile"));
     }

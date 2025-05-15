@@ -26,6 +26,30 @@ class ProfileView extends StatelessWidget {
           if (state is UserLoaded) {
             return ProfileContent(user: state.user);
           }
+          if (state is UserUnauthenticated) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "No Profile Data!",
+                    style: GoogleFonts.lato(
+                        fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  const VerticalSpace(1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 95),
+                    child: CustomGeneralButton(
+                        text: "Please Sign-In First",
+                        onTap: () {
+                          GoRouter.of(context)
+                              .pushReplacement(AppRouter.kSignIn);
+                        }),
+                  )
+                ],
+              ),
+            );
+          }
           if (state is UserError) {
             return Center(child: Text(state.error));
           }
@@ -42,7 +66,7 @@ class ProfileView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 95),
                   child: CustomGeneralButton(
-                      text: "Please Sign-In First",
+                      text: "Please Log-In First",
                       onTap: () {
                         GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
                       }),

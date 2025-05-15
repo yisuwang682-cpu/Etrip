@@ -5,14 +5,15 @@ import 'package:egyptopia/features/Profile/presentation/views/widgets/preference
 import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_two.dart';
 import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
 import 'package:egyptopia/features/home/presentation/views/home_view.dart';
+import 'package:egyptopia/features/places/data/models/place_model.dart';
 import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
 import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
-import 'package:egyptopia/features/z/activities.dart';
+import 'package:egyptopia/features/activities/activities.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/create_new_password.dart';
-import 'package:egyptopia/features/z/chat_details.dart';
-import 'package:egyptopia/features/z/chatbot.dart';
-import 'package:egyptopia/features/z/event_details.dart';
-import 'package:egyptopia/features/z/events.dart';
+import 'package:egyptopia/features/chat_bot/chat_details.dart';
+import 'package:egyptopia/features/chat_bot/chatbot.dart';
+import 'package:egyptopia/features/events/event_details.dart';
+import 'package:egyptopia/features/events/events.dart';
 import 'package:egyptopia/features/food/food_details_screen.dart';
 import 'package:egyptopia/features/food/food_items_screen.dart';
 import 'package:egyptopia/features/food/food_start.dart';
@@ -25,8 +26,8 @@ import 'package:egyptopia/features/quizzes/quiz_results.dart';
 import 'package:egyptopia/features/quizzes/quiz_screen.dart';
 import 'package:egyptopia/features/quizzes/quiz_start.dart';
 import 'package:egyptopia/features/food/food_categories.dart';
-import 'package:egyptopia/features/z/place_details.dart';
-import 'package:egyptopia/features/z/places.dart';
+import 'package:egyptopia/features/places/presentation/place_details.dart';
+import 'package:egyptopia/features/places/presentation/places_screen.dart';
 import 'package:egyptopia/features/onbording/presentation/views/on_bording_view.dart';
 import 'package:egyptopia/features/splash/presentation/views/splash_view.dart';
 import 'package:egyptopia/screens.dart';
@@ -92,7 +93,7 @@ abstract class AppRouter {
         builder: (context, state) => const CreateNewPassword()),
     GoRoute(path: kScreens, builder: (context, state) => const Screens()),
     GoRoute(path: kHomePage, builder: (context, state) => const HomeView()),
-    GoRoute(path: kPlaces, builder: (context, state) => const Places()),
+    GoRoute(path: kPlaces, builder: (context, state) => const PlacesScreen()),
     GoRoute(path: kQuizStart, builder: (context, state) => const QuizStart()),
     GoRoute(path: kEvents, builder: (context, state) => const Events()),
     GoRoute(path: kActivities, builder: (context, state) => const Activities()),
@@ -108,7 +109,7 @@ abstract class AppRouter {
     GoRoute(
       path: kPlaceDetails,
       builder: (context, state) {
-        final place = state.extra as Map<String, dynamic>? ?? {};
+        final place = state.extra as PlaceModel;
         return PlaceDetails(place: place);
       },
     ),

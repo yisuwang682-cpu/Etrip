@@ -7,7 +7,6 @@ class EgyptopiaApiService {
   static const String _baseUrl = 'http://192.168.1.12:8000/api/users';
   static const String _preferencesBaseUrl =
       'http://192.168.1.12:8000/api/preferences';
-  static const String _placesBaseUrl = 'http://192.168.1.12:8000/api/places';
 
   // Existing user-related methods
   Future<bool> userExists(String id) async {
@@ -117,107 +116,6 @@ class EgyptopiaApiService {
     );
     if (response.statusCode != 200) {
       throw Exception("Failed to update preferences: ${response.body}");
-    }
-  }
-
-  // Fetch places by tourism type
-  Future<List<Map<String, dynamic>>> fetchPlacesByTourismType(
-      String tourismType) async {
-    final uri = Uri.parse('$_placesBaseUrl/$tourismType/');
-    final response = await http.get(
-      uri,
-      headers: {'Content-Type': 'application/json', 'Accept': '*/*'},
-    );
-
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      return data.cast<Map<String, dynamic>>();
-    } else {
-      throw Exception(
-          'Failed to load places for tourism type: $tourismType, Status: ${response.statusCode}, Body: ${response.body}');
-    }
-  }
-
-  // Fetch nearby places
-  Future<List<Map<String, dynamic>>> fetchNearbyPlaces(String placeId) async {
-    final url = Uri.parse('$_placesBaseUrl/$placeId/nearby/');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-
-      List<dynamic> data;
-      if (decodedResponse is List) {
-        data = decodedResponse;
-      } else if (decodedResponse is Map<String, dynamic>) {
-        final nearbyPlaces = decodedResponse['nearby_places'];
-        if (nearbyPlaces is List) {
-          data = nearbyPlaces;
-        } else {
-          data = [];
-        }
-      } else {
-        data = [];
-      }
-
-      return List<Map<String, dynamic>>.from(data);
-    } else {
-      throw Exception('Failed to load nearby places for place ID: $placeId');
-    }
-  }
-
-  // Fetch recommended places based on user ID
-  Future<List<Map<String, dynamic>>> fetchRecommendedPlaces(
-      String userId) async {
-    final url = Uri.parse('$_placesBaseUrl/recommend/$userId/');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-
-      List<dynamic> data;
-      if (decodedResponse is List) {
-        data = decodedResponse;
-      } else if (decodedResponse is Map<String, dynamic>) {
-        final places = decodedResponse['recommendations'] ??
-            decodedResponse['places'] ??
-            decodedResponse['data'] ??
-            [];
-        data = places is List ? places : [];
-      } else {
-        data = [];
-      }
-
-      return List<Map<String, dynamic>>.from(data);
-    } else {
-      throw Exception('Failed to load recommended places for user ID: $userId');
-    }
-  }
-
-  // Fetch rated places for non-logged-in users
-  Future<List<Map<String, dynamic>>> fetchPlacesRated() async {
-    final url = Uri.parse('http://192.168.1.12:8000/api/places/rated');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-
-      List<dynamic> data;
-      if (decodedResponse is List) {
-        data = decodedResponse; // Use the list directly
-      } else if (decodedResponse is Map<String, dynamic>) {
-        data = decodedResponse['places'] ??
-            decodedResponse['data'] ??
-            decodedResponse['rated'] ??
-            [];
-      } else {
-        data = [];
-      }
-
-      return List<Map<String, dynamic>>.from(data);
-    } else {
-      throw Exception(
-          'Failed to load rated places: Status ${response.statusCode}, Body: ${response.body}');
     }
   }
 }

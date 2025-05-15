@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:egyptopia/core/widgets/custom_buttons.dart';
+import 'package:egyptopia/core/widgets/custom_star_rating_widget.dart';
 import 'package:egyptopia/core/widgets/space_widget.dart';
 import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
 import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
@@ -260,39 +261,7 @@ class _ActivitiesState extends State<Activities> {
                                             const Icon(Icons.whatshot,
                                                 size: 16, color: Colors.orange),
                                             const HorizantalSpace(0.1),
-                                            Row(
-                                              children:
-                                                  List.generate(5, (index) {
-                                                double rating = double.tryParse(
-                                                        activity['rating']
-                                                            .toString()) ??
-                                                    0;
-
-                                                // Adjust rating logic based on the new requirement
-                                                if (rating > 4.5) {
-                                                  rating = 5.0;
-                                                } else if (rating > 4.0) {
-                                                  rating = 4.5;
-                                                }
-
-                                                if (rating >= index + 1) {
-                                                  return const Icon(Icons.star,
-                                                      size: 16,
-                                                      color: Colors.amber);
-                                                } else if (rating > index &&
-                                                    rating < index + 1) {
-                                                  return const Icon(
-                                                      Icons.star_half,
-                                                      size: 16,
-                                                      color: Colors.amber);
-                                                } else {
-                                                  return const Icon(
-                                                      Icons.star_border,
-                                                      size: 16,
-                                                      color: Colors.amber);
-                                                }
-                                              }),
-                                            ),
+                                            CustomStarRatingWidget(rating: double.tryParse(activity['rating'].toString()) ?? 0),
                                             const HorizantalSpace(0.3),
                                             Text(
                                               activity['rating'],
