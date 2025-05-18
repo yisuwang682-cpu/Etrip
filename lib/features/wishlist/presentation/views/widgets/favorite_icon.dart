@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
 import 'package:egyptopia/features/wishlist/data/service/favorite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
+import 'package:egyptopia/features/Profile/bloc/user_state.dart';
 
 class FavoriteIcon extends StatefulWidget {
   final String id;
@@ -62,6 +64,17 @@ class _FavoriteIconState extends State<FavoriteIcon> {
 
         return IconButton(
           onPressed: () async {
+            final userState = context.read<UserBloc>().state;
+            if (userState is! UserLoaded) {
+              // If you are not logged in
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('You must log in first to add to favorites'),
+                  backgroundColor: Colors.black87,
+                ),
+              );
+              return;
+            }
             final model = FavoriteModel(
               id: widget.id,
               type: widget.type,

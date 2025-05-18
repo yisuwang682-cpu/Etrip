@@ -5,17 +5,20 @@ import 'package:google_fonts/google_fonts.dart';
 class BuildCategoryIcon extends StatelessWidget {
   final IconData icon;
   final String label;
-  final String route;
+  final String? route;
+  final VoidCallback? onTap;
+
   const BuildCategoryIcon(
       {super.key,
       required this.icon,
       required this.label,
-      required this.route});
+      this.route,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => GoRouter.of(context).push(route),
+    return InkWell(
+      onTap: onTap ?? () => GoRouter.of(context).push(route!),
       child: Column(
         children: [
           CircleAvatar(

@@ -1,7 +1,10 @@
 import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_view.dart';
+import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
+import 'package:egyptopia/features/Profile/bloc/user_state.dart';
 import 'package:egyptopia/features/Profile/presentation/views/profile_view.dart';
 import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/home/presentation/views/home_view.dart';
 
 class Screens extends StatefulWidget {
@@ -23,11 +26,24 @@ class _ScreensState extends State<Screens> {
 
   @override
   Widget build(BuildContext context) {
+    final userState = context.watch<UserBloc>().state;
+
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
             type:
                 BottomNavigationBarType.fixed, // Ensures all labels are visible
             onTap: (val) {
+              if ((val == 1 || val == 2) && userState is! UserLoaded) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                        Text("You must be logged in first to use this feature"),
+                    backgroundColor: Colors.black87,
+                  ),
+                );
+                return;
+              }
+
               setState(() {
                 _selectedIndex = val;
               });

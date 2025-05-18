@@ -123,36 +123,78 @@ class _HomeBodyState extends State<HomeBody> {
           },
         ),
         const VerticalSpace(2),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            BuildCategoryIcon(
+            const BuildCategoryIcon(
               icon: Icons.place,
               label: "Places",
               route: AppRouter.kPlaces,
             ),
-            BuildCategoryIcon(
+            const BuildCategoryIcon(
               icon: Icons.event,
               label: "Events",
               route: AppRouter.kEvents,
             ),
-            BuildCategoryIcon(
+            const BuildCategoryIcon(
                 icon: Icons.restaurant_menu,
                 label: "Food",
                 route: AppRouter.kFoodStart),
             BuildCategoryIcon(
-                icon: Icons.directions_walk,
-                label: "Activities",
-                route: AppRouter.kActivities),
+              icon: Icons.directions_walk,
+              label: "Activities",
+              onTap: () {
+                final userState = context.read<UserBloc>().state;
+                if (userState is! UserLoaded) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          'You cannot use the Activities feature without logging in!'),
+                      backgroundColor: Colors.black87,
+                    ),
+                  );
+                } else {
+                  context.push(AppRouter.kActivities);
+                }
+              },
+            ),
             BuildCategoryIcon(
-                icon: Icons.thunderstorm_outlined,
-                label: "Weather",
-                route: AppRouter.kWeather),
+              icon: Icons.thunderstorm_outlined,
+              label: "Weather",
+              onTap: () {
+                final userState = context.read<UserBloc>().state;
+                if (userState is! UserLoaded) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          'You cannot use the Weather feature without logging in!'),
+                      backgroundColor: Colors.black87,
+                    ),
+                  );
+                } else {
+                  context.push(AppRouter.kWeather);
+                }
+              },
+            ),
             BuildCategoryIcon(
-                icon: FontAwesomeIcons.redditAlien,
-                label: "ChatBot",
-                route: AppRouter.kChatbot),
-            BuildCategoryIcon(
+              icon: FontAwesomeIcons.redditAlien,
+              label: "ChatBot",
+              onTap: () {
+                final userState = context.read<UserBloc>().state;
+                if (userState is! UserLoaded) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                          'You cannot use the ChatBot feature without logging in!'),
+                      backgroundColor: Colors.black87,
+                    ),
+                  );
+                } else {
+                  context.push(AppRouter.kChatbot);
+                }
+              },
+            ),
+            const BuildCategoryIcon(
                 icon: Icons.extension,
                 label: "Quizzes",
                 route: AppRouter.kQuizStart),

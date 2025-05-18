@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:egyptopia/core/utils/app_router.dart';
 import 'package:egyptopia/core/utils/assets.dart';
 import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,14 +31,14 @@ class _SplashBodyState extends State<SplashBody>
 
   void _initAnimations() {
     _animationController = AnimationController(
-      vsync: this,duration: const Duration(milliseconds: 700),
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
     )..repeat(reverse: true);
-  
+
     fadeAnimation =
         Tween<double>(begin: 0.2, end: 1).animate(_animationController);
 
     rotateAnimation = Tween<double>(begin: -0.1, end: 0.1).animate(
-
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
   }
@@ -48,7 +52,6 @@ class _SplashBodyState extends State<SplashBody>
   @override
   Widget build(BuildContext context) {
     return Stack(
-
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,9 +90,22 @@ class _SplashBodyState extends State<SplashBody>
   }
 
   void goNextPage() {
-    Future.delayed(const Duration(seconds: 4), () {
-      // ignore: use_build_context_synchronously
-      GoRouter.of(context).pushReplacement(AppRouter.kOnBordingView);
+    Future.delayed(const Duration(seconds: 4), () async {
+      final user = FirebaseAuth.instance.currentUser;
+      if (!mounted) return;
+      if (user != null) {
+        final apiService = EgyptopiaApiService();
+        final existingPreferences =
+            await apiService.getUserPreferences(user.uid);
+
+        if (existingPreferences != null) {
+          GoRouter.of(context).pushReplacement(AppRouter.kScreens);
+        } else {
+          GoRouter.of(context).pushReplacement(AppRouter.kPreferenceOne);
+        }
+      } else {
+        GoRouter.of(context).pushReplacement(AppRouter.kOnBordingView);
+      }
     });
   }
 }

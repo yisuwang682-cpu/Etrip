@@ -96,9 +96,8 @@ class _PreferenceOneState extends State<PreferenceOne> {
   }
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return ReusableScreen(
-      showBackButton: true,
       gradientStops: const [0.1, 0.9],
       backgroundColor: kSecondaryColor,
       imageColor: Colors.black,
