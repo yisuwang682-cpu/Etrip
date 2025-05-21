@@ -1,3 +1,6 @@
+import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_result_view.dart';
+import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_one.dart';
+import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_two.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/about_me.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/edit_profile.dart';
 import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_one.dart';
@@ -64,6 +67,9 @@ abstract class AppRouter {
   static const kPreferenceOne = '/preferenceOne';
   static const kPreferenceTwo = '/preferenceTwo';
   static const kPreferenceThree = '/preferenceThree';
+  static const kItineraryStepone = '/itineraryStepone';
+  static const kItineraryStepTwo = '/itineraryStepTwo';
+  static const kItineraryResult = '/itineraryResult';
 
   static final router = GoRouter(routes: [
     GoRoute(path: '/', builder: (context, state) => const SplashView()),
@@ -179,5 +185,29 @@ abstract class AppRouter {
       path: kPreferenceThree,
       builder: (context, state) => const PreferenceThree(),
     ),
+      GoRoute(
+      path: kItineraryStepone,
+      builder: (context, state) => const ItineraryStepOne(),
+    ),
+    GoRoute(
+      path: kItineraryStepTwo,
+      builder: (context, state) {
+        final args = state.extra as Map<String, dynamic>;
+        return ItineraryStepTwo(
+          noOfDays: args["noOfDays"],
+          budget: args["budget"],
+          popularity: args["popularity"],
+          withWho: args["withWho"],
+          tourismTypeWeights: List<String>.from(args["tourismTypeWeights"]),
+        );
+      },
+    ),
+    GoRoute(
+  path: kItineraryResult,
+  builder: (context, state) {
+    final args = state.extra as Map<String, dynamic>;
+    return ItineraryResultView(args: args);
+  },
+),
   ]);
 }

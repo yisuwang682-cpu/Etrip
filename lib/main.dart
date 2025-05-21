@@ -14,7 +14,7 @@ import 'features/wishlist/data/service/favorite_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   await Hive.initFlutter();
   await FavoriteService.initHive();
   runApp(const MyApp());
@@ -29,13 +29,14 @@ class MyApp extends StatelessWidget {
       builder: (context, constraints) {
         SizeConfig().init(context);
 
-         return BlocProvider(
+        return BlocProvider(
           create: (ctx) {
             final user = FirebaseAuth.instance.currentUser;
             final uid = user != null ? user.uid : '';
             return UserBloc()..add(LoadUser(uid));
           },
           child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             routerConfig: AppRouter.router,
             theme: ThemeData(
               textTheme: GoogleFonts.imFellFrenchCanonScTextTheme(),
