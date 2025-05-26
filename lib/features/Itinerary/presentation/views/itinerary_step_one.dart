@@ -120,10 +120,9 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
                         if (selectedTourismTypes.length < 2) {
                           selectedTourismTypes.add(type);
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text(
-                            "يا معرص اختار 2 بس",
-                            style: GoogleFonts.inter(fontSize: 18),
+                            "You cannot select more than 2",
                           )));
                         }
                       } else if (checked == false) {
