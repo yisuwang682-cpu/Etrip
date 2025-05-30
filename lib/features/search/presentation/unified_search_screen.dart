@@ -106,12 +106,15 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                   autofocus: true,
                   textInputAction: TextInputAction.search,
                   onChanged: _onQueryChanged,
-                  style: GoogleFonts.lato(fontSize: 18),
-                  decoration: const InputDecoration(
+                  style: GoogleFonts.lato(fontSize: 16),
+                  decoration: InputDecoration(
+                    hintStyle: GoogleFonts.imFellFrenchCanonSc(
+                      color: const Color(0xFF7D848D),
+                    ),
                     hintText: "Search Places, Events, Activities...",
                     border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 13),
                   ),
                 ),
               ),
