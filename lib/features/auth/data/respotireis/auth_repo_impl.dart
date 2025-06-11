@@ -29,7 +29,7 @@ class AuthRepoImpl extends AuthRepo {
           await FirebaseAuth.instance.signInWithCredential(credential);
       User? user = userCredential.user;
 
-       if (user != null) {
+      if (user != null) {
         final exists = await _apiService.userExists(user.uid);
         if (!exists) {
           EgyptopiaUser egyptopiaUser = EgyptopiaUser(
@@ -79,8 +79,8 @@ class AuthRepoImpl extends AuthRepo {
           gender: user.gender,
           profileImg: user.profileImg,
         );
- try {
-          await _apiService.createUser(newUser); 
+        try {
+          await _apiService.createUser(newUser);
         } catch (e) {
           return Left(Exception("API Error: $e"));
         }
@@ -118,7 +118,16 @@ class AuthRepoImpl extends AuthRepo {
       User? user = userCredential.user;
 
       if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
+        try {
+          await user.sendEmailVerification();
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'too-many-requests') {
+            await FirebaseAuth.instance.signOut();
+            return Left(
+                Exception("Please Verify Your Email Before Logging In."));
+          }
+          rethrow;
+        }
         await FirebaseAuth.instance.signOut();
         return Left(Exception("Please Verify Your Email Before Logging In."));
       }
@@ -158,24 +167,26 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-Future<Either<Exception, void>> changePassword(String oldPassword, String newPassword) async {
-  try {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null || user.email == null) {
-      return Left(Exception("No user logged in"));
-    }
-    final cred = EmailAuthProvider.credential(email: user.email!, password: oldPassword);
-    await user.reauthenticateWithCredential(cred);
+  Future<Either<Exception, void>> changePassword(
+      String oldPassword, String newPassword) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null || user.email == null) {
+        return Left(Exception("No user logged in"));
+      }
+      final cred = EmailAuthProvider.credential(
+          email: user.email!, password: oldPassword);
+      await user.reauthenticateWithCredential(cred);
 
-    await user.updatePassword(newPassword);
-    return const Right(null);
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'wrong-password') {
-      return Left(Exception("Old password is incorrect!"));
+      await user.updatePassword(newPassword);
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'wrong-password') {
+        return Left(Exception("Old password is incorrect!"));
+      }
+      return Left(Exception(e.message ?? "Error changing password"));
+    } catch (e) {
+      return Left(Exception(e.toString()));
     }
-    return Left(Exception(e.message ?? "Error changing password"));
-  } catch (e) {
-    return Left(Exception(e.toString()));
   }
-}
 }
