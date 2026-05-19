@@ -1,9 +1,12 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/widgets/custom_dropdown.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/Itinerary/presentation/views/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ItineraryStepOne extends StatefulWidget {
@@ -35,6 +38,7 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       gradientStops: const [0, 0.6],
       backgroundColor: kSecondaryColor,
@@ -44,8 +48,8 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
         child: ListView(
           children: [
             const SizedBox(height: 24),
-            const Text(
-              'Plan your trip',
+            Text(
+              Translations.tr('plan_your_trip', lang),
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -61,44 +65,49 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
             ),
             const VerticalSpace(2),
             CustomDropdown<int>(
-              label: "Days",
+              label: Translations.tr('days', lang),
               items: List.generate(7, (i) => i + 1),
               value: _noOfDays,
               onChanged: (val) => setState(() => _noOfDays = val ?? 3),
-              itemLabelBuilder: (n) => "$n day${n == 1 ? '' : 's'}",
+              itemLabelBuilder: (n) => lang == 'en'
+                  ? "$n day${n == 1 ? '' : 's'}"
+                  : "${n}天",
             ),
             const VerticalSpace(0.8),
             Row(
               children: [
                 Expanded(
                   child: CustomDropdown<String>(
-                    label: "Budget",
+                    label: Translations.tr('budget', lang),
                     items: budgets,
                     value: _budget,
                     onChanged: (val) => setState(() => _budget = val!),
+                    itemLabelBuilder: (val) => Translations.tr(val, lang),
                   ),
                 ),
                 const HorizantalSpace(0.5),
                 Expanded(
                   child: CustomDropdown<String>(
-                    label: "Popularity",
+                    label: Translations.tr('popularity', lang),
                     items: popularities,
                     value: _popularity,
                     onChanged: (val) => setState(() => _popularity = val!),
+                    itemLabelBuilder: (val) => Translations.tr(val, lang),
                   ),
                 ),
               ],
             ),
             const VerticalSpace(0.8),
             CustomDropdown<String>(
-              label: "Travel With",
+              label: Translations.tr('travel_with', lang),
               items: companions,
               value: _withWho,
               onChanged: (val) => setState(() => _withWho = val!),
+              itemLabelBuilder: (val) => Translations.tr(val, lang),
             ),
             const VerticalSpace(1),
             Text(
-              "Tourism Types (choose up to 2):",
+              Translations.tr('tourism_types_choose', lang),
               style: GoogleFonts.inter(
                   fontSize: 15,
                   color: const Color.fromARGB(255, 1, 44, 80),
@@ -120,9 +129,9 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
                         if (selectedTourismTypes.length < 2) {
                           selectedTourismTypes.add(type);
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                            "You cannot select more than 2",
+                            Translations.tr('max_2_selected', lang),
                           )));
                         }
                       } else if (checked == false) {
@@ -135,12 +144,12 @@ class _ItineraryStepOneState extends State<ItineraryStepOne> {
             SizedBox(
               width: double.infinity,
               child: CustomJoinButton(
-                text: "Next",
+                text: Translations.tr('next', lang),
                 onTap: () {
                   if (selectedTourismTypes.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
-                            Text("Please select at least one tourism type.")));
+                            Text(Translations.tr('please_select_one_type', lang))));
                     return;
                   }
                   if (widget.onStepTwo != null) {

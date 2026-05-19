@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_event.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart'; // import service
+import 'package:etrip/features/auth/data/egyptopia_api_service.dart'; // import service
 
 class ProfileImage extends StatefulWidget {
   final String? imageUrl;
@@ -35,6 +37,7 @@ class _ProfileImageState extends State<ProfileImage> {
   }
 
   Future<void> _pickAndUploadImage() async {
+    final lang = context.read<LocaleCubit>().state.languageCode;
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() => _uploading = true);
@@ -50,12 +53,12 @@ class _ProfileImageState extends State<ProfileImage> {
           context.read<UserBloc>().add(LoadUser(widget.userId));
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Profile image updated successfully ✅")),
+          SnackBar(content: Text(Translations.tr('profile_image_updated', lang))),
         );
       } catch (e) {
         setState(() => _uploading = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Image upload failed ❌\n$e')),
+          SnackBar(content: Text(Translations.tr('image_upload_failed', lang) + e.toString())),
         );
       }
     }

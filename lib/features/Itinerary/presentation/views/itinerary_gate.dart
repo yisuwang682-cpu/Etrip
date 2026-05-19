@@ -1,11 +1,11 @@
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_request.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:egyptopia/features/Itinerary/data/itinerary_api_service.dart';
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_response.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_one.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_two.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_result_view.dart';
+import 'package:etrip/features/Itinerary/data/itinerary_api_service.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_response.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_step_one.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_step_two.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_result_view.dart';
 
 class ItineraryGate extends StatefulWidget {
   const ItineraryGate({super.key});

@@ -1,13 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/custom_card.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_event.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/profile_image.dart';
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_card.dart';
+import 'package:etrip/core/widgets/language_dialog.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_event.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/profile_image.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +23,8 @@ class ProfileContent extends StatelessWidget {
   final EgyptopiaUser user;
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LocaleCubit>().state;
+    final lang = locale.languageCode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,7 +55,7 @@ class ProfileContent extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
                 CustomJoinButton(
-                  text: "Edit Profile",
+                  text: Translations.tr('edit_profile', lang),
                   onTap: () {
                     GoRouter.of(context)
                         .push(AppRouter.kEditProfile, extra: user);
@@ -65,31 +70,41 @@ class ProfileContent extends StatelessWidget {
         const VerticalSpace(2),
         CustomCard(
             icon: const Icon(Icons.favorite_border),
-            text: "Favourites",
+            text: Translations.tr('favourites', lang),
             onTap: () {
               GoRouter.of(context).push(AppRouter.kWishList);
             }),
         CustomCard(
             icon: const Icon(Icons.account_box_outlined),
-            text: "About me",
+            text: Translations.tr('about_me', lang),
             onTap: () {
               GoRouter.of(context).push(AppRouter.kAboutMe, extra: user);
             }),
         CustomCard(
             icon: const Icon(Icons.directions_bike_outlined),
-            text: "Edit Prefrence",
+            text: Translations.tr('edit_preference', lang),
             onTap: () {
               GoRouter.of(context).push(AppRouter.kPreferenceOne);
             }),
         CustomCard(
+          icon: const Icon(Icons.language),
+          text: Translations.tr('language', lang),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => const LanguageDialog(),
+            );
+          },
+        ),
+        CustomCard(
             icon: const Icon(Icons.vpn_key_outlined),
-            text: "Change Password",
+            text: Translations.tr('change_password', lang),
             onTap: () {
               GoRouter.of(context).push(AppRouter.kCreateNewPassword);
             }),
         CustomCard(
           icon: const Icon(Icons.logout),
-          text: "Log Out",
+          text: Translations.tr('log_out', lang),
           onTap: () async {
             await FirebaseAuth.instance.signOut();
             await GoogleSignIn().signOut();

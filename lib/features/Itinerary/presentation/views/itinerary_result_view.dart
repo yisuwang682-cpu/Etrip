@@ -1,12 +1,15 @@
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/Itinerary/data/itinerary_api_service.dart';
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_request.dart';
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_response.dart';
-import 'package:egyptopia/features/places/presentation/widgets/place_card.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/Itinerary/data/itinerary_api_service.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_request.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_response.dart';
+import 'package:etrip/features/places/presentation/widgets/place_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,10 +54,11 @@ class _ItineraryResultViewState extends State<ItineraryResultView> {
       child: FutureBuilder<ItineraryResponse>(
         future: futureItinerary,
         builder: (context, snapshot) {
+          final lang = context.watch<LocaleCubit>().state.languageCode;
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+            return Center(child: Text("${Translations.tr('error', lang)}: ${snapshot.error}"));
           }
           final resp = snapshot.data!;
           return Stack(
@@ -76,7 +80,7 @@ class _ItineraryResultViewState extends State<ItineraryResultView> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
-                            "Day ${entry.key}",
+                            "${Translations.tr('day', lang)} ${entry.key}",
                             style:  GoogleFonts.montserrat(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
@@ -100,7 +104,7 @@ class _ItineraryResultViewState extends State<ItineraryResultView> {
                 child: FloatingActionButton.extended(
                   backgroundColor: const Color(0xFF1F2544),
                   foregroundColor: Colors.white,
-                  label: const Text("New",
+                  label: Text(Translations.tr('new_fab', lang),
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   icon: const Icon(Icons.restart_alt),
                   onPressed: () {

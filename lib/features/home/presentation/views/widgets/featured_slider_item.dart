@@ -1,8 +1,8 @@
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 
 class FeaturedSliderItem extends StatelessWidget {
   final double? width;
@@ -106,7 +106,7 @@ class FeaturedSliderItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '$cityName, Egypt',
+                        '$cityName, China',
                         style: GoogleFonts.montserrat(
                           color: Colors.white,
                           fontSize: 12,

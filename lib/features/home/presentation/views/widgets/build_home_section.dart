@@ -1,47 +1,48 @@
-import 'package:egyptopia/features/places/data/models/place_model.dart';
-import 'package:egyptopia/features/places/data/places_api_service.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
+import 'package:etrip/features/places/data/places_api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:egyptopia/features/home/presentation/views/widgets/feature_slider.dart';
-import 'package:egyptopia/features/home/presentation/views/widgets/feature_section.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/features/home/presentation/views/widgets/feature_slider.dart';
+import 'package:etrip/features/home/presentation/views/widgets/feature_section.dart';
+import 'package:etrip/core/utils/size_config.dart';
 import 'package:go_router/go_router.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
+import 'package:etrip/core/utils/app_router.dart';
 
-final List<Map<String, String>> sections = [
+List<Map<String, String>> sections(String lang) => [
   {
     'cacheKey': 'cultural',
-    'title': "  Cultural & Historical",
+    'title': "  ${Translations.tr('cultural', lang)}",
     'apiTitle': "Cultural and Historical Attractions",
-    'emptyText': 'No Cultural and Historical Attractions found',
-    'failText': 'Failed to load Cultural and Historical Attractions',
+    'emptyText': Translations.tr('no_cultural', lang),
+    'failText': Translations.tr('fail_cultural', lang),
   },
   {
     'cacheKey': 'religious',
-    'title': "  Religious & Spiritual",
+    'title': "  ${Translations.tr('religious', lang)}",
     'apiTitle': "Religious and Spiritual Attractions",
-    'emptyText': 'No Religious and Spiritual Attractions found',
-    'failText': 'Failed to load Religious and Spiritual Attractions',
+    'emptyText': Translations.tr('no_religious', lang),
+    'failText': Translations.tr('fail_religious', lang),
   },
   {
     'cacheKey': 'natural',
-    'title': "  Natural Attractions",
+    'title': "  ${Translations.tr('natural', lang)}",
     'apiTitle': 'Natural Attractions',
-    'emptyText': 'No Natural Attractions found',
-    'failText': 'Failed to load Natural Attractions',
+    'emptyText': Translations.tr('no_natural', lang),
+    'failText': Translations.tr('fail_natural', lang),
   },
   {
     'cacheKey': 'entertainment',
-    'title': "  Entertainment & Modern",
+    'title': "  ${Translations.tr('entertainment', lang)}",
     'apiTitle': 'Entertainment and Modern Attractions',
-    'emptyText': 'No Entertainment and Modern Attractions found',
-    'failText': 'Failed to load Entertainment and Modern Attractions',
+    'emptyText': Translations.tr('no_entertainment', lang),
+    'failText': Translations.tr('fail_entertainment', lang),
   },
   {
     'cacheKey': 'medical',
-    'title': "  Medical Attractions",
+    'title': "  ${Translations.tr('medical', lang)}",
     'apiTitle': 'Medical Attractions',
-    'emptyText': 'No Medical Attractions found',
-    'failText': 'Failed to load Medical Attractions',
+    'emptyText': Translations.tr('no_medical', lang),
+    'failText': Translations.tr('fail_medical', lang),
   },
 ];
 

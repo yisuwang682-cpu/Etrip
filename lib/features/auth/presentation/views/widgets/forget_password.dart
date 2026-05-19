@@ -1,12 +1,15 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_fields.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/auth/data/logic/sign_in_controller.dart';
-import 'package:egyptopia/features/onbording/presentation/views/widgets/page_view_item.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_fields.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/auth/data/logic/sign_in_controller.dart';
+import 'package:etrip/features/onbording/presentation/views/widgets/page_view_item.dart';
 import 'package:flutter/material.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -27,6 +30,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return AbsorbPointer(
       absorbing: _loading,
       child: ReusableScreen(
@@ -39,7 +43,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 children: [
                   const VerticalSpace(5),
                   Text(
-                    "Verify Your Email",
+                    Translations.tr('verify_your_email', lang),
                     style: GoogleFonts.imFellFrenchCanon(
                       fontSize: SizeConfig.defaultSize! * 3,
                       fontWeight: FontWeight.w500,
@@ -48,21 +52,21 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   const VerticalSpace(3),
                   PageViewItem(
                     image: 'assets/images/forgot.png',
-                    title: 'Enter your email address',
-                    subTitle: 'We will verify this email is yours',
+                    title: Translations.tr('enter_email_address', lang),
+                    subTitle: Translations.tr('we_will_verify_email', lang),
                     titleFontSize: SizeConfig.defaultSize! * 2.6,
                     subTitleFontSize: SizeConfig.defaultSize! * 1.6,
                   ),
                   const VerticalSpace(3),
                   CustomInputField(
-                    label: "Email",
-                    hint: "Enter Your Email",
+                    label: Translations.tr('email', lang),
+                    hint: Translations.tr('enter_your_email', lang),
                     inputType: TextInputType.emailAddress,
                     controller: _controller.emailController,
                   ),
                   const VerticalSpace(3),
                   CustomGeneralButton(
-                    text: "Send",
+                    text: Translations.tr('send', lang),
                     onTap: () {
                       _controller.sendPasswordReset(
                           context, _controller.emailController.text, (isLoading) {

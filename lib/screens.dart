@@ -1,8 +1,8 @@
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_gate.dart';
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_state.dart';
-import 'package:egyptopia/features/Profile/presentation/views/profile_view.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_gate.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_state.dart';
+import 'package:etrip/features/Profile/presentation/views/profile_view.dart';
+import 'package:etrip/features/wishlist/presentation/views/wish_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

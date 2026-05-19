@@ -1,5 +1,5 @@
 import 'search_item.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
 
 class UnifiedSearchService {
   static Map<String, List<SearchItem>> search({

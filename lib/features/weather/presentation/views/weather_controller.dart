@@ -1,14 +1,15 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/features/weather/data/weather_api.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/features/weather/data/weather_api.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:etrip/core/localization/translations.dart' as etrip;
 
 class WeatherController extends GetxController {
   RxString country = "".obs;
   RxInt weatherId = 0.obs;
-  RxString city = "Loading...".obs;
+  RxString city = etrip.Translations.tr('loading', 'en').obs;
   RxDouble temperature = 0.0.obs;
   RxString description = "".obs;
   RxString icon = "01d".obs;
@@ -85,7 +86,7 @@ class WeatherController extends GetxController {
         fetchWeatherDataByCoordinates(
             lastKnownPosition.latitude, lastKnownPosition.longitude);
       } else {
-        city.value = "Locating...";
+        city.value = etrip.Translations.tr('locating', 'en');
       }
       Position position = await _determinePosition();
       await fetchWeatherDataByCoordinates(
@@ -93,7 +94,7 @@ class WeatherController extends GetxController {
 
       errorMessage.value = '';
     } catch (e) {
-      city.value = "Location Error";
+      city.value = etrip.Translations.tr('location_error', 'en');
       isLoading.value = false;
       errorMessage.value = e.toString();
     }

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'user_event.dart';
 import 'user_state.dart';
-import 'package:egyptopia/core/mock_data.dart';
+import 'package:etrip/core/mock_data.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {

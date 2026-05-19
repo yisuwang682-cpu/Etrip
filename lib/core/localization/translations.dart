@@ -1,0 +1,643 @@
+class Translations {
+  static const Map<String, Map<String, String>> _data = {
+    'en': {
+      // App
+      'app_name': 'Etrip',
+      'ok': 'OK',
+      'cancel': 'Cancel',
+      'save': 'Save',
+      'loading': 'Processing...',
+      'error': 'Error',
+      'no_data': 'No data available',
+      'or': 'OR',
+
+      // Splash
+      'etrip_title': 'Etrip',
+
+      // Onboarding
+      'onboarding_title_1': 'Start Exploring Today',
+      'onboarding_sub_1':
+          'Dive into unforgettable experiences \nand make your China dreams a\n reality',
+      'onboarding_title_2': 'Plan Effortlessly',
+      'onboarding_sub_2':
+          'From personalized itineraries to expert \ntravel tips, we make exploring China simple and stress-free.',
+      'onboarding_title_3': 'Experience More',
+      'onboarding_sub_3':
+          'Discover local favorites, cultural\n treasures, and breathtaking \nadventures',
+      'onboarding_next': 'Next',
+      'onboarding_skip': 'Skip',
+      'onboarding_get_started': 'Start',
+
+      // Auth - Registration
+      'start_discover': 'Start Discovering China Like Never Before',
+      'sign_up': 'Sign up',
+      'sign_in': 'Sign in',
+      'skip_now': 'Skip for now',
+
+      // Auth - General
+      'full_name': 'Full Name',
+      'email': 'Email',
+      'password': 'Password',
+      'confirm_password': 'Confirm Password',
+      'enter_your_name': 'Enter Your Name',
+      'enter_your_email': 'Enter Your Email',
+      'enter_your_password': 'Enter Your Password',
+      'already_have_account': 'Already have an account?',
+      'dont_have_account': "Don't have an account?",
+      'please_fill_all_fields': 'Please fill all fields!',
+      'sign_in_successful': 'Sign in successful! ✅',
+      'sign_up_successful': 'Sign up successful!',
+      'google_sign_in_successful': 'Sign in with Google successful ✅',
+      'please_enter_email': 'Please enter your email!',
+
+      // Auth - Sign Up
+      'create_account': 'Create Account',
+      'country': 'Country',
+      'select_country': 'Select Country',
+      'date_of_birth': 'Date Of Birth',
+      'select_date_of_birth': 'Select Date Of Birth',
+      'gender': 'Gender',
+      'select_gender': 'Select Gender',
+
+      // Auth - Sign In
+      'welcome_back': 'Welcome Back',
+      'forget_password': 'Forgot password?',
+      'login_success': 'Login successful!',
+
+      // Auth - Forget Password
+      'verify_your_email': 'Verify Your Email',
+      'enter_email_address': 'Enter your email address',
+      'we_will_verify_email': 'We will verify this email is yours',
+      'send': 'Send',
+      'if_email_exists_reset':
+          'If That Email Exists, A Password Reset Email Has Been Sent ✅',
+
+      // Auth - Errors
+      'no_account_found': '❌ No Account Found With This Email.',
+      'password_incorrect': '❌ The Password Is Incorrect.',
+      'invalid_email': '⚠️ The Email Address Is Badly Formatted.',
+      'auth_error': '⚠️ An Error Occurred!',
+      'account_exists': '⚠️ There Is An Account Actually Associated With This Email.',
+      'google_unavailable': 'Google sign-in unavailable in offline mode.',
+      'sign_up_failed': 'Sign up failed, Please try again.',
+      'login_failed': '❌ This Email Doesn\'t Exist or The Password Is Incorrect',
+
+      // Home
+      'recommended_for_you': 'Recommended For You',
+      'top_places': 'Top Places',
+      'all_places': 'All Places',
+      'places': 'Places',
+      'events': 'Events',
+      'activities': 'Activities',
+      'weather': 'Weather',
+      'chatbot': 'ChatBot',
+      'login_required_activities':
+          'You cannot use the Activities feature without logging in!',
+      'login_required_weather':
+          'You cannot use the Weather feature without logging in!',
+      'login_required_chatbot':
+          'You cannot use the ChatBot feature without logging in!',
+      'no_recommended': 'No recommended places found',
+      'no_top_places': 'No top places found',
+      'see_all': 'See All',
+
+      // Categories / Sections
+      'cultural': 'Cultural & Historical',
+      'natural': 'Natural Attractions',
+      'entertainment': 'Entertainment & Modern',
+      'religious': 'Religious & Spiritual',
+      'medical': 'Medical Attractions',
+      'no_cultural': 'No Cultural and Historical Attractions found',
+      'no_religious': 'No Religious and Spiritual Attractions found',
+      'no_natural': 'No Natural Attractions found',
+      'no_entertainment': 'No Entertainment and Modern Attractions found',
+      'no_medical': 'No Medical Attractions found',
+      'fail_cultural': 'Failed to load Cultural and Historical Attractions',
+      'fail_religious': 'Failed to load Religious and Spiritual Attractions',
+      'fail_natural': 'Failed to load Natural Attractions',
+      'fail_entertainment': 'Failed to load Entertainment and Modern Attractions',
+      'fail_medical': 'Failed to load Medical Attractions',
+
+      // Places
+      'places_title': 'Places',
+      'place_details': 'Place Details',
+      'description': 'Description',
+      'no_description': 'No description available.',
+      'location': 'Location',
+      'nearby_places': 'Nearby Places',
+      'failed_nearby': 'Failed to load nearby places',
+      'no_nearby': 'No nearby places found',
+      'image_failed': 'Image failed to load',
+      'no_image': 'No image available',
+      'filter_by': 'Filter By',
+      'city': 'City',
+      'tourism_type': 'Tourism Type',
+      'category': 'Category',
+      'popularity': 'Popularity',
+      'clear': 'Clear',
+      'apply': 'Apply',
+      'rate': 'Rate',
+      'open_in_maps': 'Open in Google Maps',
+      'add_to_wishlist': 'Add to Wishlist',
+      'remove_from_wishlist': 'Remove from Wishlist',
+
+      // Events
+      'events_title': 'Events',
+      'event_details': 'Event Details',
+      'about_event': 'About event',
+      'organizer': 'Organizer:',
+      'n_a': 'N/A',
+      'contact_info': 'Contact Info',
+      'join_event': 'Join event',
+      'type_label': 'Type: ',
+      'price_label': 'Price: ',
+      'free': 'Free',
+      'date': 'Date',
+      'time': 'Time',
+      'price': 'Price',
+      'book_now': 'Book Now',
+
+      // Activities
+      'activities_title': 'Activities',
+      'join_now': 'Join Now',
+      'explore_now': 'Explore Now',
+      'filter_by_price': 'Filter by Price',
+      'activity_details': 'Activity Details',
+      'duration': 'Duration',
+      'difficulty': 'Difficulty',
+      'what_to_bring': 'What to Bring',
+
+      // Profile
+      'edit_profile': 'Edit Profile',
+      'favourites': 'Favourites',
+      'about_me': 'About me',
+      'edit_preference': 'Edit Prefrence',
+      'change_password': 'Change Password',
+      'log_out': 'Log Out',
+      'language': 'Language',
+      'profile': 'Profile',
+      'no_profile_data': 'No Profile Data!',
+      'please_sign_in_first': 'Please Sign-In First',
+      'please_log_in_first': 'Please Log-In First',
+
+      // Edit Profile
+      'about_me_title': 'About Me',
+      'update_profile': 'Update Profile',
+      'change_photo': 'Change Photo',
+      'name': 'Name',
+      'email_cant_edit': "Email (can't edit)",
+      'save_changes': 'Save Changes',
+      'profile_image_updated': 'Profile image updated successfully ✅',
+      'image_upload_failed': 'Image upload failed ❌\n',
+
+      // Change Password
+      'create_new_password': 'Create New Password',
+      'new_password_must_differ':
+          'Your new password must be different\nfrom previously used password',
+      'old_password': 'Old Password',
+      'enter_old_password': 'Enter Your Old Password',
+      'new_password': 'New Password',
+      'enter_new_password': 'Enter Your New Password',
+      'confirm_new_password': 'Confirm Password',
+      'reenter_password': 'Re-enter Your Password',
+      'confirm': 'Confirm',
+      'no_user_logged_in': 'No user logged in!',
+      'old_password_incorrect': 'Old password is incorrect!',
+      'please_enter_all_fields': 'Please enter all fields!',
+      'passwords_dont_match': 'Passwords do not match!',
+      'password_changed': 'Password changed successfully!',
+
+      // Preferences
+      'how_spend_time': 'How do you want to \nspend your time?',
+      'choose_many': "Choose as many as you'd like",
+      'favourite_tourism_type': 'What is your favourite \ntype for tourism?',
+      'favourite_city': 'What is your favorite \ncity to explore?',
+      'skip': 'Skip',
+      'next': 'Next',
+      'start_exploring': 'Start Exploring',
+      'please_choose_one': 'Please Choose At Least One Option.',
+      'please_choose_one_or_skip': 'Please Choose At Least One Option Or Skip.',
+      'failed_load_preferences': 'Failed to load preferences: ',
+      'failed_save_preferences': 'Failed to save preferences: ',
+
+      // Language
+      'select_language': 'Select Language',
+      'english': 'English',
+      'chinese': '中文',
+
+      // Wishlist
+      'wishlist': 'Wishlist',
+      'favorites_title': 'Favorites',
+      'no_favorites_yet': 'No Favorites yet',
+      'description_not_available': 'Description not available',
+      'category_label': 'Category: ',
+      'type_label_short': 'Type: ',
+      'rating_label': 'Rating: ',
+      'could_not_launch': 'Could not launch the link',
+      'must_login_favorites': 'You must log in first to add to favorites',
+      'removed_from_favorites': 'has been removed from favorites',
+      'added_to_favorites': 'has been added to favorites',
+
+      // Wishlist tabs
+      'places_tab': 'Places',
+      'activities_tab': 'Activities',
+      'events_tab': 'Events',
+
+      // Itinerary
+      'itinerary': 'Itinerary',
+      'plan_your_trip': 'Plan your trip',
+      'days': 'Days',
+      'budget': 'Budget',
+      'travel_with': 'Travel With',
+      'low': 'low',
+      'medium': 'medium',
+      'high': 'high',
+      'solo': 'solo',
+      'friends': 'friends',
+      'family': 'family',
+      'couple': 'couple',
+      'tourism_types_choose': 'Tourism Types (choose up to 2):',
+      'max_2_selected': 'You cannot select more than 2',
+      'please_select_one_type': 'Please select at least one tourism type.',
+      'pick_up_to_10': 'Pick up to 10 categories:',
+      'select_at_least_one': 'Select at least one category.',
+      'max_10_selected': 'You cannot select more than 10',
+      'create_itinerary': 'Create Itinerary',
+      'day': 'Day',
+      'new_fab': 'New',
+      'trip_description': 'Trip Description',
+      'error_loading': 'Error loading data',
+
+      // Search
+      'search_hint': 'Search Places, Events, Activities...',
+      'search_placeholder': 'Search Places, Activities...',
+      'start_typing': 'Start typing to search...',
+      'no_results': 'No Results Found',
+      'retry': 'Retry',
+      'error_loading_data': 'Error loading data',
+      'error_loading_filters': 'Error loading filters: ',
+      'places_section': 'Places',
+      'events_section': 'Events',
+      'activities_section': 'Activities',
+
+      // Weather
+      'location_permission_required': 'Location Permission Required',
+      'permission_denied_message':
+          'Location permission is permanently denied. Please enable it from app settings.',
+      'open_settings': 'Open Settings',
+      'enter_city_name': 'Enter city name',
+      'five_day_forecast': '5-Day Weather Forecast',
+      'humidity': 'Humidity',
+      'wind_speed': 'Wind Speed',
+      'pressure': 'Pressure',
+      'sunrise': 'Sunrise: ',
+      'sunset': 'Sunset: ',
+      'locating': 'Locating...',
+      'location_error': 'Location Error',
+      'celsius': '°C',
+
+      // Chatbot
+      'chatbot_title': 'Travel Assistant',
+      'chatbot_greeting': 'How can i help you?',
+      'start_new_chat': 'Start New Chat',
+      'type_message': 'Type your message...',
+      'ask_me': 'Ask me something...',
+      'bot_thinking': '...',
+
+      // Chatbot mock responses
+      'chat_response_1':
+          'You can visit the Great Wall, the Forbidden City, and the Summer Palace in Beijing.',
+      'chat_response_2':
+          'The best time to visit China is from March to May or September to November when the weather is mild.',
+      'chat_response_3':
+          "Absolutely! Shanghai and Xi'an are must-visit destinations with amazing attractions.",
+      'chat_response_4':
+          'I recommend trying Peking Duck, Hot Pot, and Xiaolongbao (soup dumplings).',
+      'chat_response_5':
+          'You can take a Yangtze River cruise for a wonderful experience through stunning landscapes.',
+      'chat_response_6':
+          'Zhangjiajie and Guilin are perfect for nature lovers and photography!',
+
+      // Errors
+      'error_load_places': 'Failed to load places',
+      'error_load_events': 'Failed to load events',
+      'error_load_profile': 'Failed to load profile',
+      'error_update_profile': 'Error updating profile',
+      'no_internet': 'No internet connection',
+    },
+    'zh': {
+      // App
+      'app_name': 'Etrip',
+      'ok': '确定',
+      'cancel': '取消',
+      'save': '保存',
+      'loading': '处理中...',
+      'error': '错误',
+      'no_data': '暂无数据',
+      'or': '或',
+
+      // Splash
+      'etrip_title': 'Etrip',
+
+      // Onboarding
+      'onboarding_title_1': '开始探索之旅',
+      'onboarding_sub_1': '沉浸于难忘的体验中\n让您的中国梦\n变为现实',
+      'onboarding_title_2': '轻松规划',
+      'onboarding_sub_2': '从个性化行程到专业\n旅行建议，让探索中国变得简单无忧',
+      'onboarding_title_3': '体验更多',
+      'onboarding_sub_3': '发现当地最爱、文化\n瑰宝和令人惊叹的\n冒险之旅',
+      'onboarding_next': '下一步',
+      'onboarding_skip': '跳过',
+      'onboarding_get_started': '开始',
+
+      // Auth - Registration
+      'start_discover': '开始以前所未有的方式探索中国',
+      'sign_up': '注册',
+      'sign_in': '登录',
+      'skip_now': '稍后再说',
+
+      // Auth - General
+      'full_name': '全名',
+      'email': '邮箱',
+      'password': '密码',
+      'confirm_password': '确认密码',
+      'enter_your_name': '请输入您的姓名',
+      'enter_your_email': '请输入您的邮箱',
+      'enter_your_password': '请输入您的密码',
+      'already_have_account': '已有账户？',
+      'dont_have_account': '还没有账户？',
+      'please_fill_all_fields': '请填写所有字段！',
+      'sign_in_successful': '登录成功！✅',
+      'sign_up_successful': '注册成功！',
+      'google_sign_in_successful': 'Google 登录成功 ✅',
+      'please_enter_email': '请输入您的邮箱！',
+
+      // Auth - Sign Up
+      'create_account': '创建账户',
+      'country': '国家',
+      'select_country': '选择国家',
+      'date_of_birth': '出生日期',
+      'select_date_of_birth': '选择出生日期',
+      'gender': '性别',
+      'select_gender': '选择性别',
+
+      // Auth - Sign In
+      'welcome_back': '欢迎回来',
+      'forget_password': '忘记密码？',
+      'login_success': '登录成功！',
+
+      // Auth - Forget Password
+      'verify_your_email': '验证您的邮箱',
+      'enter_email_address': '输入您的邮箱地址',
+      'we_will_verify_email': '我们将验证此邮箱是否属于您',
+      'send': '发送',
+      'if_email_exists_reset': '如果该邮箱存在，重置密码邮件已发送 ✅',
+
+      // Auth - Errors
+      'no_account_found': '❌ 未找到与此邮箱关联的账户。',
+      'password_incorrect': '❌ 密码错误。',
+      'invalid_email': '⚠️ 邮箱地址格式不正确。',
+      'auth_error': '⚠️ 发生错误！',
+      'account_exists': '⚠️ 此邮箱已关联其他账户。',
+      'google_unavailable': '离线模式下无法使用 Google 登录。',
+      'sign_up_failed': '注册失败，请重试。',
+      'login_failed': '❌ 此邮箱不存在或密码错误',
+
+      // Home
+      'recommended_for_you': '为您推荐',
+      'top_places': '热门景点',
+      'all_places': '全部景点',
+      'places': '景点',
+      'events': '活动',
+      'activities': '户外',
+      'weather': '天气',
+      'chatbot': '智能助手',
+      'login_required_activities': '您需要登录才能使用户外活动功能！',
+      'login_required_weather': '您需要登录才能查看天气！',
+      'login_required_chatbot': '您需要登录才能使用智能助手！',
+      'no_recommended': '暂无推荐景点',
+      'no_top_places': '暂无热门景点',
+      'see_all': '查看全部',
+
+      // Categories / Sections
+      'cultural': '文化与历史',
+      'natural': '自然景观',
+      'entertainment': '娱乐与现代',
+      'religious': '宗教与精神',
+      'medical': '医疗旅游',
+      'no_cultural': '暂无文化与历史景点',
+      'no_religious': '暂无宗教与精神景点',
+      'no_natural': '暂无自然景观',
+      'no_entertainment': '暂无娱乐与现代景点',
+      'no_medical': '暂无医疗旅游景点',
+      'fail_cultural': '加载文化与历史景点失败',
+      'fail_religious': '加载宗教与精神景点失败',
+      'fail_natural': '加载自然景观失败',
+      'fail_entertainment': '加载娱乐与现代景点失败',
+      'fail_medical': '加载医疗旅游景点失败',
+
+      // Places
+      'places_title': '景点',
+      'place_details': '景点详情',
+      'description': '描述',
+      'no_description': '暂无描述。',
+      'location': '位置',
+      'nearby_places': '附近景点',
+      'failed_nearby': '加载附近景点失败',
+      'no_nearby': '未找到附近景点',
+      'image_failed': '图片加载失败',
+      'no_image': '暂无图片',
+      'filter_by': '筛选条件',
+      'city': '城市',
+      'tourism_type': '旅游类型',
+      'category': '类别',
+      'popularity': '热门程度',
+      'clear': '清除',
+      'apply': '应用',
+      'rate': '评分',
+      'open_in_maps': '在谷歌地图中打开',
+      'add_to_wishlist': '加入收藏',
+      'remove_from_wishlist': '移除收藏',
+
+      // Events
+      'events_title': '活动',
+      'event_details': '活动详情',
+      'about_event': '关于活动',
+      'organizer': '主办方：',
+      'n_a': '暂无',
+      'contact_info': '联系方式',
+      'join_event': '参加活动',
+      'type_label': '类型：',
+      'price_label': '价格：',
+      'free': '免费',
+      'date': '日期',
+      'time': '时间',
+      'price': '价格',
+      'book_now': '立即预订',
+
+      // Activities
+      'activities_title': '户外活动',
+      'join_now': '立即参加',
+      'explore_now': '立即查看',
+      'filter_by_price': '按价格筛选',
+      'activity_details': '活动详情',
+      'duration': '时长',
+      'difficulty': '难度',
+      'what_to_bring': '携带物品',
+
+      // Profile
+      'edit_profile': '编辑资料',
+      'favourites': '我的收藏',
+      'about_me': '关于我',
+      'edit_preference': '编辑偏好',
+      'change_password': '修改密码',
+      'log_out': '退出登录',
+      'language': '语言',
+      'profile': '个人主页',
+      'no_profile_data': '暂无个人资料！',
+      'please_sign_in_first': '请先登录',
+      'please_log_in_first': '请先登录',
+
+      // Edit Profile
+      'about_me_title': '关于我',
+      'update_profile': '更新资料',
+      'change_photo': '更换头像',
+      'name': '姓名',
+      'email_cant_edit': '邮箱（不可编辑）',
+      'save_changes': '保存修改',
+      'profile_image_updated': '头像更新成功 ✅',
+      'image_upload_failed': '头像上传失败 ❌\n',
+
+      // Change Password
+      'create_new_password': '创建新密码',
+      'new_password_must_differ': '您的新密码必须与\n之前使用的密码不同',
+      'old_password': '旧密码',
+      'enter_old_password': '请输入旧密码',
+      'new_password': '新密码',
+      'enter_new_password': '请输入新密码',
+      'confirm_new_password': '确认密码',
+      'reenter_password': '请再次输入密码',
+      'confirm': '确认',
+      'no_user_logged_in': '没有用户登录！',
+      'old_password_incorrect': '旧密码错误！',
+      'please_enter_all_fields': '请填写所有字段！',
+      'passwords_dont_match': '密码不匹配！',
+      'password_changed': '密码修改成功！',
+
+      // Preferences
+      'how_spend_time': '您想如何\n度过时光？',
+      'choose_many': '可以选择多个选项',
+      'favourite_tourism_type': '您最喜欢的\n旅游类型是什么？',
+      'favourite_city': '您最喜欢探索\n哪个城市？',
+      'skip': '跳过',
+      'next': '下一步',
+      'start_exploring': '开始探索',
+      'please_choose_one': '请至少选择一个选项。',
+      'please_choose_one_or_skip': '请至少选择一个选项或跳过。',
+      'failed_load_preferences': '加载偏好失败：',
+      'failed_save_preferences': '保存偏好失败：',
+
+      // Language
+      'select_language': '选择语言',
+      'english': 'English',
+      'chinese': '中文',
+
+      // Wishlist
+      'wishlist': '收藏夹',
+      'favorites_title': '收藏',
+      'no_favorites_yet': '暂无收藏',
+      'description_not_available': '暂无描述',
+      'category_label': '类别：',
+      'type_label_short': '类型：',
+      'rating_label': '评分：',
+      'could_not_launch': '无法打开链接',
+      'must_login_favorites': '您需要先登录才能添加收藏',
+      'removed_from_favorites': '已从收藏中移除',
+      'added_to_favorites': '已添加到收藏',
+
+      // Wishlist tabs
+      'places_tab': '景点',
+      'activities_tab': '户外',
+      'events_tab': '活动',
+
+      // Itinerary
+      'itinerary': '行程规划',
+      'plan_your_trip': '规划您的旅程',
+      'days': '天数',
+      'budget': '预算',
+      'travel_with': '同行',
+      'low': '低',
+      'medium': '中',
+      'high': '高',
+      'solo': '独自',
+      'friends': '朋友',
+      'family': '家庭',
+      'couple': '情侣',
+      'tourism_types_choose': '旅游类型（最多选2项）：',
+      'max_2_selected': '最多选择2项',
+      'please_select_one_type': '请至少选择一种旅游类型。',
+      'pick_up_to_10': '选择最多10个类别：',
+      'select_at_least_one': '请至少选择一个类别。',
+      'max_10_selected': '最多选择10项',
+      'create_itinerary': '创建行程',
+      'day': '天',
+      'new_fab': '新建',
+      'trip_description': '行程描述',
+      'error_loading': '加载数据失败',
+
+      // Search
+      'search_hint': '搜索景点、活动、户外...',
+      'search_placeholder': '搜索景点、户外...',
+      'start_typing': '开始输入搜索...',
+      'no_results': '未找到结果',
+      'retry': '重试',
+      'error_loading_data': '加载数据失败',
+      'error_loading_filters': '加载筛选条件失败：',
+      'places_section': '景点',
+      'events_section': '活动',
+      'activities_section': '户外',
+
+      // Weather
+      'location_permission_required': '需要位置权限',
+      'permission_denied_message': '位置权限已被永久拒绝。请在应用设置中启用。',
+      'open_settings': '打开设置',
+      'enter_city_name': '输入城市名称',
+      'five_day_forecast': '5天天气预报',
+      'humidity': '湿度',
+      'wind_speed': '风速',
+      'pressure': '气压',
+      'sunrise': '日出：',
+      'sunset': '日落：',
+      'locating': '定位中...',
+      'location_error': '定位错误',
+      'celsius': '°C',
+
+      // Chatbot
+      'chatbot_title': '旅行助手',
+      'chatbot_greeting': '有什么可以帮您？',
+      'start_new_chat': '开始新对话',
+      'type_message': '输入您的消息...',
+      'ask_me': '问我点什么...',
+      'bot_thinking': '...',
+
+      // Chatbot mock responses
+      'chat_response_1': '您可以参观北京的长城、故宫和颐和园。',
+      'chat_response_2': '访问中国的最佳时间是三月到五月或九月到十一月，天气温和宜人。',
+      'chat_response_3': '当然！上海和西安是必去的城市，拥有令人惊叹的景点。',
+      'chat_response_4': '我推荐尝试北京烤鸭、火锅和小笼包。',
+      'chat_response_5': '您可以乘坐长江游轮，在壮丽的风景中享受美妙的体验。',
+      'chat_response_6': '张家界和桂林是自然爱好者和摄影爱好者的绝佳去处！',
+
+      // Errors
+      'error_load_places': '加载景点失败',
+      'error_load_events': '加载活动失败',
+      'error_load_profile': '加载个人资料失败',
+      'error_update_profile': '更新个人资料失败',
+      'no_internet': '没有网络连接',
+    },
+  };
+
+  static String tr(String key, String languageCode) {
+    return _data[languageCode]?[key] ?? _data['en']?[key] ?? key;
+  }
+}

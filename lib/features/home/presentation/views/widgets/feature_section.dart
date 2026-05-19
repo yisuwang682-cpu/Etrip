@@ -1,4 +1,7 @@
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FeatureSection extends StatelessWidget {
@@ -17,6 +20,7 @@ class FeatureSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,7 +39,7 @@ class FeatureSection extends StatelessWidget {
             TextButton(
               onPressed: onSeeAll,
               child: Text(
-                "See All",
+                Translations.tr('see_all', lang),
                 style: GoogleFonts.merriweather(
                   color: Colors.black,
                   shadows: [

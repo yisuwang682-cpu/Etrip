@@ -1,39 +1,31 @@
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_result_view.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_one.dart';
-import 'package:egyptopia/features/Itinerary/presentation/views/itinerary_step_two.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/about_me.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/edit_profile.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_one.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_three.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/preference_two.dart';
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
-import 'package:egyptopia/features/home/presentation/views/home_view.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
-import 'package:egyptopia/features/weather/presentation/weather_screen.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/wish_list_view.dart';
-import 'package:egyptopia/features/activities/activities.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/create_new_password.dart';
-import 'package:egyptopia/features/chat_bot/chat_details.dart';
-import 'package:egyptopia/features/chat_bot/chatbot.dart';
-import 'package:egyptopia/features/events/event_details.dart';
-import 'package:egyptopia/features/events/events.dart';
-import 'package:egyptopia/features/food/food_details_screen.dart';
-import 'package:egyptopia/features/food/food_items_screen.dart';
-import 'package:egyptopia/features/food/food_start.dart';
-import 'package:egyptopia/features/auth/presentation/views/widgets/forget_password.dart';
-import 'package:egyptopia/features/auth/presentation/views/registration_view.dart';
-import 'package:egyptopia/features/auth/presentation/views/sign_in_view.dart';
-import 'package:egyptopia/features/auth/presentation/views/sign_up_view.dart';
-import 'package:egyptopia/features/quizzes/quiz_levels.dart';
-import 'package:egyptopia/features/quizzes/quiz_results.dart';
-import 'package:egyptopia/features/quizzes/quiz_screen.dart';
-import 'package:egyptopia/features/quizzes/quiz_start.dart';
-import 'package:egyptopia/features/food/food_categories.dart';
-import 'package:egyptopia/features/places/presentation/place_details.dart';
-import 'package:egyptopia/features/places/presentation/places_screen.dart';
-import 'package:egyptopia/features/onbording/presentation/views/on_bording_view.dart';
-import 'package:egyptopia/features/splash/presentation/views/splash_view.dart';
-import 'package:egyptopia/screens.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_result_view.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_step_one.dart';
+import 'package:etrip/features/Itinerary/presentation/views/itinerary_step_two.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/about_me.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/edit_profile.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/preference_one.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/preference_three.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/preference_two.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/home/presentation/views/home_view.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
+import 'package:etrip/features/weather/presentation/weather_screen.dart';
+import 'package:etrip/features/wishlist/presentation/views/wish_list_view.dart';
+import 'package:etrip/features/activities/activities.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/create_new_password.dart';
+import 'package:etrip/features/chat_bot/chat_details.dart';
+import 'package:etrip/features/chat_bot/chatbot.dart';
+import 'package:etrip/features/events/event_details.dart';
+import 'package:etrip/features/events/events.dart';
+import 'package:etrip/features/auth/presentation/views/widgets/forget_password.dart';
+import 'package:etrip/features/auth/presentation/views/registration_view.dart';
+import 'package:etrip/features/auth/presentation/views/sign_in_view.dart';
+import 'package:etrip/features/auth/presentation/views/sign_up_view.dart';
+import 'package:etrip/features/places/presentation/place_details.dart';
+import 'package:etrip/features/places/presentation/places_screen.dart';
+import 'package:etrip/features/onbording/presentation/views/on_bording_view.dart';
+import 'package:etrip/features/splash/presentation/views/splash_view.dart';
+import 'package:etrip/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,20 +39,13 @@ abstract class AppRouter {
   static const kScreens = '/screens';
   static const kHomePage = '/home';
   static const kPlaces = '/places';
-  static const kQuizStart = '/quizzes';
   static const kEvents = '/events';
   static const kActivities = '/activities';
   static const kChatbot = '/chatbot';
-  static const kQuizLevels = '/quizLevel';
   static const kEventDetails = '/eventDetails';
   static const kPlaceDetails = '/placeDetails';
-  static const kQuizResults = '/quizResults';
   static const kWeather = '/weather';
-  static const kFoodStart = '/foodStart';
-  static const kFoodCategories = '/foodCategories';
   static const kChatDetails = '/chatDetails';
-  static const kFoodItemsScreen = '/foodItemsScreen';
-  static const kFoodDetails = '/foodDetails';
   static const kWishList = '/wishList';
   static const kEditProfile = '/editProfile';
   static const kAboutMe = '/aboutme';
@@ -100,11 +85,9 @@ abstract class AppRouter {
     GoRoute(path: kScreens, builder: (context, state) => const Screens()),
     GoRoute(path: kHomePage, builder: (context, state) => const HomeView()),
     GoRoute(path: kPlaces, builder: (context, state) => const PlacesScreen()),
-    GoRoute(path: kQuizStart, builder: (context, state) => const QuizStart()),
     GoRoute(path: kEvents, builder: (context, state) => const Events()),
     GoRoute(path: kActivities, builder: (context, state) => const Activities()),
     GoRoute(path: kChatbot, builder: (context, state) => const Chatbot()),
-    GoRoute(path: kQuizLevels, builder: (context, state) => const QuizLevels()),
     GoRoute(
       path: kEventDetails,
       builder: (context, state) {
@@ -119,44 +102,8 @@ abstract class AppRouter {
         return PlaceDetails(place: place);
       },
     ),
-    GoRoute(
-      path: '/quiz/:level',
-      builder: (context, state) {
-        String level = state.pathParameters['level'] ?? 'beginner';
-        return QuizScreen(level: level);
-      },
-    ),
-    GoRoute(
-      path: kQuizResults,
-      builder: (context, state) {
-        final extra = state.extra as Map<String, dynamic>? ?? {};
-        return QuizResults(
-          score: extra['score'] ?? 0,
-          totalQuestions: extra['totalQuestions'] ?? 1,
-          wrongAnswers: extra['wrongAnswers'] ?? [],
-        );
-      },
-    ),
     GoRoute(path: kWeather, builder: (context, state) => WeatherScreen()),
-    GoRoute(path: kFoodStart, builder: (context, state) => const FoodStart()),
-    GoRoute(
-        path: kFoodCategories,
-        builder: (context, state) => const FoodCategories()),
-    GoRoute(
-        path: kChatDetails, builder: (context, state) => const ChatDetails()),
-    GoRoute(
-        path: kFoodItemsScreen,
-        builder: (context, state) {
-          final category = state.extra as String;
-          return FoodItemsScreen(category: category);
-        }),
-    GoRoute(
-        path: kFoodDetails,
-        builder: (context, state) {
-          final foodItem = state.extra as Map<String, dynamic>;
-          return FoodDetailsScreen(foodItem: foodItem);
-        }),
-    GoRoute(path: kWishList, builder: (context, state) => const WishListView()),
+    GoRoute(path: kChatDetails, builder: (context, state) => const ChatDetails()),
     GoRoute(
         path: kEditProfile,
         builder: (context, state) {

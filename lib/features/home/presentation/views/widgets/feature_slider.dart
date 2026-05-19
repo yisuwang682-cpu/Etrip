@@ -1,6 +1,9 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/mock_data.dart';
 import 'featured_slider_item.dart';
 
 class FeatureSlider extends StatelessWidget {
@@ -25,6 +28,7 @@ class FeatureSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     final uniquePlaces = places != null
         ? (places!
             .fold<Map<String, PlaceModel>>(
@@ -53,12 +57,12 @@ class FeatureSlider extends StatelessWidget {
                         ? place.profileImage
                         :  place.carouselImages.first,
               isStatic: false,
-              cityName: place.cityName,
-              name: place.name,
+              cityName: localizedCityName(place.cityName, lang),
+              name: localizedPlaceName(place, lang),
               rate: place.rate,
               placeId: place.id,
-              category: place.category,
-              tourismType: place.tourismType,
+              category: localizedCategory(place.category, lang),
+              tourismType: localizedTourismType(place.tourismType, lang),
               description: place.description,
               googleMapsLink: place.googleMapsLink,
               totalRates: place.totalRates,

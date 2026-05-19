@@ -1,11 +1,14 @@
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
 import 'package:go_router/go_router.dart';
 
 class RegistrationBody extends StatelessWidget {
@@ -41,7 +44,7 @@ class RegistrationBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "Start Discovering Egypt Like Never Before",
+                Translations.tr('start_discover', context.watch<LocaleCubit>().state.languageCode),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.imFellFrenchCanon(
                   fontSize: SizeConfig.defaultSize! * 1.8,
@@ -54,7 +57,7 @@ class RegistrationBody extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomGeneralButton(
-                      text: "Sign up",
+                      text: Translations.tr('sign_up', context.watch<LocaleCubit>().state.languageCode),
                       onTap: () {
                         GoRouter.of(context).push(AppRouter.kSignUp);
                       },
@@ -63,7 +66,7 @@ class RegistrationBody extends StatelessWidget {
                   const HorizantalSpace(1),
                   Expanded(
                     child: CustomGeneralButton(
-                      text: "Sign in",
+                      text: Translations.tr('sign_in', context.watch<LocaleCubit>().state.languageCode),
                       onTap: () {
                         GoRouter.of(context).push(AppRouter.kSignIn);
                       },
@@ -77,7 +80,7 @@ class RegistrationBody extends StatelessWidget {
                   GoRouter.of(context).go(AppRouter.kScreens);
                 },
                 child: Text(
-                  "Skip for now",
+                  Translations.tr('skip_now', context.watch<LocaleCubit>().state.languageCode),
                   style: GoogleFonts.inter(
                     decoration: TextDecoration.underline,
                     fontSize: SizeConfig.defaultSize! * 1.6,
@@ -100,7 +103,7 @@ class RegistrationBody extends StatelessWidget {
               ),
               const VerticalSpace(1),
               Text(
-                "Egyptopia",
+                "Etrip",
                 style: TextStyle(
                   fontSize: SizeConfig.defaultSize! * 4.8,
                   color: Colors.white,

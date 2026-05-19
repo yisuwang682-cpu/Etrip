@@ -1,15 +1,17 @@
-import 'package:egyptopia/core/mock_data.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/widgets/build_category_icon.dart';
-import 'package:egyptopia/features/search/presentation/widgets/custom_search.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/Profile/bloc/user_state.dart';
-import 'package:egyptopia/features/home/presentation/views/widgets/build_home_section.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
-import 'package:egyptopia/features/places/data/places_api_service.dart';
-import 'package:egyptopia/features/home/presentation/views/widgets/feature_slider.dart';
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/mock_data.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/widgets/build_category_icon.dart';
+import 'package:etrip/features/search/presentation/widgets/custom_search.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/Profile/bloc/user_state.dart';
+import 'package:etrip/features/home/presentation/views/widgets/build_home_section.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
+import 'package:etrip/features/places/data/places_api_service.dart';
+import 'package:etrip/features/home/presentation/views/widgets/feature_slider.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +46,7 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     final userState = context.watch<UserBloc>().state;
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     String? userId;
     if (userState is UserLoaded) {
       userId = userState.user.id;
@@ -77,7 +80,9 @@ class _HomeBodyState extends State<HomeBody> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              userId != null ? "  Recommended For You" : "  Top Places",
+              userId != null
+                  ? Translations.tr('recommended_for_you', lang)
+                  : Translations.tr('top_places', lang),
               style: GoogleFonts.merriweather(
                 color: const Color(0xFF1F2544),
                 fontSize: 19,
@@ -92,7 +97,7 @@ class _HomeBodyState extends State<HomeBody> {
                 });
               },
               child: Text(
-                "All Places",
+                Translations.tr('all_places', lang),
                 style: GoogleFonts.merriweather(
                   color: Colors.black,
                   shadows: [
@@ -118,9 +123,9 @@ class _HomeBodyState extends State<HomeBody> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: Text('${Translations.tr('error', lang)}: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No recommended places found'));
+              return Center(child: Text(Translations.tr('no_recommended', lang)));
             }
             return FeatureSlider(
               places: snapshot.data!,
@@ -137,30 +142,26 @@ class _HomeBodyState extends State<HomeBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const BuildCategoryIcon(
+            BuildCategoryIcon(
               icon: Icons.place,
-              label: "Places",
+              label: Translations.tr('places', lang),
               route: AppRouter.kPlaces,
             ),
-            const BuildCategoryIcon(
+            BuildCategoryIcon(
               icon: Icons.event,
-              label: "Events",
+              label: Translations.tr('events', lang),
               route: AppRouter.kEvents,
             ),
-            const BuildCategoryIcon(
-                icon: Icons.restaurant_menu,
-                label: "Food",
-                route: AppRouter.kFoodStart),
             BuildCategoryIcon(
               icon: Icons.directions_walk,
-              label: "Activities",
+              label: Translations.tr('activities', lang),
               onTap: () {
                 final userState = context.read<UserBloc>().state;
                 if (userState is! UserLoaded) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(
-                          'You cannot use the Activities feature without logging in!'),
+                          Translations.tr('login_required_activities', lang)),
                       backgroundColor: Colors.black87,
                     ),
                   );
@@ -171,14 +172,14 @@ class _HomeBodyState extends State<HomeBody> {
             ),
             BuildCategoryIcon(
               icon: Icons.thunderstorm_outlined,
-              label: "Weather",
+              label: Translations.tr('weather', lang),
               onTap: () {
                 final userState = context.read<UserBloc>().state;
                 if (userState is! UserLoaded) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(
-                          'You cannot use the Weather feature without logging in!'),
+                          Translations.tr('login_required_weather', lang)),
                       backgroundColor: Colors.black87,
                     ),
                   );
@@ -189,14 +190,14 @@ class _HomeBodyState extends State<HomeBody> {
             ),
             BuildCategoryIcon(
               icon: FontAwesomeIcons.redditAlien,
-              label: "ChatBot",
+              label: Translations.tr('chatbot', lang),
               onTap: () {
                 final userState = context.read<UserBloc>().state;
                 if (userState is! UserLoaded) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(
-                          'You cannot use the ChatBot feature without logging in!'),
+                          Translations.tr('login_required_chatbot', lang)),
                       backgroundColor: Colors.black87,
                     ),
                   );
@@ -205,14 +206,10 @@ class _HomeBodyState extends State<HomeBody> {
                 }
               },
             ),
-            const BuildCategoryIcon(
-                icon: Icons.extension,
-                label: "Quizzes",
-                route: AppRouter.kQuizStart),
           ],
         ),
         const VerticalSpace(1),
-        ...sections.map((section) => BuildHomeSection(
+        ...sections(lang).map((section) => BuildHomeSection(
               cacheKey: section['cacheKey']!,
               title: section['title']!,
               apiTitle: section['apiTitle']!,

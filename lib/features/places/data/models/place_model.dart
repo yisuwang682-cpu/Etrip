@@ -1,4 +1,4 @@
-import 'package:egyptopia/core/config.dart';
+import 'package:etrip/core/config.dart';
 
 class PlaceModel {
   final String id;

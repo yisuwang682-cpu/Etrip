@@ -1,7 +1,10 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeatherCard extends StatelessWidget {
   final String city;
@@ -29,6 +32,7 @@ class WeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return Card(
       color: Colors.white.withValues(alpha:0.2),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -49,21 +53,21 @@ class WeatherCard extends StatelessWidget {
             const VerticalSpace(1),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               _buildWeatherDetail(
-                  Icons.water_drop, Colors.blue, "Humidity", "$humidity%"),
-              _buildWeatherDetail(Icons.air, Colors.grey, "Wind Speed",
+                  Icons.water_drop, Colors.blue, Translations.tr('humidity', lang), "$humidity%"),
+              _buildWeatherDetail(Icons.air, Colors.grey, Translations.tr('wind_speed', lang),
                   "${windSpeed.toStringAsFixed(1)} m/s"),
               _buildWeatherDetail(
-                  Icons.speed, Colors.orange, "Pressure", "$pressure hPa%"),
+                  Icons.speed, Colors.orange, Translations.tr('pressure', lang), "$pressure hPa%"),
             ]),
             const VerticalSpace(2),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildWeatherDetail(
-                    Icons.wb_sunny, Colors.yellow, "Sunrise: $sunrise", null,
+                    Icons.wb_sunny, Colors.yellow, "${Translations.tr('sunrise', lang)}$sunrise", null,
                     visable: false),
                 _buildWeatherDetail(Icons.nightlight_round, Colors.orange,
-                    "Sunset: $sunset", null,
+                    "${Translations.tr('sunset', lang)}$sunset", null,
                     visable: false),
               ],
             ),

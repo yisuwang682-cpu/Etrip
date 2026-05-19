@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
 
 abstract class AuthRepo {
   Future<Either<Exception, UserCredential>> loginWithEmail(

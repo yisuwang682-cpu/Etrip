@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_fields.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/features/onbording/presentation/views/widgets/page_view_item.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_fields.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/features/onbording/presentation/views/widgets/page_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,10 +39,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   Future<String?> changePassword({
     required String currentPassword,
     required String newPassword,
+    required String lang,
   }) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
-      if (user == null || user.email == null) return "No user logged in!";
+      if (user == null || user.email == null) return Translations.tr('no_user_logged_in', lang);
 
       // عمل re-authenticate بالباسورد القديم
       AuthCredential credential = EmailAuthProvider.credential(
@@ -53,7 +57,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
       return null; // يعني success!
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        return "Old password is incorrect!";
+        return Translations.tr('old_password_incorrect', lang);
       }
       return e.message;
     } catch (e) {
@@ -62,31 +66,32 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   }
 
   void onChangePasswordTap(BuildContext context) async {
+    final lang = context.read<LocaleCubit>().state.languageCode;
     final oldPw = oldPasswordController.text.trim();
     final newPw = newPasswordController.text.trim();
     final confirmPw = confirmPasswordController.text.trim();
 
     if (oldPw.isEmpty || newPw.isEmpty || confirmPw.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter all fields!")),
+        SnackBar(content: Text(Translations.tr('please_enter_all_fields', lang))),
       );
       return;
     }
     if (newPw != confirmPw) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Passwords do not match!")),
+        SnackBar(content: Text(Translations.tr('passwords_dont_match', lang))),
       );
       return;
     }
     setState(() => _loading = true);
 
     final error =
-        await changePassword(currentPassword: oldPw, newPassword: newPw);
+        await changePassword(currentPassword: oldPw, newPassword: newPw, lang: lang);
     setState(() => _loading = false);
 
     if (error == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Password changed successfully!")),
+        SnackBar(content: Text(Translations.tr('password_changed', lang))),
       );
       GoRouter.of(context).pop();
     } else {
@@ -98,6 +103,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       child: SingleChildScrollView(
@@ -109,48 +115,47 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 children: [
                   const VerticalSpace(4),
                   Text(
-                    "Create New Password",
+                    Translations.tr('create_new_password', lang),
                     style: GoogleFonts.imFellFrenchCanon(
                       fontSize: SizeConfig.defaultSize! * 3,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const VerticalSpace(2),
-                  const PageViewItem(
+                  PageViewItem(
                     image: 'assets/images/new1.png',
-                    title:
-                        'Your new password must be different\nfrom previously used password',
+                    title: Translations.tr('new_password_must_differ', lang),
                     subTitle: '',
                     titleFontSize: 18,
                     subTitleFontSize: 1,
                   ),
                   CustomInputField(
                     controller: oldPasswordController,
-                    label: "Old Password",
-                    hint: "Enter Your Old Password",
+                    label: Translations.tr('old_password', lang),
+                    hint: Translations.tr('enter_old_password', lang),
                     inputType: TextInputType.visiblePassword,
                     isPassword: true,
                   ),
                   const VerticalSpace(2),
                   CustomInputField(
                     controller: newPasswordController,
-                    label: "New Password",
-                    hint: "Enter Your New Password",
+                    label: Translations.tr('new_password', lang),
+                    hint: Translations.tr('enter_new_password', lang),
                     inputType: TextInputType.visiblePassword,
                     isPassword: true,
                   ),
                   const VerticalSpace(2),
                   CustomInputField(
                     controller: confirmPasswordController,
-                    label: "Confirm Password",
-                    hint: "Re-enter Your Password",
+                    label: Translations.tr('confirm_new_password', lang),
+                    hint: Translations.tr('reenter_password', lang),
                     inputType: TextInputType.visiblePassword,
                     isPassword: true,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: CustomGeneralButton(
-                      text: _loading ? "Processing..." : "Confirm",
+                      text: _loading ? Translations.tr('loading', lang) : Translations.tr('confirm', lang),
                       onTap:
                           _loading ? null : () => onChangePasswordTap(context),
                     ),

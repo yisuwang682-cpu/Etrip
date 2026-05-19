@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItineraryStepTwo extends StatefulWidget {
   final int noOfDays;
@@ -52,9 +55,10 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
   bool _loading = false;
 
   Future<void> _handleItineraryCreation() async {
+    final lang = context.read<LocaleCubit>().state.languageCode;
     if (selectedCategories.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Select at least one category.")));
+          SnackBar(content: Text(Translations.tr('select_at_least_one', lang))));
       return;
     }
     setState(() {
@@ -77,7 +81,7 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Error: $e"),
+          content: Text("${Translations.tr('error', context.read<LocaleCubit>().state.languageCode)}: $e"),
         ),
       );
     } finally {
@@ -91,8 +95,8 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
-      gradientStops: const [0, 0.6],
       backgroundColor: kSecondaryColor,
       imageColor: Colors.black,
       child: AbsorbPointer(
@@ -105,8 +109,8 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Pick up to 10 categories:",
+                  Text(
+                    Translations.tr('pick_up_to_10', lang),
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -147,9 +151,9 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
                                   selectedCategories.add(cat);
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
+                                      .showSnackBar(SnackBar(
                                           content: Text(
-                                    "You cannot select more than 10",
+                                    Translations.tr('max_10_selected', lang),
                                   )));
                                 }
                               });
@@ -172,7 +176,7 @@ class _ItineraryStepTwoState extends State<ItineraryStepTwo> {
                   SizedBox(
                     width: double.infinity,
                     child: CustomJoinButton(
-                      text: _loading ? "Processing..." : "Create Itinerary",
+                      text: _loading ? Translations.tr('loading', lang) : Translations.tr('create_itinerary', lang),
                       onTap: _loading ? () {} : _handleItineraryCreation,
                     ),
                   ),

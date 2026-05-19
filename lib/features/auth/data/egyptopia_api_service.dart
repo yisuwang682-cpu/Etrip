@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:egyptopia/core/config.dart';
+import 'package:etrip/core/config.dart';
 import 'package:http/http.dart' as http;
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EgyptopiaApiService {

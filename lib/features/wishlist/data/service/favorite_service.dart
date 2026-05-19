@@ -1,4 +1,4 @@
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
 import 'package:hive/hive.dart';
 
 class FavoriteService {

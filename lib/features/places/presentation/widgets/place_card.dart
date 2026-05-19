@@ -1,19 +1,23 @@
-import 'package:egyptopia/core/widgets/custom_star_rating_widget.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
+import 'package:etrip/core/widgets/custom_star_rating_widget.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/presentation/views/widgets/favorite_icon.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/mock_data.dart';
 
 class PlaceCard extends StatelessWidget {
   final PlaceModel place;
   final VoidCallback? onTap;
 
-  const PlaceCard({super.key, required this.place, this.onTap});
+  PlaceCard({super.key, required this.place, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -47,7 +51,7 @@ class PlaceCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        place.category,
+                        localizedCategory(place.category, lang),
                         style: GoogleFonts.inter(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -68,9 +72,9 @@ class PlaceCard extends StatelessWidget {
                         iconSize: 30,
                         id: place.id,
                         type: FavoriteType.place,
-                        title: place.name,
+                        title: localizedPlaceName(place, lang),
                         imageUrl: place.profileImage,
-                        city: place.cityName,
+                        city: localizedCityName(place.cityName, lang),
                         category: place.category,
                         rate: place.rate.toString(),
                         tourismType: place.tourismType,
@@ -89,7 +93,7 @@ class PlaceCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      place.name,
+                      localizedPlaceName(place, lang),
                       style: GoogleFonts.inter(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -105,7 +109,7 @@ class PlaceCard extends StatelessWidget {
                         ),
                         const HorizantalSpace(0.3),
                         Text(
-                          place.tourismType,
+                          localizedTourismType(place.tourismType, lang),
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -125,7 +129,7 @@ class PlaceCard extends StatelessWidget {
                                 size: 19),
                             const HorizantalSpace(0.15),
                             Text(
-                              place.cityName,
+                              localizedCityName(place.cityName, lang),
                               style: GoogleFonts.inter(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,

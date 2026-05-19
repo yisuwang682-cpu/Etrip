@@ -1,6 +1,6 @@
-import 'package:egyptopia/core/mock_data.dart';
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_request.dart';
-import 'package:egyptopia/features/Itinerary/data/models/itinerary_response.dart';
+import 'package:etrip/core/mock_data.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_request.dart';
+import 'package:etrip/features/Itinerary/data/models/itinerary_response.dart';
 
 class ItineraryService {
   Future<ItineraryResponse> getItinerary({
@@ -11,7 +11,7 @@ class ItineraryService {
     return ItineraryResponse(
       noOfDays: request.noOfDays,
       plan: getMockItineraryPlan(request.noOfDays),
-      description: 'A wonderful trip through Egypt exploring cultural and natural highlights.',
+      description: 'A wonderful trip through China exploring cultural and natural highlights.',
     );
   }
 

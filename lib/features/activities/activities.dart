@@ -1,15 +1,18 @@
-import 'package:egyptopia/core/mock_data.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/custom_star_rating_widget.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
+import 'package:etrip/core/mock_data.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_star_rating_widget.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/utils/size_config.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Activities extends StatefulWidget {
   const Activities({super.key});
@@ -58,6 +61,7 @@ class _ActivitiesState extends State<Activities> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       backgroundColor: kSecondaryColor,
@@ -72,7 +76,7 @@ class _ActivitiesState extends State<Activities> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Activities',
+                Translations.tr('activities_title', lang),
                 style: TextStyle(
                   fontSize: SizeConfig.defaultSize! * 3.25,
                   fontWeight: FontWeight.bold,
@@ -94,7 +98,7 @@ class _ActivitiesState extends State<Activities> {
               child: Column(
                 children: [
                   Text(
-                    "Filter by Price: ${priceRange.start.toInt()} LE - ${priceRange.end.toInt()} LE",
+                    "${Translations.tr('filter_by_price', lang)}: ${priceRange.start.toInt()} LE - ${priceRange.end.toInt()} LE",
                     style: GoogleFonts.inter(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w500,
@@ -133,7 +137,7 @@ class _ActivitiesState extends State<Activities> {
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
                       checkmarkColor: Colors.white,
-                      label: Text(type),
+                      label: Text(localizedActivityType(type, lang)),
                       labelStyle: GoogleFonts.inter(
                         fontWeight: FontWeight.w600,
                         fontSize: 13.5,
@@ -164,7 +168,7 @@ class _ActivitiesState extends State<Activities> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
+                    return Center(child: Text("${Translations.tr('error', lang)}: ${snapshot.error}"));
                   }
 
                   final filtered = filterActivities(snapshot.data!);
@@ -203,7 +207,7 @@ class _ActivitiesState extends State<Activities> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Text(
-                                        activity['activity_type'],
+                                        localizedActivityType(activity['activity_type'] ?? '', lang),
                                         style: GoogleFonts.inter(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -222,7 +226,7 @@ class _ActivitiesState extends State<Activities> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      activity['title'],
+                                      localizedActivityTitle(activity, lang),
                                       style: GoogleFonts.inter(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
@@ -235,7 +239,7 @@ class _ActivitiesState extends State<Activities> {
                                         const Icon(Icons.location_on, size: 16),
                                         const HorizantalSpace(0.1),
                                         Text(
-                                          activity['city_name'],
+                                          localizedCityName(activity['city_name'] ?? '', lang),
                                           style: GoogleFonts.inter(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600,
@@ -306,7 +310,7 @@ class _ActivitiesState extends State<Activities> {
                                       children: [
                                         Expanded(
                                           child: CustomJoinButton(
-                                            text: "Join Now",
+                                            text: Translations.tr('join_now', lang),
                                             onTap: () async {
                                               String registrationLink = activity[
                                                   'link']; // Replace 'event' with your actual event data

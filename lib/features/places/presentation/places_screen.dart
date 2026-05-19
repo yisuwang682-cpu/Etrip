@@ -1,13 +1,16 @@
-import 'package:egyptopia/features/places/data/models/place_model.dart';
-import 'package:egyptopia/features/places/data/places_api_service.dart';
-import 'package:egyptopia/features/places/presentation/widgets/place_card.dart';
-import 'package:egyptopia/features/places/presentation/widgets/places_drawer.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
+import 'package:etrip/features/places/data/places_api_service.dart';
+import 'package:etrip/features/places/presentation/widgets/place_card.dart';
+import 'package:etrip/features/places/presentation/widgets/places_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlacesScreen extends StatefulWidget {
   const PlacesScreen({super.key});
@@ -111,6 +114,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -121,7 +125,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(
-                  child: Text('Error loading filters: ${snapshot.error}'));
+                  child: Text('${Translations.tr('error_loading_filters', lang)}${snapshot.error}'));
             }
 
             final data = snapshot.data ?? {};
@@ -164,7 +168,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
+                return Center(child: Text('${Translations.tr('error', lang)}: ${snapshot.error}'));
               }
               if (allPlaces.isEmpty && snapshot.hasData) {
                 allPlaces = snapshot.data!;
@@ -179,7 +183,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Places',
+                          Translations.tr('places_title', lang),
                           style: TextStyle(
                             fontSize: SizeConfig.defaultSize! * 3.25,
                             fontWeight: FontWeight.bold,

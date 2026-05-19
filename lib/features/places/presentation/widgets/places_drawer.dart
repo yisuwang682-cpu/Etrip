@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlacesDrawer extends StatelessWidget {
   final List<String> cities;
@@ -38,6 +41,7 @@ class PlacesDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
@@ -45,7 +49,7 @@ class PlacesDrawer extends StatelessWidget {
         children: [
           const SizedBox(height: 40),
           Text(
-            'Filter By',
+            Translations.tr('filter_by', lang),
             style: GoogleFonts.inter(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -57,9 +61,9 @@ class PlacesDrawer extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 300),
             child: DropdownButtonFormField<String>(
               isExpanded: true,
-              decoration: const InputDecoration(
-                labelText: 'City',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: Translations.tr('city', lang),
+                border: const OutlineInputBorder(),
               ),
               value: selectedCity,
               items: cities
@@ -80,9 +84,9 @@ class PlacesDrawer extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 300),
             child: DropdownButtonFormField<String>(
               isExpanded: true,
-              decoration: const InputDecoration(
-                labelText: 'Tourism Type',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: Translations.tr('tourism_type', lang),
+                border: const OutlineInputBorder(),
               ),
               value: selectedTourismType,
               items: tourismTypes
@@ -102,9 +106,9 @@ class PlacesDrawer extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 300),
             child: DropdownButtonFormField<String>(
               isExpanded: true,
-              decoration: const InputDecoration(
-                labelText: 'Category',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: Translations.tr('category', lang),
+                border: const OutlineInputBorder(),
               ),
               value: selectedCategory,
               items: categories
@@ -124,9 +128,9 @@ class PlacesDrawer extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 300),
             child: DropdownButtonFormField<String>(
               isExpanded: true,
-              decoration: const InputDecoration(
-                labelText: 'Popularity',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: Translations.tr('popularity', lang),
+                border: const OutlineInputBorder(),
               ),
               value: selectedPopularity,
               items: popularityOptions
@@ -144,8 +148,8 @@ class PlacesDrawer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomJoinButton(text: "Clear", onTap: onClear, fontSize: 18),
-              CustomJoinButton(text: "Apply", onTap: onApply, fontSize: 18),
+              CustomJoinButton(text: Translations.tr('clear', lang), onTap: onClear, fontSize: 18),
+              CustomJoinButton(text: Translations.tr('apply', lang), onTap: onApply, fontSize: 18),
             ],
           ),
           const SizedBox(height: 20),

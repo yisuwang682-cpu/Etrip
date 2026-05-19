@@ -1,7 +1,7 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/weather/presentation/views/forecast_list.dart';
-import 'package:egyptopia/features/weather/presentation/views/weather_card.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/weather/presentation/views/forecast_list.dart';
+import 'package:etrip/features/weather/presentation/views/weather_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +9,9 @@ import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'views/weather_controller.dart';
 import 'package:app_settings/app_settings.dart';
+import 'package:etrip/core/localization/translations.dart' as etrip;
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeatherScreen extends StatelessWidget {
   final WeatherController controller = Get.put(WeatherController());
@@ -17,23 +20,23 @@ class WeatherScreen extends StatelessWidget {
   WeatherScreen({super.key});
 
   void showLocationDialog(BuildContext context) {
+    final lang = context.read<LocaleCubit>().state.languageCode;
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Location Permission Required"),
-        content: const Text(
-            "Location permission is permanently denied. Please enable it from app settings."),
+        title: Text(etrip.Translations.tr('location_permission_required', lang)),
+        content: Text(etrip.Translations.tr('permission_denied_message', lang)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text("Cancel"),
+            child: Text(etrip.Translations.tr('cancel', lang)),
           ),
           TextButton(
             onPressed: () {
               AppSettings.openAppSettings();
               Navigator.pop(ctx);
             },
-            child: const Text("Open Settings"),
+            child: Text(etrip.Translations.tr('open_settings', lang)),
           ),
         ],
       ),
@@ -55,6 +58,7 @@ class WeatherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       smartGetWeatherByLocation(context);
     });
@@ -108,7 +112,7 @@ class WeatherScreen extends StatelessWidget {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withValues(alpha: 0.8),
-                      hintText: "Enter city name",
+                      hintText: etrip.Translations.tr('enter_city_name', lang),
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.search),
                         onPressed: () {
@@ -192,7 +196,7 @@ class WeatherScreen extends StatelessWidget {
                                       sunset: controller.sunset.value),
                                   if (controller.forecastData.isNotEmpty) ...[
                                     const VerticalSpace(1),
-                                    Text("5-Day Weather Forecast",
+                                    Text(etrip.Translations.tr('five_day_forecast', lang),
                                         style: GoogleFonts.lato(
                                             fontSize:
                                                 SizeConfig.defaultSize! * 2,

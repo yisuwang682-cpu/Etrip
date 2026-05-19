@@ -1,5 +1,5 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/features/splash/presentation/views/widgets/splash_body.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/features/splash/presentation/views/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatelessWidget {

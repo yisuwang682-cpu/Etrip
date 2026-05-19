@@ -1,14 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_event.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_event.dart';
 import 'package:flutter/material.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
-import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
-import 'package:egyptopia/features/auth/data/respotireis/auth_repo_impl.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/auth/domain/respotireis/auth_repo.dart';
+import 'package:etrip/features/auth/data/respotireis/auth_repo_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
 
 class SignUpController {
   final AuthRepo _authRepo = AuthRepoImpl();
@@ -47,7 +49,7 @@ class SignUpController {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text(
-          'Please fill all fields!',
+          Translations.tr('please_fill_all_fields', context.read<LocaleCubit>().state.languageCode),
           style: GoogleFonts.lato(),
         )),
       );
@@ -88,7 +90,7 @@ class SignUpController {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
-            'Sign up successful!',
+            Translations.tr('sign_up_successful', context.read<LocaleCubit>().state.languageCode),
             style: GoogleFonts.lato(),
           )),
         );
@@ -119,7 +121,7 @@ class SignUpController {
         context.read<UserBloc>().add(LoadUser(user.uid));
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text('Sign in with Google successful ✅',
+              content: Text(Translations.tr('google_sign_in_successful', context.read<LocaleCubit>().state.languageCode),
                   style: GoogleFonts.lato())),
         );
         GoRouter.of(context).pushReplacement(AppRouter.kScreens);

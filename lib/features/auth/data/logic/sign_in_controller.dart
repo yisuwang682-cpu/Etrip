@@ -1,14 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_event.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_event.dart';
 import 'package:flutter/material.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
-import 'package:egyptopia/features/auth/data/respotireis/auth_repo_impl.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/features/auth/domain/respotireis/auth_repo.dart';
+import 'package:etrip/features/auth/data/respotireis/auth_repo_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
 
 class SignInController {
   final AuthRepo _authRepo = AuthRepoImpl();
@@ -32,7 +34,7 @@ class SignInController {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content:
-                Text('Please fill all fields!', style: GoogleFonts.lato())),
+                Text(Translations.tr('please_fill_all_fields', context.read<LocaleCubit>().state.languageCode), style: GoogleFonts.lato())),
       );
       return;
     }
@@ -60,7 +62,7 @@ class SignInController {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content:
-                    Text('Sign in successful! ✅', style: GoogleFonts.lato())),
+                    Text(Translations.tr('sign_in_successful', context.read<LocaleCubit>().state.languageCode), style: GoogleFonts.lato())),
           );
           GoRouter.of(context).pushReplacement(AppRouter.kScreens);
         }
@@ -90,7 +92,7 @@ class SignInController {
         context.read<UserBloc>().add(LoadUser(user.uid));
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text('Sign in with Google successful ✅',
+              content: Text(Translations.tr('google_sign_in_successful', context.read<LocaleCubit>().state.languageCode),
                   style: GoogleFonts.lato())),
         );
         GoRouter.of(context).pushReplacement(AppRouter.kScreens);
@@ -104,7 +106,7 @@ class SignInController {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content:
-                Text("Please enter your email!", style: GoogleFonts.lato())),
+                Text(Translations.tr('please_enter_email', context.read<LocaleCubit>().state.languageCode), style: GoogleFonts.lato())),
       );
       return;
     }
@@ -128,7 +130,7 @@ class SignInController {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
-                  "If That Email Exists, A Password Reset Email Has Been Sent ✅",
+                  Translations.tr('if_email_exists_reset', context.read<LocaleCubit>().state.languageCode),
                   style: GoogleFonts.lato())),
         );
         GoRouter.of(context).pop();

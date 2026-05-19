@@ -1,10 +1,13 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +16,7 @@ class Chatbot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       backgroundColor: kMainColor,
@@ -25,7 +29,7 @@ class Chatbot extends StatelessWidget {
             height: SizeConfig.defaultSize! * 30,
           ),
           Text(
-            "How can i help you?",
+            Translations.tr('chatbot_greeting', lang),
             style: TextStyle(
               fontSize: SizeConfig.defaultSize! * 3,
               color: Colors.white,
@@ -47,7 +51,7 @@ class Chatbot extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
               ),
               child: Text(
-                "Start New Chat",
+                Translations.tr('start_new_chat', lang),
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

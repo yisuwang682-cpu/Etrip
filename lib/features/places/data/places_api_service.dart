@@ -1,4 +1,4 @@
-import 'package:egyptopia/core/mock_data.dart';
+import 'package:etrip/core/mock_data.dart';
 import 'models/place_model.dart';
 
 class PlacesApiService {

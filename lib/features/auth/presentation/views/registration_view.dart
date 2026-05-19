@@ -1,4 +1,4 @@
-import 'package:egyptopia/features/auth/presentation/views/widgets/registration_body.dart';
+import 'package:etrip/features/auth/presentation/views/widgets/registration_body.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationView extends StatelessWidget {

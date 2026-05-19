@@ -1,12 +1,14 @@
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_state.dart';
-import 'package:egyptopia/features/Profile/presentation/views/widgets/profile_content.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_state.dart';
+import 'package:etrip/features/Profile/presentation/views/widgets/profile_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,6 +17,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       imageColor: const Color(0xFF999EB9),
       backgroundColor: const [Colors.white, Colors.white],
@@ -32,7 +35,7 @@ class ProfileView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "No Profile Data!",
+                    Translations.tr('no_profile_data', lang),
                     style: GoogleFonts.lato(
                         fontSize: 25, fontWeight: FontWeight.bold),
                   ),
@@ -40,7 +43,7 @@ class ProfileView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 95),
                     child: CustomGeneralButton(
-                        text: "Please Sign-In First",
+                        text: Translations.tr('please_sign_in_first', lang),
                         onTap: () {
                           GoRouter.of(context)
                               .pushReplacement(AppRouter.kSignIn);
@@ -58,7 +61,7 @@ class ProfileView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "No Profile Data!",
+                  Translations.tr('no_profile_data', lang),
                   style: GoogleFonts.lato(
                       fontSize: 25, fontWeight: FontWeight.bold),
                 ),
@@ -66,7 +69,7 @@ class ProfileView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 95),
                   child: CustomGeneralButton(
-                      text: "Please Log-In First",
+                      text: Translations.tr('please_log_in_first', lang),
                       onTap: () {
                         GoRouter.of(context).pushReplacement(AppRouter.kSignIn);
                       }),

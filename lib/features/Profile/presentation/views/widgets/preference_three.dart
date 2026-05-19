@@ -1,12 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/auth/data/egyptopia_api_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -78,9 +81,10 @@ class _PreferenceThreeState extends State<PreferenceThree> {
         });
       }
     } catch (e) {
+      final lang = context.read<LocaleCubit>().state.languageCode;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Failed to load preferences: $e"),
+          content: Text(Translations.tr('failed_load_preferences', lang) + e.toString()),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 2),
         ),
@@ -136,8 +140,8 @@ class _PreferenceThreeState extends State<PreferenceThree> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     final userId = FirebaseAuth.instance.currentUser?.uid ?? '';
-    
 
     final Map<String, dynamic>? previousData =
         GoRouterState.of(context).extra as Map<String, dynamic>?;
@@ -162,7 +166,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                   Row(
                     children: [
                       Text(
-                        'What is your favorite \ncity to explore?',
+                        Translations.tr('favourite_city', lang),
                         style: TextStyle(
                           fontSize: SizeConfig.defaultSize! * 3,
                           fontWeight: FontWeight.bold,
@@ -190,7 +194,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text("Failed to save preferences: $e"),
+                                content: Text(Translations.tr('failed_save_preferences', lang) + e.toString()),
                                 backgroundColor: Colors.red,
                                 duration: const Duration(seconds: 2),
                               ),
@@ -200,7 +204,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 52, right: 10),
                           child: Text(
-                            "Skip",
+                            Translations.tr('skip', lang),
                             style: GoogleFonts.inter(
                               fontSize: 20,
                               color: Colors.white,
@@ -224,7 +228,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                   ),
                   const VerticalSpace(1.5),
                   Text(
-                    'Choose as many as you\'d like or skip for now',
+                    "${Translations.tr('choose_many', lang)} ${Translations.tr('or', lang)} ${Translations.tr('skip', lang)}",
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.7),
                       fontSize: 19,
@@ -281,7 +285,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                     alignment: Alignment.center,
                     children: [
                       CustomGeneralButton(
-                        text: "Start Exploring",
+                        text: Translations.tr('start_exploring', lang),
                         onTap: isLoading
                             ? null
                             : () async {
@@ -303,7 +307,7 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                            "Failed to save preferences: $e"),
+                                            Translations.tr('failed_save_preferences', lang) + e.toString()),
                                         backgroundColor: Colors.red,
                                         duration: const Duration(seconds: 2),
                                       ),
@@ -311,11 +315,11 @@ class _PreferenceThreeState extends State<PreferenceThree> {
                                   }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                       content: Text(
-                                          "Please Choose At Least One Option Or Skip."),
+                                          Translations.tr('please_choose_one_or_skip', lang)),
                                       backgroundColor: Colors.black,
-                                      duration: Duration(seconds: 2),
+                                      duration: const Duration(seconds: 2),
                                     ),
                                   );
                                 }

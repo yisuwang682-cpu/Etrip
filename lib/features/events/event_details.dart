@@ -1,14 +1,17 @@
-import 'package:egyptopia/core/mock_data.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
+import 'package:etrip/core/mock_data.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/constants.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EventDetails extends StatefulWidget {
   final Map<String, dynamic> event;
@@ -48,6 +51,7 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       backgroundColor: kSecondaryColor,
@@ -62,7 +66,7 @@ class _EventDetailsState extends State<EventDetails> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Event Details',
+                Translations.tr('event_details', lang),
                 style: TextStyle(
                   fontSize: SizeConfig.defaultSize! * 3.25,
                   fontWeight: FontWeight.bold,
@@ -87,7 +91,7 @@ class _EventDetailsState extends State<EventDetails> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
+                    return Center(child: Text('${Translations.tr('error', lang)}: ${snapshot.error}'));
                   }
 
                   final event = snapshot.data!;
@@ -138,7 +142,7 @@ class _EventDetailsState extends State<EventDetails> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Text(
-                                      event['event_type'],
+                                      localizedEventType(event['event_type'] ?? '', lang),
                                       style: GoogleFonts.inter(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
@@ -155,7 +159,7 @@ class _EventDetailsState extends State<EventDetails> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    event['event_name'],
+                                    localizedEventName(event, lang),
                                     style: GoogleFonts.inter(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
@@ -167,7 +171,7 @@ class _EventDetailsState extends State<EventDetails> {
                                       const Icon(Icons.location_on, size: 18),
                                       const HorizantalSpace(0.1),
                                       Text(
-                                        event['location'],
+                                        localizedCityName(event['location'] ?? '', lang),
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           color: const Color.fromARGB(
@@ -188,7 +192,7 @@ class _EventDetailsState extends State<EventDetails> {
                                       ),
                                       const Spacer(),
                                       Text(
-                                        'Price: ${event['ticket_price']} LE',
+                                        '${Translations.tr('price_label', lang)}${event['ticket_price']} LE',
                                         style: GoogleFonts.inter(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14,
@@ -229,14 +233,14 @@ class _EventDetailsState extends State<EventDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "About event",
+                              Translations.tr('about_event', lang),
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 6),
                             Text(
                               event['description'] ??
-                                  'No description available.',
+                                  Translations.tr('no_description', lang),
                               style: GoogleFonts.inter(color: Colors.grey[700]),
                             ),
                             const SizedBox(height: 12),
@@ -247,7 +251,7 @@ class _EventDetailsState extends State<EventDetails> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Organizer:',
+                                      Translations.tr('organizer', lang),
                                       style: GoogleFonts.inter(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
@@ -255,7 +259,7 @@ class _EventDetailsState extends State<EventDetails> {
                                     ),
                                     const SizedBox(height: 6),
                                     Text(
-                                      event['organizer'] ?? 'N/A',
+                                      event['organizer'] ?? Translations.tr('n_a', lang),
                                       style: GoogleFonts.inter(
                                         fontSize: 14,
                                         color: const Color.fromARGB(
@@ -266,11 +270,11 @@ class _EventDetailsState extends State<EventDetails> {
                                   ],
                                 ),
                                 CustomJoinButton(
-                                  text: "Contact Info",
+                                  text: Translations.tr('contact_info', lang),
                                   fontSize: 14,
                                   onTap: () async {
                                     final email = event['contact_info'] ??
-                                        'info@touregypt.gov.eg';
+                                        'info@travelchina.gov.cn';
                                     final Uri emailUri = Uri(
                                       scheme: 'mailto',
                                       path: email,
@@ -284,7 +288,7 @@ class _EventDetailsState extends State<EventDetails> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              "Location",
+                              Translations.tr('location', lang),
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold),
                             ),
@@ -306,7 +310,7 @@ class _EventDetailsState extends State<EventDetails> {
                               children: [
                                 Expanded(
                                   child: CustomJoinButton(
-                                    text: "Join event",
+                                    text: Translations.tr('join_event', lang),
                                     minimumSize: const Size(200, 45),
                                     onTap: () async {
                                       String registrationLink =

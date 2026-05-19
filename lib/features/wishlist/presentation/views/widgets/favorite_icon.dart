@@ -1,12 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/data/service/favorite_service.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/data/service/favorite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_bloc.dart';
-import 'package:egyptopia/features/Profile/bloc/user_state.dart';
+import 'package:etrip/features/Profile/bloc/user_bloc.dart';
+import 'package:etrip/features/Profile/bloc/user_state.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
 
 class FavoriteIcon extends StatefulWidget {
   final String id;
@@ -54,6 +56,7 @@ class FavoriteIcon extends StatefulWidget {
 class _FavoriteIconState extends State<FavoriteIcon> {
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     final key = '${widget.id}_${widget.type.name}';
 
     return ValueListenableBuilder(
@@ -68,8 +71,8 @@ class _FavoriteIconState extends State<FavoriteIcon> {
             if (userState is! UserLoaded) {
               // If you are not logged in
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('You must log in first to add to favorites'),
+                SnackBar(
+                  content: Text(Translations.tr('must_login_favorites', lang)),
                   backgroundColor: Colors.black87,
                 ),
               );
@@ -97,8 +100,8 @@ class _FavoriteIconState extends State<FavoriteIcon> {
               SnackBar(
                 content: Text(
                   isFav
-                      ? '${widget.title} has been removed from favorites'
-                      : '${widget.title} has been added to favorites',
+                      ? '${widget.title} ${Translations.tr('removed_from_favorites', lang)}'
+                      : '${widget.title} ${Translations.tr('added_to_favorites', lang)}',
                   style: GoogleFonts.playfairDisplay(color: Colors.white),
                 ),
                 backgroundColor: Colors.black87,

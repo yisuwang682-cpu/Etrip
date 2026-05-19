@@ -1,5 +1,5 @@
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';

@@ -1,5 +1,6 @@
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
-import 'package:egyptopia/features/auth/domain/respotireis/auth_repo.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/auth/domain/respotireis/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dartz/dartz.dart';
 
@@ -10,7 +11,7 @@ class AuthRepoImpl extends AuthRepo {
       final credential = await FirebaseAuth.instance.signInAnonymously();
       return Right(credential);
     } catch (e) {
-      return Left(Exception('Google sign-in unavailable in offline mode.'));
+      return Left(Exception(Translations.tr('google_unavailable', 'en')));
     }
   }
 
@@ -33,13 +34,13 @@ class AuthRepoImpl extends AuthRepo {
         return Right(credential);
       }
 
-      return Left(Exception("Sign up failed, Please try again."));
+      return Left(Exception(Translations.tr('sign_up_failed', 'en')));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         return Left(Exception(
-            '⚠️ There Is An Account Actually Associated With This Email.'));
+            Translations.tr('account_exists', 'en')));
       } else {
-        return Left(Exception(e.message ?? '⚠️ An error happened'));
+        return Left(Exception(e.message ?? Translations.tr('auth_error', 'en')));
       }
     } on Exception catch (e) {
       return Left(Exception(e.toString()));
@@ -59,14 +60,14 @@ class AuthRepoImpl extends AuthRepo {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
-          return Left(Exception('❌ No Account Found With This Email.'));
+          return Left(Exception(Translations.tr('no_account_found', 'en')));
         case 'wrong-password':
-          return Left(Exception('❌ The Password Is Incorrect.'));
+          return Left(Exception(Translations.tr('password_incorrect', 'en')));
         case 'invalid-email':
-          return Left(Exception('⚠️ The Email Address Is Badly Formatted.'));
+          return Left(Exception(Translations.tr('invalid_email', 'en')));
         case 'invalid-credential':
           return Left(Exception(
-              "❌ This Email Doesn't Exist or The Password Is Incorrect"));
+              Translations.tr('login_failed', 'en')));
         default:
           return Left(Exception('❗ Firebase error: ${e.code}'));
       }
@@ -80,12 +81,12 @@ class AuthRepoImpl extends AuthRepo {
       return const Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        return Left(Exception('⚠️ No Account Found With This Email!'));
+        return Left(Exception(Translations.tr('no_account_found', 'en')));
       } else {
-        return Left(Exception(e.message ?? '⚠️ An Error Occurred!'));
+        return Left(Exception(e.message ?? Translations.tr('auth_error', 'en')));
       }
     } catch (e) {
-      return Left(Exception('⚠️ An Error Occurred!'));
+      return Left(Exception(Translations.tr('auth_error', 'en')));
     }
   }
 
@@ -95,7 +96,7 @@ class AuthRepoImpl extends AuthRepo {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null || user.email == null) {
-        return Left(Exception("No user logged in"));
+        return Left(Exception(Translations.tr('no_user_logged_in', 'en')));
       }
       final cred = EmailAuthProvider.credential(
           email: user.email!, password: oldPassword);
@@ -104,9 +105,9 @@ class AuthRepoImpl extends AuthRepo {
       return const Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-        return Left(Exception("Old password is incorrect!"));
+        return Left(Exception(Translations.tr('old_password_incorrect', 'en')));
       }
-      return Left(Exception(e.message ?? "Error changing password"));
+      return Left(Exception(e.message ?? "${Translations.tr('error', 'en')} changing password"));
     } catch (e) {
       return Left(Exception(e.toString()));
     }

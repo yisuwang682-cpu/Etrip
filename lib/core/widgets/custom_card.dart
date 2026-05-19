@@ -1,4 +1,4 @@
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
 

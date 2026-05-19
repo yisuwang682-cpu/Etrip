@@ -1,5 +1,5 @@
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
 
 const _img = 'https://picsum.photos/seed';
 
@@ -8,295 +8,292 @@ const _img = 'https://picsum.photos/seed';
 final List<PlaceModel> mockPlaces = [
   PlaceModel(
     id: '1',
-    name: 'Pyramids of Giza',
-    profileImage: '$_img/pyramids/400/300',
+    name: 'Great Wall',
+    profileImage: '$_img/greatwall/400/300',
     carouselImages: [
-      '$_img/pyramids1/400/300',
-      '$_img/pyramids2/400/300',
-      '$_img/pyramids3/400/300',
+      '$_img/greatwall1/400/300',
+      '$_img/greatwall2/400/300',
+      '$_img/greatwall3/400/300',
     ],
     tourismType: 'Cultural and Historical Attractions',
     category: 'historical site',
-    cityName: 'Giza',
+    cityName: 'Beijing',
     rate: 4.9,
-    totalRates: 12500,
+    totalRates: 23500,
     description:
-        'The Pyramids of Giza are iconic ancient wonders of the world, built over 4,500 years ago. '
-        'They include the Great Pyramid of Khufu, the Pyramid of Khafre, and the Pyramid of Menkaure. '
-        'Visitors can explore the surrounding complex including the Great Sphinx.',
-    googleMapsLink: 'https://maps.google.com/?q=Pyramids+of+Giza',
+        'The Great Wall of China is one of the most iconic wonders of the world, stretching over 13,000 miles. '
+        'Built across multiple dynasties, it offers breathtaking views and a glimpse into China\'s ancient history.',
+    googleMapsLink: 'https://maps.google.com/?q=Great+Wall+of+China',
   ),
   PlaceModel(
     id: '2',
-    name: 'Egyptian Museum',
-    profileImage: '$_img/egyptianmuseum/400/300',
+    name: 'Forbidden City',
+    profileImage: '$_img/forbiddencity/400/300',
     carouselImages: [
-      '$_img/egyptianmuseum1/400/300',
-      '$_img/egyptianmuseum2/400/300',
+      '$_img/forbiddencity1/400/300',
+      '$_img/forbiddencity2/400/300',
     ],
     tourismType: 'Cultural and Historical Attractions',
-    category: 'museum',
-    cityName: 'Cairo',
-    rate: 4.6,
-    totalRates: 8700,
+    category: 'palace',
+    cityName: 'Beijing',
+    rate: 4.8,
+    totalRates: 18200,
     description:
-        'The Museum of Egyptian Antiquities in Tahrir Square houses an extensive collection '
-        'of ancient Egyptian artifacts, including the treasures of Tutankhamun\'s tomb.',
-    googleMapsLink: 'https://maps.google.com/?q=Egyptian+Museum+Cairo',
+        'The Forbidden City was the Chinese imperial palace from the Ming to the Qing dynasty. '
+        'It houses over 1 million artifacts and is the world\'s largest palace complex.',
+    googleMapsLink: 'https://maps.google.com/?q=Forbidden+City+Beijing',
   ),
   PlaceModel(
     id: '3',
-    name: 'Khan El Khalili',
-    profileImage: '$_img/khanelkhalili/400/300',
+    name: 'The Bund',
+    profileImage: '$_img/bund/400/300',
     carouselImages: [
-      '$_img/khanelkhalili1/400/300',
-      '$_img/khanelkhalili2/400/300',
+      '$_img/bund1/400/300',
+      '$_img/bund2/400/300',
     ],
     tourismType: 'Entertainment and Modern Attractions',
     category: 'shopping',
-    cityName: 'Cairo',
-    rate: 4.3,
-    totalRates: 5600,
+    cityName: 'Shanghai',
+    rate: 4.5,
+    totalRates: 15400,
     description:
-        'Khan El Khalili is a famous bazaar and souk in historic Cairo. '
-        'Established in 1382, it offers a mix of traditional crafts, jewelry, spices, '
-        'and souvenirs in its winding alleyways.',
-    googleMapsLink: 'https://maps.google.com/?q=Khan+El+Khalili',
+        'The Bund is Shanghai\'s iconic waterfront promenade, lined with colonial-era buildings '
+        'and modern skyscrapers. It offers spectacular views of the Huangpu River and Pudong skyline.',
+    googleMapsLink: 'https://maps.google.com/?q=The+Bund+Shanghai',
   ),
   PlaceModel(
     id: '4',
-    name: 'Mount Sinai',
-    profileImage: '$_img/mountsinai/400/300',
+    name: 'Leshan Giant Buddha',
+    profileImage: '$_img/leshan/400/300',
     carouselImages: [
-      '$_img/mountsinai1/400/300',
-      '$_img/mountsinai2/400/300',
+      '$_img/leshan1/400/300',
+      '$_img/leshan2/400/300',
     ],
     tourismType: 'Religious and Spiritual Attractions',
     category: 'historical site',
-    cityName: 'South Sinai',
+    cityName: 'Leshan',
     rate: 4.7,
-    totalRates: 4200,
+    totalRates: 8600,
     description:
-        'Mount Sinai is a sacred mountain where Moses is said to have received the Ten Commandments. '
-        'A popular pilgrimage site, it offers breathtaking sunrise views from the summit.',
-    googleMapsLink: 'https://maps.google.com/?q=Mount+Sinai',
+        'The Leshan Giant Buddha is a 71-meter tall stone statue carved into a cliff face. '
+        'Built during the Tang dynasty, it is the largest stone Buddha in the world.',
+    googleMapsLink: 'https://maps.google.com/?q=Leshan+Giant+Buddha',
   ),
   PlaceModel(
     id: '5',
-    name: 'Sharm El-Sheikh Beaches',
-    profileImage: '$_img/sharm/400/300',
+    name: 'Zhangjiajie National Forest',
+    profileImage: '$_img/zhangjiajie/400/300',
     carouselImages: [
-      '$_img/sharm1/400/300',
-      '$_img/sharm2/400/300',
+      '$_img/zhangjiajie1/400/300',
+      '$_img/zhangjiajie2/400/300',
     ],
     tourismType: 'Natural Attractions',
     category: 'historical site',
-    cityName: 'Sharm El-Sheikh',
+    cityName: 'Zhangjiajie',
     rate: 4.8,
-    totalRates: 9800,
+    totalRates: 12600,
     description:
-        'Sharm El-Sheikh is a world-renowned resort town on the Red Sea coast. '
-        'Famous for its crystal-clear waters, coral reefs, and vibrant marine life, '
-        'it is a paradise for snorkelers and divers.',
-    googleMapsLink: 'https://maps.google.com/?q=Sharm+El+Sheikh',
+        'Zhangjiajie National Forest Park is famous for its towering sandstone pillars, '
+        'which inspired the floating mountains in Avatar. It offers stunning hiking trails and glass bridges.',
+    googleMapsLink: 'https://maps.google.com/?q=Zhangjiajie+National+Forest',
   ),
   PlaceModel(
     id: '6',
-    name: 'Valley of the Kings',
-    profileImage: '$_img/valleykings/400/300',
+    name: 'Terracotta Warriors',
+    profileImage: '$_img/terracotta/400/300',
     carouselImages: [
-      '$_img/valleykings1/400/300',
-      '$_img/valleykings2/400/300',
+      '$_img/terracotta1/400/300',
+      '$_img/terracotta2/400/300',
     ],
     tourismType: 'Cultural and Historical Attractions',
-    category: 'historical site',
-    cityName: 'Luxor',
+    category: 'museum',
+    cityName: "Xi'an",
     rate: 4.8,
-    totalRates: 7200,
+    totalRates: 16800,
     description:
-        'The Valley of the Kings is a burial site for pharaohs of the New Kingdom, '
-        'including the famous tomb of Tutankhamun. Located on the west bank of the Nile in Luxor.',
-    googleMapsLink: 'https://maps.google.com/?q=Valley+of+the+Kings',
+        'The Terracotta Army is a collection of thousands of life-sized clay soldiers buried with Emperor Qin. '
+        'Discovered in 1974, it is considered the eighth wonder of the world.',
+    googleMapsLink: 'https://maps.google.com/?q=Terracotta+Warriors+Xian',
   ),
   PlaceModel(
     id: '7',
-    name: 'Abu Simbel Temples',
-    profileImage: '$_img/abusimbel/400/300',
+    name: 'West Lake',
+    profileImage: '$_img/westlake/400/300',
     carouselImages: [
-      '$_img/abusimbel1/400/300',
-      '$_img/abusimbel2/400/300',
+      '$_img/westlake1/400/300',
+      '$_img/westlake2/400/300',
     ],
-    tourismType: 'Cultural and Historical Attractions',
-    category: 'temple',
-    cityName: 'Aswan',
-    rate: 4.9,
-    totalRates: 6400,
+    tourismType: 'Natural Attractions',
+    category: 'garden',
+    cityName: 'Hangzhou',
+    rate: 4.7,
+    totalRates: 14500,
     description:
-        'The Abu Simbel temples are two massive rock-cut temples built by Ramesses II. '
-        'They were relocated in a remarkable UNESCO operation to save them from flooding.',
-    googleMapsLink: 'https://maps.google.com/?q=Abu+Simbel',
+        'West Lake is a UNESCO World Heritage site in Hangzhou, known for its natural beauty '
+        'and historic pagodas. It has inspired poets and artists for centuries.',
+    googleMapsLink: 'https://maps.google.com/?q=West+Lake+Hangzhou',
   ),
   PlaceModel(
     id: '8',
-    name: 'Al-Azhar Mosque',
-    profileImage: '$_img/alazhar/400/300',
+    name: 'Potala Palace',
+    profileImage: '$_img/potala/400/300',
     carouselImages: [
-      '$_img/alazhar1/400/300',
-      '$_img/alazhar2/400/300',
+      '$_img/potala1/400/300',
+      '$_img/potala2/400/300',
     ],
     tourismType: 'Religious and Spiritual Attractions',
-    category: 'mosque',
-    cityName: 'Cairo',
-    rate: 4.5,
-    totalRates: 3800,
+    category: 'palace',
+    cityName: 'Lhasa',
+    rate: 4.8,
+    totalRates: 9200,
     description:
-        'Al-Azhar Mosque is one of Cairo\'s oldest mosques, founded in 970 AD. '
-        'It is also the center of Al-Azhar University, one of the world\'s oldest universities.',
-    googleMapsLink: 'https://maps.google.com/?q=Al+Azhar+Mosque',
+        'The Potala Palace in Lhasa was the winter residence of the Dalai Lama. '
+        'This stunning 13-story palace features over 1,000 rooms with beautiful Tibetan Buddhist art.',
+    googleMapsLink: 'https://maps.google.com/?q=Potala+Palace+Lhasa',
   ),
   PlaceModel(
     id: '9',
-    name: 'White Desert',
-    profileImage: '$_img/whitedesert/400/300',
+    name: 'Li River',
+    profileImage: '$_img/liriver/400/300',
     carouselImages: [
-      '$_img/whitedesert1/400/300',
-      '$_img/whitedesert2/400/300',
+      '$_img/liriver1/400/300',
+      '$_img/liriver2/400/300',
     ],
     tourismType: 'Natural Attractions',
     category: 'historical site',
-    cityName: 'New Valley',
-    rate: 4.6,
-    totalRates: 2900,
+    cityName: 'Guilin',
+    rate: 4.7,
+    totalRates: 11300,
     description:
-        'The White Desert in Egypt features stunning chalk rock formations created by sandstorms. '
-        'The surreal landscape looks like a snow-covered wonderland in the middle of the desert.',
-    googleMapsLink: 'https://maps.google.com/?q=White+Desert+Egypt',
+        'The Li River cruise from Guilin to Yangshuo offers some of China\'s most spectacular scenery, '
+        'with dramatic karst mountains reflected in the emerald water.',
+    googleMapsLink: 'https://maps.google.com/?q=Li+River+Guilin',
   ),
   PlaceModel(
     id: '10',
-    name: 'Citadel of Saladin',
-    profileImage: '$_img/citadel/400/300',
+    name: 'Summer Palace',
+    profileImage: '$_img/summerpalace/400/300',
     carouselImages: [
-      '$_img/citadel1/400/300',
-      '$_img/citadel2/400/300',
+      '$_img/summerpalace1/400/300',
+      '$_img/summerpalace2/400/300',
     ],
     tourismType: 'Cultural and Historical Attractions',
-    category: 'fortress',
-    cityName: 'Cairo',
-    rate: 4.4,
-    totalRates: 5100,
+    category: 'palace',
+    cityName: 'Beijing',
+    rate: 4.6,
+    totalRates: 13100,
     description:
-        'The Citadel of Saladin is a medieval Islamic fortification in Cairo. '
-        'It offers panoramic views of the city and houses several museums and mosques.',
-    googleMapsLink: 'https://maps.google.com/?q=Citadel+of+Saladin',
+        'The Summer Palace is a magnificent ensemble of lakes, gardens and palaces in Beijing. '
+        'It served as a royal retreat and is a masterpiece of Chinese landscape design.',
+    googleMapsLink: 'https://maps.google.com/?q=Summer+Palace+Beijing',
   ),
   PlaceModel(
     id: '11',
-    name: 'Hurghada Marina',
-    profileImage: '$_img/hurghada/400/300',
+    name: 'Shanghai Disneyland',
+    profileImage: '$_img/disney/400/300',
     carouselImages: [
-      '$_img/hurghada1/400/300',
-      '$_img/hurghada2/400/300',
+      '$_img/disney1/400/300',
+      '$_img/disney2/400/300',
     ],
     tourismType: 'Entertainment and Modern Attractions',
     category: 'shopping',
-    cityName: 'Hurghada',
-    rate: 4.3,
-    totalRates: 4500,
+    cityName: 'Shanghai',
+    rate: 4.6,
+    totalRates: 17800,
     description:
-        'Hurghada Marina is a modern waterfront destination with restaurants, cafes, '
-        'shops, and nightlife. It\'s the perfect spot for a relaxing evening by the Red Sea.',
-    googleMapsLink: 'https://maps.google.com/?q=Hurghada+Marina',
+        'Shanghai Disneyland is a world-class theme park with unique attractions blending '
+        'Disney magic with Chinese culture, including the Enchanted Storybook Castle.',
+    googleMapsLink: 'https://maps.google.com/?q=Shanghai+Disneyland',
   ),
   PlaceModel(
     id: '12',
-    name: 'Alexandria Library',
-    profileImage: '$_img/alexlibrary/400/300',
+    name: 'Chengdu Panda Base',
+    profileImage: '$_img/panda/400/300',
     carouselImages: [
-      '$_img/alexlibrary1/400/300',
-      '$_img/alexlibrary2/400/300',
+      '$_img/panda1/400/300',
+      '$_img/panda2/400/300',
     ],
-    tourismType: 'Cultural and Historical Attractions',
-    category: 'library',
-    cityName: 'Alexandria',
-    rate: 4.5,
-    totalRates: 6100,
+    tourismType: 'Entertainment and Modern Attractions',
+    category: 'garden',
+    cityName: 'Chengdu',
+    rate: 4.8,
+    totalRates: 14100,
     description:
-        'The Bibliotheca Alexandrina is a modern revival of the ancient Library of Alexandria. '
-        'It serves as a cultural center with museums, galleries, and a vast reading hall.',
-    googleMapsLink: 'https://maps.google.com/?q=Bibliotheca+Alexandrina',
+        'The Chengdu Research Base of Giant Panda Breeding lets visitors see giant pandas up close '
+        'in a natural setting. It\'s one of the most popular wildlife attractions in China.',
+    googleMapsLink: 'https://maps.google.com/?q=Chengdu+Panda+Base',
   ),
   PlaceModel(
     id: '13',
-    name: 'St. Catherine Monastery',
-    profileImage: '$_img/stcatherine/400/300',
+    name: 'Shaolin Temple',
+    profileImage: '$_img/shaolin/400/300',
     carouselImages: [
-      '$_img/stcatherine1/400/300',
-      '$_img/stcatherine2/400/300',
+      '$_img/shaolin1/400/300',
+      '$_img/shaolin2/400/300',
     ],
     tourismType: 'Religious and Spiritual Attractions',
-    category: 'historical site',
-    cityName: 'South Sinai',
-    rate: 4.7,
-    totalRates: 3300,
+    category: 'temple',
+    cityName: 'Zhengzhou',
+    rate: 4.5,
+    totalRates: 7800,
     description:
-        'St. Catherine\'s Monastery is one of the oldest working Christian monasteries in the world. '
-        'Located at the foot of Mount Sinai, it is a UNESCO World Heritage site.',
-    googleMapsLink: 'https://maps.google.com/?q=St+Catherine+Monastery',
+        'Shaolin Temple is the birthplace of Chan (Zen) Buddhism and Shaolin Kung Fu. '
+        'Located at Songshan Mountain, it attracts martial arts enthusiasts from around the world.',
+    googleMapsLink: 'https://maps.google.com/?q=Shaolin+Temple',
   ),
   PlaceModel(
     id: '14',
-    name: 'Siwa Oasis',
-    profileImage: '$_img/siwa/400/300',
+    name: 'Yellow Mountain',
+    profileImage: '$_img/huangshan/400/300',
     carouselImages: [
-      '$_img/siwa1/400/300',
-      '$_img/siwa2/400/300',
+      '$_img/huangshan1/400/300',
+      '$_img/huangshan2/400/300',
     ],
     tourismType: 'Natural Attractions',
     category: 'historical site',
-    cityName: 'Siwah',
-    rate: 4.4,
-    totalRates: 2100,
+    cityName: 'Huangshan',
+    rate: 4.8,
+    totalRates: 10500,
     description:
-        'Siwa Oasis is a remote desert oasis known for its natural springs, ancient ruins, '
-        'and unique Berber culture. The Shali Fortress and Cleopatra\'s Bath are must-sees.',
-    googleMapsLink: 'https://maps.google.com/?q=Siwa+Oasis',
+        'Huangshan, the Yellow Mountain, is renowned for its magnificent granite peaks, '
+        'hot springs, and seas of clouds. It\'s one of China\'s most famous scenic areas.',
+    googleMapsLink: 'https://maps.google.com/?q=Yellow+Mountain+Huangshan',
   ),
   PlaceModel(
     id: '15',
-    name: 'Dahab Lagoon',
-    profileImage: '$_img/dahab/400/300',
+    name: 'Mogao Caves',
+    profileImage: '$_img/mogao/400/300',
     carouselImages: [
-      '$_img/dahab1/400/300',
-      '$_img/dahab2/400/300',
+      '$_img/mogao1/400/300',
+      '$_img/mogao2/400/300',
     ],
-    tourismType: 'Natural Attractions',
-    category: 'historical site',
-    cityName: 'Dahab',
-    rate: 4.5,
-    totalRates: 3600,
+    tourismType: 'Cultural and Historical Attractions',
+    category: 'museum',
+    cityName: 'Dunhuang',
+    rate: 4.6,
+    totalRates: 6400,
     description:
-        'Dahab is a laid-back beach town on the Red Sea coast, famous for windsurfing, '
-        'kitesurfing, and the Blue Hole diving site. It\'s a favorite among backpackers.',
-    googleMapsLink: 'https://maps.google.com/?q=Dahab+Egypt',
+        'The Mogao Caves are a UNESCO World Heritage site featuring hundreds of Buddhist cave temples '
+        'filled with exquisite murals and sculptures spanning over 1,000 years.',
+    googleMapsLink: 'https://maps.google.com/?q=Mogao+Caves+Dunhuang',
   ),
   PlaceModel(
     id: '16',
-    name: 'Luxor Temple',
-    profileImage: '$_img/luxtemple/400/300',
+    name: 'Victoria Harbour',
+    profileImage: '$_img/victoria/400/300',
     carouselImages: [
-      '$_img/luxtemple1/400/300',
-      '$_img/luxtemple2/400/300',
+      '$_img/victoria1/400/300',
+      '$_img/victoria2/400/300',
     ],
-    tourismType: 'Cultural and Historical Attractions',
-    category: 'temple',
-    cityName: 'Luxor',
+    tourismType: 'Entertainment and Modern Attractions',
+    category: 'shopping',
+    cityName: 'Hong Kong',
     rate: 4.7,
-    totalRates: 5900,
+    totalRates: 19200,
     description:
-        'Luxor Temple is a stunning ancient Egyptian temple complex on the east bank of the Nile. '
-        'It was the center of the Opet Festival and is beautifully illuminated at night.',
-    googleMapsLink: 'https://maps.google.com/?q=Luxor+Temple',
+        'Victoria Harbour is a major attraction in Hong Kong, famous for its stunning skyline '
+        'and the Symphony of Lights show. The Star Ferry offers a classic harbour crossing.',
+    googleMapsLink: 'https://maps.google.com/?q=Victoria+Harbour+Hong+Kong',
   ),
 ];
 
@@ -305,58 +302,58 @@ final List<PlaceModel> mockPlaces = [
 final List<Map<String, dynamic>> mockEvents = [
   {
     'event_id': '1',
-    'event_name': 'Cairo International Film Festival',
-    'Image': '$_img/filmfestival/400/300',
-    'event_date': '15 Dec 2026',
+    'event_name': 'Shanghai International Film Festival',
+    'Image': '$_img/shanghaifilm/400/300',
+    'event_date': '15 Jun 2026',
     'event_type': 'Cultural',
-    'city_name': 'Cairo',
+    'city_name': 'Shanghai',
     'event_time': '7:00 PM',
-    'ticket_price': '200',
-    'registration_link': 'https://example.com/filmfest',
+    'ticket_price': '280',
+    'registration_link': 'https://example.com/shanghaifilm',
   },
   {
     'event_id': '2',
-    'event_name': 'Sharm El-Sheikh Jazz Festival',
-    'Image': '$_img/jazzfest/400/300',
-    'event_date': '20-22 Jan 2027',
+    'event_name': 'Beijing Jazz Festival',
+    'Image': '$_img/beijingjazz/400/300',
+    'event_date': '20-22 Jul 2026',
     'event_type': 'Music',
-    'city_name': 'Sharm El-Sheikh',
+    'city_name': 'Beijing',
     'event_time': '6:00 PM',
-    'ticket_price': '350',
-    'registration_link': 'https://example.com/jazzfest',
+    'ticket_price': '380',
+    'registration_link': 'https://example.com/beijingjazz',
   },
   {
     'event_id': '3',
-    'event_name': 'Luxor Heritage Festival',
-    'Image': '$_img/heritagefest/400/300',
-    'event_date': '10 Feb 2027',
-    'event_type': 'Cultural',
-    'city_name': 'Luxor',
-    'event_time': '9:00 AM',
-    'ticket_price': '150',
-    'registration_link': 'https://example.com/heritage',
+    'event_name': 'Chengdu Food Festival',
+    'Image': '$_img/chengdufood/400/300',
+    'event_date': '10 Aug 2026',
+    'event_type': 'Food',
+    'city_name': 'Chengdu',
+    'event_time': '10:00 AM',
+    'ticket_price': '120',
+    'registration_link': 'https://example.com/chengdufood',
   },
   {
     'event_id': '4',
-    'event_name': 'Alexandria Book Fair',
-    'Image': '$_img/bookfair/400/300',
-    'event_date': '25 Mar 2027',
-    'event_type': 'Educational',
-    'city_name': 'Alexandria',
-    'event_time': '10:00 AM',
-    'ticket_price': 'Free',
-    'registration_link': 'https://example.com/bookfair',
+    'event_name': 'Guilin International Music Festival',
+    'Image': '$_img/guilinmusic/400/300',
+    'event_date': '15 Sep 2026',
+    'event_type': 'Music',
+    'city_name': 'Guilin',
+    'event_time': '4:00 PM',
+    'ticket_price': '200',
+    'registration_link': 'https://example.com/guilinmusic',
   },
   {
     'event_id': '5',
-    'event_name': 'Hurghada Food Festival',
-    'Image': '$_img/foodfest/400/300',
-    'event_date': '5 Apr 2027',
-    'event_type': 'Food',
-    'city_name': 'Hurghada',
-    'event_time': '12:00 PM',
-    'ticket_price': '250',
-    'registration_link': 'https://example.com/foodfest',
+    'event_name': 'Xi\'an Cultural Heritage Expo',
+    'Image': '$_img/xianexpo/400/300',
+    'event_date': '5 Oct 2026',
+    'event_type': 'Cultural',
+    'city_name': "Xi'an",
+    'event_time': '9:00 AM',
+    'ticket_price': '150',
+    'registration_link': 'https://example.com/xianexpo',
   },
 ];
 
@@ -365,69 +362,69 @@ final List<Map<String, dynamic>> mockEvents = [
 final List<Map<String, dynamic>> mockActivities = [
   {
     'id': '1',
-    'title': 'Red Sea Snorkeling Adventure',
-    'Image': '$_img/snorkeling/400/300',
-    'activity_type': 'Diving',
-    'city_name': 'Hurghada',
-    'price_before': '1500',
-    'price_after': '900',
+    'title': 'Li River Bamboo Rafting',
+    'Image': '$_img/bambooraft/400/300',
+    'activity_type': 'Safari',
+    'city_name': 'Guilin',
+    'price_before': '800',
+    'price_after': '500',
     'rating': '4.8',
-    'link': 'https://example.com/snorkel',
+    'link': 'https://example.com/liriver',
   },
   {
     'id': '2',
-    'title': 'Hot Air Balloon over Luxor',
-    'Image': '$_img/balloon/400/300',
+    'title': 'Hot Air Balloon over Yangshuo',
+    'Image': '$_img/yangshuoballoon/400/300',
     'activity_type': 'Balloon Tours',
-    'city_name': 'Luxor',
-    'price_before': '3000',
-    'price_after': '2200',
+    'city_name': 'Yangshuo',
+    'price_before': '1500',
+    'price_after': '980',
     'rating': '4.9',
-    'link': 'https://example.com/balloon',
+    'link': 'https://example.com/yangshuo',
   },
   {
     'id': '3',
-    'title': 'Camel Ride at the Pyramids',
-    'Image': '$_img/camelride/400/300',
-    'activity_type': 'Camel Tours',
-    'city_name': 'Giza',
-    'price_before': '800',
-    'price_after': '500',
-    'rating': '4.5',
-    'link': 'https://example.com/camel',
+    'title': 'Great Wall Hiking Adventure',
+    'Image': '$_img/greatwallhike/400/300',
+    'activity_type': 'Safari',
+    'city_name': 'Beijing',
+    'price_before': '600',
+    'price_after': '350',
+    'rating': '4.7',
+    'link': 'https://example.com/greatwallhike',
   },
   {
     'id': '4',
-    'title': 'Safari in the White Desert',
-    'Image': '$_img/safari/400/300',
+    'title': 'Huangshan Mountain Trek',
+    'Image': '$_img/huangshantrek/400/300',
     'activity_type': 'Safari',
-    'city_name': 'New Valley',
-    'price_before': '2500',
-    'price_after': '1800',
-    'rating': '4.7',
-    'link': 'https://example.com/safari',
+    'city_name': 'Huangshan',
+    'price_before': '1200',
+    'price_after': '800',
+    'rating': '4.8',
+    'link': 'https://example.com/huangshan',
   },
   {
     'id': '5',
-    'title': 'Swimming with Dolphins in Sharm',
-    'Image': '$_img/dolphins/400/300',
+    'title': 'Panda Volunteering in Chengdu',
+    'Image': '$_img/pandavolunteer/400/300',
     'activity_type': 'Swimming With Dolphins',
-    'city_name': 'Sharm El-Sheikh',
-    'price_before': '2000',
-    'price_after': '1200',
-    'rating': '4.6',
-    'link': 'https://example.com/dolphins',
+    'city_name': 'Chengdu',
+    'price_before': '1000',
+    'price_after': '600',
+    'rating': '4.9',
+    'link': 'https://example.com/pandavolunteer',
   },
   {
     'id': '6',
-    'title': 'Submarine Tour in Hurghada',
-    'Image': '$_img/submarine/400/300',
-    'activity_type': 'Submarine Tours',
-    'city_name': 'Hurghada',
-    'price_before': '1800',
-    'price_after': '1400',
-    'rating': '4.4',
-    'link': 'https://example.com/submarine',
+    'title': 'Zhangjiajie Glass Bridge Walk',
+    'Image': '$_img/glassbridge/400/300',
+    'activity_type': 'Balloon Tours',
+    'city_name': 'Zhangjiajie',
+    'price_before': '500',
+    'price_after': '300',
+    'rating': '4.6',
+    'link': 'https://example.com/glassbridge',
   },
 ];
 
@@ -435,18 +432,18 @@ final List<Map<String, dynamic>> mockActivities = [
 
 final EgyptopiaUser mockUser = EgyptopiaUser(
   id: 'mock-user-001',
-  name: 'Ahmed Hassan',
-  email: 'ahmed@example.com',
-  country: 'Egypt',
+  name: 'Zhang Wei',
+  email: 'zhangwei@example.com',
+  country: 'China',
   dateOfBirth: '1998-05-15',
   gender: 'male',
   profileImg: null,
-  preferredCategories: ['museum', 'historical site', 'temple'],
+  preferredCategories: ['museum', 'historical site', 'palace'],
   preferredTourismTypes: [
     'Cultural and Historical Attractions',
     'Natural Attractions',
   ],
-  preferredCities: ['Cairo', 'Luxor', 'Aswan'],
+  preferredCities: ['Beijing', 'Shanghai', "Xi'an"],
 );
 
 // ============ Mock Itinerary Helpers ============
@@ -467,4 +464,188 @@ Map<int, List<PlaceModel>> getMockItineraryPlan(int noOfDays) {
     }
   }
   return plan;
+}
+
+/// Chinese descriptions for mock places, keyed by place ID.
+final Map<String, String> placeDescriptionsZh = {
+  '1': '中国长城是世界最著名的奇迹之一，全长超过13,000英里。'
+      '历经多个朝代修建，它提供了令人叹为观止的景色，让人一窥中国古代历史。',
+  '2': '故宫是中国明清两代的皇家宫殿。'
+      '它收藏了超过100万件文物，是世界上最大的宫殿建筑群。',
+  '3': '外滩是上海标志性的滨江长廊，两旁排列着殖民时期的建筑'
+      '和现代摩天大楼。可以欣赏到黄浦江和浦东天际线的壮观景色。',
+  '4': '乐山大佛是一尊高达71米的石雕佛像，雕刻在悬崖峭壁上。'
+      '建于唐代，是世界上最大的石刻佛像。',
+  '5': '张家界国家森林公园以其高耸的砂岩柱而闻名，'
+      '这些石柱曾是电影《阿凡达》中悬浮山的灵感来源。这里有绝佳的徒步路线和玻璃桥。',
+  '6': '兵马俑是成千上万等身大小的陶俑，与秦始皇一同埋葬。'
+      '于1974年被发现，被誉为世界第八大奇迹。',
+  '7': '西湖是杭州的一处联合国教科文组织世界遗产，以其自然美景'
+      '和历史悠久的宝塔而闻名。数百年来一直激发着诗人和艺术家的灵感。',
+  '8': '拉萨的布达拉宫曾是达赖喇嘛的冬季宫殿。'
+      '这座令人惊叹的13层宫殿拥有超过1,000个房间，装饰着精美的藏传佛教艺术品。',
+  '9': '从桂林到阳朔的漓江游船展现了中国最壮观的景色，'
+      '翠绿的江面倒映着奇特的喀斯特山峰。',
+  '10': '颐和园是北京一处集湖泊、园林和宫殿于一体的宏伟建筑群。'
+      '它曾是皇家避暑胜地，是中国园林设计的杰作。',
+  '11': '上海迪士尼乐园是世界级主题公园，拥有融合迪士尼魔法'
+      '与中国文化的独特景点，包括奇幻童话城堡。',
+  '12': '成都大熊猫繁育研究基地让游客在自然环境中近距离观赏大熊猫。'
+      '它是中国最受欢迎的野生动物景点之一。',
+  '13': '少林寺是禅宗佛教和少林功夫的发源地。'
+      '位于嵩山，吸引着来自世界各地的武术爱好者。',
+  '14': '黄山以其壮丽的花岗岩山峰、温泉和云海而闻名。'
+      '它是中国最著名的风景区之一。',
+  '15': '莫高窟是联合国教科文组织世界遗产，拥有数百个佛教石窟寺，'
+      '内有精美的壁画和雕塑，跨越一千多年。',
+  '16': '维多利亚港是香港的主要景点，以其 stunning 的天际线'
+      '和幻彩咏香江灯光秀而闻名。天星小轮提供经典的海港渡轮体验。',
+};
+
+// ============ Chinese Translations for Mock Data ============
+
+/// Chinese place names keyed by place ID.
+final Map<String, String> placeNamesZh = {
+  '1': '长城',
+  '2': '故宫',
+  '3': '外滩',
+  '4': '乐山大佛',
+  '5': '张家界国家森林公园',
+  '6': '兵马俑',
+  '7': '西湖',
+  '8': '布达拉宫',
+  '9': '漓江',
+  '10': '颐和园',
+  '11': '上海迪士尼乐园',
+  '12': '成都大熊猫基地',
+  '13': '少林寺',
+  '14': '黄山',
+  '15': '莫高窟',
+  '16': '维多利亚港',
+};
+
+/// Chinese city names keyed by English name.
+final Map<String, String> cityNamesZh = {
+  'Beijing': '北京',
+  'Shanghai': '上海',
+  'Leshan': '乐山',
+  'Zhangjiajie': '张家界',
+  "Xi'an": '西安',
+  'Hangzhou': '杭州',
+  'Lhasa': '拉萨',
+  'Guilin': '桂林',
+  'Huangshan': '黄山',
+  'Dunhuang': '敦煌',
+  'Hong Kong': '香港',
+  'Chengdu': '成都',
+  'Zhengzhou': '郑州',
+  'Yangshuo': '阳朔',
+};
+
+/// Chinese event names keyed by event_id.
+final Map<String, String> eventNamesZh = {
+  '1': '上海国际电影节',
+  '2': '北京爵士音乐节',
+  '3': '成都美食节',
+  '4': '桂林国际音乐节',
+  '5': "西安文化遗产博览会",
+};
+
+/// Chinese activity titles keyed by activity id.
+final Map<String, String> activityTitlesZh = {
+  '1': '漓江竹筏漂流',
+  '2': '阳朔热气球之旅',
+  '3': '长城徒步探险',
+  '4': '黄山登山之旅',
+  '5': '成都大熊猫志愿者',
+  '6': '张家界玻璃桥漫步',
+};
+
+/// Chinese event types.
+final Map<String, String> eventTypesZh = {
+  'Cultural': '文化',
+  'Music': '音乐',
+  'Food': '美食',
+};
+
+/// Chinese activity types.
+final Map<String, String> activityTypesZh = {
+  'Safari': '探险',
+  'Balloon Tours': '热气球',
+  'Swimming With Dolphins': '与海豚同游',
+};
+
+/// Chinese tourism types keyed by English value.
+final Map<String, String> tourismTypesZh = {
+  'Cultural and Historical Attractions': '文化与历史景点',
+  'Natural Attractions': '自然景观',
+  'Entertainment and Modern Attractions': '娱乐与现代景点',
+  'Religious and Spiritual Attractions': '宗教与精神景点',
+  'Medical Attractions': '医疗旅游',
+};
+
+/// Chinese category names keyed by English category value.
+final Map<String, String> categoriesZh = {
+  'library': '图书馆',
+  'museum': '博物馆',
+  'theater': '剧院',
+  'garden': '园林',
+  'fortress': '堡垒',
+  'mosque': '清真寺',
+  'tower': '塔',
+  'palace': '宫殿',
+  'tomb': '陵墓',
+  'shopping': '购物',
+  'zoo': '动物园',
+  'synagogue': '犹太教堂',
+  'historical site': '历史遗址',
+  'temple': '寺庙',
+  'aquarium': '水族馆',
+  'church': '教堂',
+};
+
+// ============ Helper Functions ============
+
+String localizedPlaceName(PlaceModel place, String lang) {
+  if (lang == 'zh') return placeNamesZh[place.id] ?? place.name;
+  return place.name;
+}
+
+String localizedCityName(String cityName, String lang) {
+  if (lang == 'zh') return cityNamesZh[cityName] ?? cityName;
+  return cityName;
+}
+
+String localizedTourismType(String tourismType, String lang) {
+  if (lang == 'zh') return tourismTypesZh[tourismType] ?? tourismType;
+  return tourismType;
+}
+
+String localizedCategory(String category, String lang) {
+  if (lang == 'zh') return categoriesZh[category] ?? category;
+  return category;
+}
+
+String localizedEventName(Map<String, dynamic> event, String lang) {
+  if (lang == 'zh') {
+    return eventNamesZh[event['event_id']?.toString()] ?? event['event_name'] ?? '';
+  }
+  return event['event_name'] ?? '';
+}
+
+String localizedEventType(String type, String lang) {
+  if (lang == 'zh') return eventTypesZh[type] ?? type;
+  return type;
+}
+
+String localizedActivityTitle(Map<String, dynamic> activity, String lang) {
+  if (lang == 'zh') {
+    return activityTitlesZh[activity['id']?.toString()] ?? activity['title'] ?? '';
+  }
+  return activity['title'] ?? '';
+}
+
+String localizedActivityType(String type, String lang) {
+  if (lang == 'zh') return activityTypesZh[type] ?? type;
+  return type;
 }

@@ -1,9 +1,12 @@
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
 
 class ChatDetails extends StatefulWidget {
   const ChatDetails({super.key});
@@ -31,13 +34,14 @@ class _ChatDetailsState extends State<ChatDetails> {
     // Mock response delay
     await Future.delayed(const Duration(milliseconds: 800));
 
+    final lang = context.read<LocaleCubit>().state.languageCode;
     final mockResponses = [
-      'You can visit the Pyramids of Giza, the Egyptian Museum, and Khan El Khalili in Cairo.',
-      'The best time to visit Egypt is from October to April when the weather is mild.',
-      'Absolutely! Luxor and Aswan are must-visit destinations with amazing temples.',
-      'I recommend trying Koshari, Ful Medames, and fresh seafood in Alexandria.',
-      'You can book a Nile cruise between Luxor and Aswan for a wonderful experience.',
-      'Sharm El-Sheikh and Hurghada are perfect for diving and snorkeling!',
+      Translations.tr('chat_response_1', lang),
+      Translations.tr('chat_response_2', lang),
+      Translations.tr('chat_response_3', lang),
+      Translations.tr('chat_response_4', lang),
+      Translations.tr('chat_response_5', lang),
+      Translations.tr('chat_response_6', lang),
     ];
 
     final reply = mockResponses[userMessage.length % mockResponses.length];

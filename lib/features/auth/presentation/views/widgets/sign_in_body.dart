@@ -1,12 +1,15 @@
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/build_social_icon.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/custom_fields.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/auth/data/logic/sign_in_controller.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/build_social_icon.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_fields.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/auth/data/logic/sign_in_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,6 +32,7 @@ class _SignInBodyState extends State<SignInBody> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return AbsorbPointer(
       absorbing: _loading,
       child: SingleChildScrollView(
@@ -42,7 +46,7 @@ class _SignInBodyState extends State<SignInBody> {
                 height: SizeConfig.defaultSize! * 10,
               ),
               Text(
-                "Egyptopia",
+                Translations.tr('app_name', lang),
                 style: TextStyle(
                   fontSize: SizeConfig.defaultSize! * 3,
                   color: Colors.white,
@@ -69,26 +73,26 @@ class _SignInBodyState extends State<SignInBody> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(" Sign in",
+                      Text(" ${Translations.tr('sign_in', lang)}",
                           style: GoogleFonts.imFellFrenchCanon(
                               fontSize: 30, fontWeight: FontWeight.w500)),
                       const VerticalSpace(2),
                       CustomInputField(
-                        label: "Email",
-                        hint: "Enter Your Email",
+                        label: Translations.tr('email', lang),
+                        hint: Translations.tr('enter_your_email', lang),
                         inputType: TextInputType.emailAddress,
                         controller: _controller.emailController,
                       ),
                       const VerticalSpace(1.5),
                       CustomInputField(
-                        label: "Password",
-                        hint: "Enter Your Password",
+                        label: Translations.tr('password', lang),
+                        hint: Translations.tr('enter_your_password', lang),
                         isPassword: true,
                         controller: _controller.passwordController,
                       ),
                       const VerticalSpace(2),
                       CustomGeneralButton(
-                        text: _loading ? "Processing..." : "Sign in",
+                        text: _loading ? Translations.tr('loading', lang) : Translations.tr('sign_in', lang),
                         onTap: ()=> _controller.signIn(context,  (isLoading) {
                     setState(() {
                       _loading = isLoading;
@@ -105,7 +109,7 @@ class _SignInBodyState extends State<SignInBody> {
                             GoRouter.of(context).push(AppRouter.kForgetPassword);
                           },
                           child: Text(
-                            "Forgot password?",
+                            Translations.tr('forget_password', lang),
                             style: GoogleFonts.inter(
                               decoration: TextDecoration.underline,
                               decorationColor: Colors.grey,
@@ -127,7 +131,7 @@ class _SignInBodyState extends State<SignInBody> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                              "OR",
+                              Translations.tr('or', lang),
                               style: GoogleFonts.inter(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -164,12 +168,12 @@ class _SignInBodyState extends State<SignInBody> {
                               .pushReplacement(AppRouter.kSignUp),
                           child: RichText(
                             text: TextSpan(
-                              text: "Don't have an account? ",
+                              text: "${Translations.tr('dont_have_account', lang)} ",
                               style: GoogleFonts.inter(
                                   fontSize: 16, color: Colors.grey),
                               children: [
                                 TextSpan(
-                                  text: "Sign up",
+                                  text: Translations.tr('sign_up', lang),
                                   style: GoogleFonts.inter(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

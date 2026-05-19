@@ -1,4 +1,4 @@
-import 'package:egyptopia/features/auth/data/models/egyptopia_user.dart';
+import 'package:etrip/features/auth/data/models/egyptopia_user.dart';
 
 abstract class UserState {}
 

@@ -1,12 +1,15 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/search/presentation/widgets/search_result_card.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/search/presentation/widgets/search_result_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/features/search/data/search_item.dart';
-import 'package:egyptopia/features/search/data/unified_search_service.dart';
-import 'package:egyptopia/features/places/data/models/place_model.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
+import 'package:etrip/features/search/data/search_item.dart';
+import 'package:etrip/features/search/data/unified_search_service.dart';
+import 'package:etrip/features/places/data/models/place_model.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UnifiedSearchScreen extends StatefulWidget {
   final Future<List<PlaceModel>> Function() fetchPlaces;
@@ -86,6 +89,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       backgroundColor: kSecondaryColor,
@@ -111,7 +115,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                     hintStyle: GoogleFonts.imFellFrenchCanonSc(
                       color: const Color(0xFF7D848D),
                     ),
-                    hintText: "Search Places, Events, Activities...",
+                    hintText: Translations.tr('search_hint', lang),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 13),
@@ -130,19 +134,19 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text("Error loading data"),
+                          Text(Translations.tr('error_loading_data', lang)),
                           TextButton(
                             onPressed: _fetchAllData,
-                            child: const Text("Retry"),
+                            child: Text(Translations.tr('retry', lang)),
                           )
                         ],
                       ),
                     );
                   }
                   if (_query.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: Text(
-                        "Start typing to search...",
+                        Translations.tr('start_typing', lang),
                         style: TextStyle(color: Colors.black, fontSize: 18),
                       ),
                     );
@@ -153,9 +157,9 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                       (_results["activities"]?.isEmpty ?? true);
 
                   if (nothingFound) {
-                    return const Center(
+                    return Center(
                       child: Text(
-                        "No Results Found",
+                        Translations.tr('no_results', lang),
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
                     );
@@ -171,7 +175,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                           padding: const EdgeInsets.only(
                               left: 12, bottom: 4, top: 12),
                           child: Text(
-                            "Places",
+                            Translations.tr('places_section', lang),
                             style: GoogleFonts.merriweather(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -196,7 +200,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                           padding: const EdgeInsets.only(
                               left: 12, bottom: 4, top: 12),
                           child: Text(
-                            "Events",
+                            Translations.tr('events_section', lang),
                             style: GoogleFonts.merriweather(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -221,7 +225,7 @@ class _UnifiedSearchScreenState extends State<UnifiedSearchScreen> {
                           padding: const EdgeInsets.only(
                               left: 12, bottom: 4, top: 12),
                           child: Text(
-                            "Activities",
+                            Translations.tr('activities_section', lang),
                             style: GoogleFonts.merriweather(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

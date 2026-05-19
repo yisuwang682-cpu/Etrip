@@ -1,12 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/assets.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/auth/data/egyptopia_api_service.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/assets.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/auth/data/egyptopia_api_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -81,9 +84,10 @@ class _PreferenceOneState extends State<PreferenceOne> {
         });
       }
     } catch (e) {
+      final lang = context.read<LocaleCubit>().state.languageCode;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Failed to load preferences: $e"),
+          content: Text(Translations.tr('failed_load_preferences', lang) + e.toString()),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 2),
         ),
@@ -97,6 +101,7 @@ class _PreferenceOneState extends State<PreferenceOne> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       gradientStops: const [0.1, 0.9],
       backgroundColor: kSecondaryColor,
@@ -110,7 +115,7 @@ class _PreferenceOneState extends State<PreferenceOne> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'How do you want to \nspend your time?',
+                    Translations.tr('how_spend_time', lang),
                     style: TextStyle(
                       fontSize: SizeConfig.defaultSize! * 3,
                       fontWeight: FontWeight.bold,
@@ -131,7 +136,7 @@ class _PreferenceOneState extends State<PreferenceOne> {
                   ),
                   const VerticalSpace(1.5),
                   Text(
-                    'Choose as many as you\'d like',
+                    Translations.tr('choose_many', lang),
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.7),
                       fontSize: 19,
@@ -185,7 +190,7 @@ class _PreferenceOneState extends State<PreferenceOne> {
                   ),
                   const VerticalSpace(1),
                   CustomGeneralButton(
-                    text: "Next",
+                    text: Translations.tr('next', lang),
                     onTap: () {
                       if (selectedIndexes.isNotEmpty) {
                         final selectedCategories = selectedIndexes
@@ -197,10 +202,10 @@ class _PreferenceOneState extends State<PreferenceOne> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Please Choose At Least One Option."),
+                          SnackBar(
+                            content: Text(Translations.tr('please_choose_one', lang)),
                             backgroundColor: Colors.black,
-                            duration: Duration(seconds: 2),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       }

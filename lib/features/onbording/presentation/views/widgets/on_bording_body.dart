@@ -1,9 +1,9 @@
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/custom_buttons.dart';
-import 'package:egyptopia/core/widgets/custom_indicator.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/onbording/presentation/views/widgets/custom_page_view.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/custom_buttons.dart';
+import 'package:etrip/core/widgets/custom_indicator.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/onbording/presentation/views/widgets/custom_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';

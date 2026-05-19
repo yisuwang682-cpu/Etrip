@@ -1,6 +1,6 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/features/home/presentation/views/widgets/home_body.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/features/home/presentation/views/widgets/home_body.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

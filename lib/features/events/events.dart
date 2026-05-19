@@ -1,14 +1,17 @@
-import 'package:egyptopia/core/mock_data.dart';
-import 'package:egyptopia/core/utils/app_router.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
-import 'package:egyptopia/features/wishlist/presentation/views/widgets/favorite_icon.dart';
+import 'package:etrip/core/mock_data.dart';
+import 'package:etrip/core/utils/app_router.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/features/wishlist/presentation/views/widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Events extends StatefulWidget {
   const Events({super.key});
@@ -33,6 +36,7 @@ class _EventsState extends State<Events> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return ReusableScreen(
       showBackButton: true,
       backgroundColor: kSecondaryColor,
@@ -46,7 +50,7 @@ class _EventsState extends State<Events> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Events',
+                Translations.tr('events_title', lang),
                 style: TextStyle(
                   fontSize: SizeConfig.defaultSize! * 3.25,
                   fontWeight: FontWeight.bold,
@@ -71,7 +75,7 @@ class _EventsState extends State<Events> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
+                    return Center(child: Text('${Translations.tr('error', lang)}: ${snapshot.error}'));
                   }
 
                   final events = snapshot.data!;
@@ -162,7 +166,7 @@ class _EventsState extends State<Events> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        event['event_name'],
+                                        localizedEventName(event, lang),
                                         style: GoogleFonts.inter(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
@@ -170,7 +174,7 @@ class _EventsState extends State<Events> {
                                         ),
                                       ),
                                       Text(
-                                        'Type: ${event['event_type']}',
+                                        '${Translations.tr('type_label', lang)}${localizedEventType(event['event_type'] ?? '', lang)}',
                                         style: GoogleFonts.inter(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
@@ -189,7 +193,7 @@ class _EventsState extends State<Events> {
                                                   size: 16),
                                               const HorizantalSpace(0.1),
                                               Text(
-                                                event['city_name'],
+                                                localizedCityName(event['city_name'] ?? '', lang),
                                                 style: GoogleFonts.inter(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600,

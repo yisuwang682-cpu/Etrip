@@ -1,9 +1,12 @@
-import 'package:egyptopia/core/constants.dart';
-import 'package:egyptopia/core/utils/size_config.dart';
-import 'package:egyptopia/core/widgets/reusable_screen.dart';
-import 'package:egyptopia/core/widgets/space_widget.dart';
-import 'package:egyptopia/features/wishlist/data/model/favorite_model.dart';
+import 'package:etrip/core/constants.dart';
+import 'package:etrip/core/localization/locale_cubit.dart';
+import 'package:etrip/core/localization/translations.dart';
+import 'package:etrip/core/utils/size_config.dart';
+import 'package:etrip/core/widgets/reusable_screen.dart';
+import 'package:etrip/core/widgets/space_widget.dart';
+import 'package:etrip/features/wishlist/data/model/favorite_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'widgets/favorite_card.dart';
@@ -26,6 +29,7 @@ class _WishListViewState extends State<WishListView> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LocaleCubit>().state.languageCode;
     return Scaffold(
       body: ReusableScreen(
         backgroundColor: kSecondaryColor,
@@ -39,7 +43,7 @@ class _WishListViewState extends State<WishListView> {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  'Favorites',
+                  Translations.tr('favorites_title', lang),
                   style: TextStyle(
                     fontSize: SizeConfig.defaultSize! * 3.25,
                     fontWeight: FontWeight.bold,
@@ -76,10 +80,10 @@ class _WishListViewState extends State<WishListView> {
                     selectedIndex = index;
                   });
                 },
-                children: const [
-                  Text('Places'),
-                  Text('Activities'),
-                  Text('Events'),
+                children: [
+                  Text(Translations.tr('places_tab', lang)),
+                  Text(Translations.tr('activities_tab', lang)),
+                  Text(Translations.tr('events_tab', lang)),
                 ],
               ),
               Expanded(
